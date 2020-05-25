@@ -1,0 +1,31 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "lib": [
+      "es2015",
+      "es2016",
+      "es2017"
+    ],
+    "declaration": true,
+    "sourceMap": true,
+    "declarationMap": false,
+    "strict": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "declarationDir":"./dist/@types/sunday",
+    "outDir": "./dist",
+    "skipLibCheck": true
+  },
+  "include": [
+    "app",
+    "config",
+    "core",
+    "loaders",
+    "plugins",
+    "definitions",
+    "index.ts"
+  ]
+}
