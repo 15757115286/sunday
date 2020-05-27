@@ -6,8 +6,8 @@
   "scripts": {
     "start": "ts-node index.ts",
     "watch-server": "nodemon --inspect --watch 'index.ts' -e ts,tsx --exec 'node -r ts-node/register' index.ts",
-    "dev":"nodemon --inspect index.ts",
-    "build":"tsc -p tsconfig.json"
+    "dev": "nodemon --inspect index.ts",
+    "build": "tsc -p tsconfig.json"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "@types/koa-router": "^7.4.1",
     "nodemon": "^2.0.4",
     "ts-node": "^8.10.1",
+    "tslib": "^2.0.0",
     "typescript": "^3.9.3"
   }
 }
