@@ -4,3 +4,7 @@
 package-lock.json
 # 忽略打包之后的文件
 dist/
+# 忽略vscode配置
+.vscode/
+# 忽略yarn.lock配置文件
+yarn.lock

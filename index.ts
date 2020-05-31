@@ -1,14 +1,6 @@
-import * as Koa from 'koa';
-import * as Router from 'koa-router';
-const app = new Koa();
-const router:any = new Router();
+import Sunday from './core/Sunday';
+import Loader from './core/Loader';
 
-router.get('/*', async (ctx:Koa.Context) => {
-    ctx.body = 'Hello World!';
+new Sunday({
+    port: 3000
 });
-
-app.use(router.routes());
-
-app.listen(3000);
-
-console.log('Server running on port 3000');
