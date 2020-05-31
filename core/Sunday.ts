@@ -19,7 +19,7 @@ class Sunday {
         options.env
         this.options = <SundayOptions>options;
         this.init();
-        this.start();
+        // this.start();
     }
 
     init(this:Sunday) {

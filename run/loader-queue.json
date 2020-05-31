@@ -1,0 +1,9 @@
+[
+  {
+    "priority": 10,
+    "options": {
+      "pattern": "app/routers/**/*.(ts|js)"
+    },
+    "name": "SundayRouterLoader"
+  }
+]

@@ -1,12 +1,20 @@
 import { PureObject } from '../definitions/common';
-import { LoadConfig } from '../definitions/core';
+import { LoaderConfigItem } from '../definitions/core';
 
-const LoaderConfig: PureObject<LoadConfig> = {
+const EXTENDSION = 'ts|js';
+const loaderConfig: PureObject<Partial<LoaderConfigItem>> = {
     'SundayConfigLoader': {
+        enable:false,
         priority: 1,
         options: {
-            pattern: 'config/**/*.(ts|js)'
+            pattern: `config/**/*.(${EXTENDSION})`
+        }
+    },
+    'SundayRouterLoader': {
+        priority: 10,
+        options: {
+            pattern: `app/routers/**/*.(${EXTENDSION})`
         }
     }
 };
-export default LoaderConfig;
+export = loaderConfig;

@@ -1,0 +1,12 @@
+[
+  {
+    "type": "plugin",
+    "path": "/Users/xuweitao/workspace/sunday/plugins/sunday-router",
+    "name": "sunday-router"
+  },
+  {
+    "path": "/Users/xuweitao/workspace/sunday",
+    "type": "app",
+    "name": "sunday"
+  }
+]
