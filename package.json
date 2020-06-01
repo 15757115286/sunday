@@ -7,7 +7,7 @@
     "start": "ts-node index.ts",
     "watch-server": "nodemon --inspect --watch 'index.ts' -e ts,tsx --exec 'node -r ts-node/register' index.ts",
     "dev": "nodemon --inspect index.ts",
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.prod.json"
   },
   "keywords": [],
   "author": "",

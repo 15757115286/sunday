@@ -151,7 +151,6 @@ class CoreLoader extends Loader {
         });
         this.app.loaderConfig = mergedLoaderConfig;
         this.app.loadersQueue = loadersQueue;
-        outputJSON(`${this.app.options.root}/run/loader.config.json`, mergedLoaderConfig);
         outputJSON(`${this.app.options.root}/run/loader-queue.json`, loadersQueue);
     }
 
