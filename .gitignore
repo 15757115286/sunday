@@ -10,3 +10,5 @@ dist/
 yarn.lock
 # 忽略运行时输出文件
 run/
+# 忽略yarn-error.log
+yarn-error.log
