@@ -1,7 +1,0 @@
-{
-  "sunday-router": {
-    "enable": true,
-    "path": "/Users/xuweitao/workspace/sunday/plugins/sunday-router",
-    "owner": "sunday"
-  }
-}
