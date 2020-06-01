@@ -1,5 +1,5 @@
 import Koa from 'koa';
-import { PureObject, NumberLike } from '../definitions/common';
+import { PureObject, NumberLike, StringLike } from '../definitions/common';
 
 type EntryType = 'framework' | 'plugin' | 'app';
 export interface CoreEntry {
@@ -54,3 +54,25 @@ export interface PluginConfigItem {
     path: string;
     owner: string;
 }
+
+/**
+ * match的优先级大于ignore。 如果有match和ignore并存那么程序只会判断match
+ */
+export interface MiddlewareConfig {
+    priority: number;
+    enable: boolean;
+    options?: MiddlewareItemConfig;
+    match?: StringLike | StringLike[];
+    ignore?: StringLike | StringLike[];
+    name?: string;
+}
+
+export interface MiddlewareItemConfig extends PureObject {}
+
+export interface Middleware<T = any> {
+    (ctx:Koa.BaseContext, next:Koa.Next): Promise<T>;
+}
+export interface WrappedMiddleware {
+    (config:MiddlewareItemConfig, app:BaseApplication): Middleware;
+}
+

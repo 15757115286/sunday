@@ -1,6 +1,6 @@
 {
   "SundayConfigLoader": {
-    "enable": false,
+    "enable": true,
     "priority": 1,
     "options": {
       "pattern": "config/**/*.(ts|js)"
@@ -8,10 +8,21 @@
     "name": "SundayConfigLoader"
   },
   "SundayRouterLoader": {
-    "priority": 10,
+    "priority": 100,
     "options": {
       "pattern": "app/routers/**/*.(ts|js)"
     },
     "name": "SundayRouterLoader"
+  },
+  "SundayMiddlewaresLoader": {
+    "priority": 101,
+    "options": {
+      "pattern": "app/middlewares/*.(ts|js)",
+      "configPattern": [
+        "config/**/middlewares.(ts|js)",
+        "config/**/middlewares.development.(ts|js)"
+      ]
+    },
+    "name": "SundayMiddlewaresLoader"
   }
 }

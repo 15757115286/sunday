@@ -3,3 +3,5 @@ export interface PureObject<T = any> {
 }
 
 export type NumberLike = string | number;
+
+export type StringLike = string | RegExp;

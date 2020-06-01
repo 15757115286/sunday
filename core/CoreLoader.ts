@@ -1,8 +1,9 @@
 import Loader from "./Loader";
-import { CoreLoaderParameter, BaseApplication, CoreEntry, PluginConfigItem, LoaderConfigItem } from '../definitions/core';
+import { CoreLoaderParameter, BaseApplication, CoreEntry, PluginConfigItem, LoaderConfigItem, MiddlewareItemConfig, MiddlewareConfig } from '../definitions/core';
 import { BASE_DIR } from './Sunday';
 import { PureObject } from '../definitions/common';
-import { merge, outputJSON, isFunction } from '../core/lib/util';
+import { merge, outputJSON, isExtendsFrom, isMatch } from '../core/lib/util';
+import Koa from 'koa';
 
 
 class CoreLoader extends Loader {
@@ -21,6 +22,7 @@ class CoreLoader extends Loader {
         this.mergePluginEntriesToCoreEntries();
         this.getLoaderConfig();
         this.runLoaders();
+        this.useMiddlewares();
     }
 
     get pattern() {
@@ -161,14 +163,15 @@ class CoreLoader extends Loader {
         const canExecuteLoaders:PureObject<Loader> = {};
         this.getGlobalEntry(this.pattern.loaderPath, entries => {
             entries.forEach(entry => {
-                const name = this.resolvePathName(entry);
+                const loaderName = this.resolvePathName(entry);
                 const loaderClass = require(entry);
-                if(isFunction(loaderClass)) {
-                    canExecuteLoaders[name] = loaderClass;
+                if(isExtendsFrom(loaderClass, Loader)) {
+                    canExecuteLoaders[loaderName] = loaderClass;
+                } else {
+                    throw new TypeError(`【${loaderName}】 is not a loader!`);
                 }
             });
         });
-        outputJSON(`${this.app.options.root}/run/loaders.json`, canExecuteLoaders);
         loadersQueue.forEach(config => {
             const loaderName = config.name;
             const loaderClass:Loader = canExecuteLoaders[loaderName];
@@ -180,11 +183,35 @@ class CoreLoader extends Loader {
                 coreEntries: this.coreEntries,
                 config: config.options
             });
-            if(loader instanceof Loader) {
-                loader.load();
-            } else {
-                throw new TypeError(`【${loaderName}】 is not a loader !`);
+            loader.load();
+        });
+    }
+
+    /**
+     * 加载中间件
+     */
+    useMiddlewares() {
+        const middlewaresQueue = this.app.sundayMiddlewaresQueue;
+        const middlewares = this.app.sundayMiddlewares;
+        middlewaresQueue.forEach((config:MiddlewareConfig) => {
+            const middlewareName = config.name;
+            const wrappedMiddleware = middlewares[middlewareName as string];
+            const _middleware = wrappedMiddleware(config.options as MiddlewareItemConfig, this.app);
+            const middleware = async function(ctx: Koa.BaseContext, next: Koa.Next) {
+                const { match, ignore } = config;
+                if(match) {
+                    if(isMatch(ctx.path, match)) {
+                        return await _middleware(ctx, next);
+                    } else {
+                        return await next();
+                    }
+                }
+                if(ignore && isMatch(ctx.path ,ignore)) {
+                    return await next();
+                }
+                return await _middleware(ctx, next);
             }
+            this.app.use(middleware);
         });
     }
 }

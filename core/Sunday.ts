@@ -16,10 +16,10 @@ class Sunday {
     constructor(options:Partial<SundayOptions> = {}) {
         options.port = this.getPort(options);
         options.root = this.getRoot(options);
-        options.env
+        options.env = this.getRoot(options);
         this.options = <SundayOptions>options;
         this.init();
-        // this.start();
+        this.start();
     }
 
     init(this:Sunday) {
