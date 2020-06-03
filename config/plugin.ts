@@ -4,8 +4,12 @@ import { getPluginPath } from '../core/lib/util';
 
 const pluginConfig: PureObject<Partial<PluginConfigItem>> = {
     'sunday-router': {
-        enable: true,
+        enable: false,
         path: getPluginPath(__dirname, 'sunday-router')
+    },
+    'sunday-decorator': {
+        enable: true,
+        path: getPluginPath(__dirname, 'sunday-decorator')
     }
 }
 

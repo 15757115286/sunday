@@ -126,8 +126,8 @@ class CoreLoader extends Loader {
 
     // 加载所有项目中的加载器的配置文件。
     getLoaderConfig() {
-        // 不执行插件中的加载器
-        const entries = this.coreEntries.filter(entry => entry.type !== 'plugin');
+        // 同样执行插件中的loaders
+        const entries = this.coreEntries;
         let mergedLoaderConfig: PureObject<LoaderConfigItem> = {};
         let loadersQueue: LoaderConfigItem[] = [];
         entries.forEach(entry => {

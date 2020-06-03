@@ -12,12 +12,6 @@ const loaderConfig: PureObject<Partial<LoaderConfigItem>> = {
             pattern: `config/**/*.(${EXTENDSION})`
         }
     },
-    'SundayRouterLoader': {
-        priority: 100,
-        options: {
-            pattern: `app/routers/**/*.(${EXTENDSION})`
-        }
-    },
     'SundayMiddlewaresLoader': {
         priority: 101,
         options: {
