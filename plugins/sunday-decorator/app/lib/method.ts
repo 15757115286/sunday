@@ -1,5 +1,4 @@
 import { Method as _Method, IClass } from '../../definitions';
-import { STORE_KEY } from './store';
 import { getControllStore } from './util';
 
 export default function Method(methods: _Method[]| _Method) {

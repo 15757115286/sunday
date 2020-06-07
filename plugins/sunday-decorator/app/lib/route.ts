@@ -1,5 +1,4 @@
 import { IClass } from '../../definitions';
-import { STORE_KEY } from './store';
 import { getControllStore } from './util';
 
 export default function Route(route: string = '/') {
