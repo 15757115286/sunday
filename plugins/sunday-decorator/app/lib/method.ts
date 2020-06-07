@@ -1,10 +1,11 @@
-import { Method as _Method, ControllerRouterInfo, ReturnFunction } from '../../definitions';
+import { Method as _Method, IClass } from '../../definitions';
 import { STORE_KEY } from './store';
+import { getControllStore } from './util';
 
 export default function Method(methods: _Method[]| _Method) {
     return function (target: any, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
-        const constructor = target.constructor;
-        const controllerStore:Partial<ControllerRouterInfo> = constructor[STORE_KEY] || (constructor[STORE_KEY] = {});
+        const constructor:IClass = target.constructor;
+        const controllerStore = getControllStore(constructor);
         const routeItems = controllerStore.routeItems = controllerStore.routeItems || {};
         const item = routeItems[propertyKey] = routeItems[propertyKey] || {};
         if(typeof methods === 'string') methods = [methods];

@@ -1,19 +1,27 @@
 import { BaseContext } from 'koa';
-import { Controller, Method, Route, Get, Post } from '../../plugins/sunday-decorator/app/lib';
+import { Controller, Method, Route, Get, Post, Inject } from '../../plugins/sunday-decorator/app/lib';
+import { BaseApplication } from '../../definitions/core';
+import TestService from '../services/TestService';
 
 @Controller('/test')
 class TestController {
+    app!: BaseApplication;
+    ctx!: BaseContext;
+    
+    @Inject(TestService)
+    testService!: TestService;
+
     name:string = 'xwt';
+
     @Get
     @Route('/getName')
-    getName(ctx:BaseContext) {
-        ctx.body = 'my name is '  + this.name;
+    getName() {
+        this.ctx.body = 'my name is '  + this.name + this.testService.getAge();
     }
 
     @Route('/getAge')
-    getAge(ctx:BaseContext) {
-        ctx.body = 'my age is 18ss'
+    getAge() {
+        this.ctx.body = 'my age is 18ss'
     }
 }
-
-export = TestController;
+export default TestController;

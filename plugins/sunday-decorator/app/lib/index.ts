@@ -1,4 +1,6 @@
 import Controller from './controller';
+import Service from './service';
+import Inject from './inject';
 import {
     default as Method,
     Post,
@@ -16,6 +18,7 @@ import Route from './route';
 
 export {
     Controller,
+    Service,
     Method,
     Route,
     Post,
@@ -27,5 +30,6 @@ export {
     Options,
     Head,
     Connect,
-    Common
+    Common,
+    Inject
 }

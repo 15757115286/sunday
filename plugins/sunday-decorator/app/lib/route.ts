@@ -1,10 +1,11 @@
-import { ControllerRouterInfo } from '../../definitions';
+import { IClass } from '../../definitions';
 import { STORE_KEY } from './store';
+import { getControllStore } from './util';
 
 export default function Route(route: string = '/') {
     return function (target: any, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
-        const constructor = target.constructor;
-        const controllerStore:Partial<ControllerRouterInfo> = constructor[STORE_KEY] || (constructor[STORE_KEY] = {});
+        const constructor: IClass = target.constructor;
+        const controllerStore = getControllStore(constructor);
         const routeItems = controllerStore.routeItems = controllerStore.routeItems || {};
         const item = routeItems[propertyKey] = routeItems[propertyKey] || {};
         item.route = route;

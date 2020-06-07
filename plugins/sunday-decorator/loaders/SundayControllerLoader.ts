@@ -2,7 +2,6 @@ import Loader from "../../../core/Loader";
 import { PureObject } from '../../../definitions/common';
 import { ControllerRouterInfo, IClass } from '../definitions';
 import { controllerRouterInfo as _controllerRouterInfo } from '../app/lib/store';
-import Controller from '../app/lib/controller';
 import { outputJSON } from '../../../core/lib/util';
 
 declare module '../../../definitions/core' {
@@ -12,14 +11,15 @@ declare module '../../../definitions/core' {
     }
 }
 
-class SundayRouterLoader extends Loader{
+class SundayControllerLoader extends Loader{
     load() {
         const controllerPattern = this.config.pattern;
         const controllers: IClass[] = [];
         const controllerRouterInfo: PureObject<ControllerRouterInfo> = {};
         this.getGlobalEntry(controllerPattern!, entries => {
             entries.forEach(entry => {
-                const controller: IClass = require(entry);
+                const _controller: any = require(entry);
+                const controller:IClass = _controller.default || _controller;
                 if(controller.__isController !== true) {
                     throw new TypeError(`can not find a controller at ${entry}`);
                 }
@@ -33,8 +33,8 @@ class SundayRouterLoader extends Loader{
         });
         this.app.controllers = controllers;
         this.app.controllerRouterInfo = controllerRouterInfo;
-        outputJSON(`${this.app.options.root}/run/routers.config.json`, controllerRouterInfo);
+        outputJSON(`${this.app.options.root}/run/controllers.config.json`, controllerRouterInfo);
     }
 }
 
-export = SundayRouterLoader;
+export = SundayControllerLoader;

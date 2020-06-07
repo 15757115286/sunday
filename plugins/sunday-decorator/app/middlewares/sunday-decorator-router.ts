@@ -4,6 +4,7 @@ import { BaseContext, Next } from 'koa';
 const compose = require('koa-compose');
 const Router = require('koa-router');
 
+// 把controller加载通过koa-router变成router信息
 function factory(config:MiddlewareItemConfig, app:BaseApplication) {
     const AllRoute = new Router();
     const controllerRouterInfo = app.controllerRouterInfo;
@@ -27,8 +28,9 @@ function factory(config:MiddlewareItemConfig, app:BaseApplication) {
                 }
             }
             methods.forEach(method => {
-                AllRoute[method.toLocaleLowerCase()](finalRoute, (ctx: BaseContext, next:Next) => {
-                    (new controller())[actionName](ctx, next);
+                AllRoute[method.toLocaleLowerCase()](finalRoute, async (ctx: BaseContext, next:Next) => {
+                    await (new controller({ app, ctx }))[actionName]();
+                    await next();
                 });
             });
         }
