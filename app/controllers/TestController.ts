@@ -8,7 +8,7 @@ class TestController {
     app!: BaseApplication;
     ctx!: BaseContext;
     
-    @Inject(TestService)
+    @Inject(TestService) 
     testService!: TestService;
 
     name:string = 'xwt';

@@ -1,8 +1,6 @@
 import { IService, IClass, IServiceInstance } from '../../definitions';
 import { getProvides } from './util';
 import { PureObject } from '../../../../definitions/common';
-import { BaseApplication } from '../../../../definitions/core';
-import { BaseContext } from 'koa';
 
 export default function Inject(service: IService) {
     if(!service.__isService) {
@@ -15,7 +13,7 @@ export default function Inject(service: IService) {
     }
 }
 
-export function initService(instance:PureObject, controller:IClass, config:{app:BaseApplication, ctx:BaseContext}) {
+export function initService(instance:PureObject, controller:IClass, config:PureObject) {
     const provides = getProvides(controller);
     for(let key in provides) {
         const service = provides[key];

@@ -1,22 +1,23 @@
-import { IClass, ControllerRouterInfo } from '../../definitions';
+import { IClass, ControllerRouterInfo, Provides } from '../../definitions';
 import { STORE_KEY, PROVIDE_KEY } from './store';
 
 export function isString(str: any): str is string {
     return typeof str === 'string';
 }
 
-export function getControllStore<T extends IClass> (controller: T):Partial<ControllerRouterInfo> {
-    let store = controller[STORE_KEY];
-    if(store === undefined) {
-        store = controller[STORE_KEY] = {};
+export function get <T> (obj:any, key:string | symbol, defaultValue: T):T {
+    if (!obj) return defaultValue;
+    let result = obj[key];
+    if (result === undefined) {
+        result = obj[key] = defaultValue;
     }
-    return store;
+    return result as T;
+}
+
+export function getControllStore<T extends IClass> (controller: T) {
+    return get<Partial<ControllerRouterInfo>> (controller, STORE_KEY, {});
 }
 
 export function getProvides<T extends IClass> (controller: T) {
-    let provides = controller[PROVIDE_KEY];
-    if(provides === undefined) {
-        provides = controller[PROVIDE_KEY] = {};
-    }
-    return provides;
+    return get<Provides> (controller, PROVIDE_KEY, {});
 }

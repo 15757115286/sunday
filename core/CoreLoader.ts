@@ -5,7 +5,7 @@ import { PureObject } from '../definitions/common';
 import { merge, outputJSON, isExtendsFrom, isMatch } from '../core/lib/util';
 import Koa from 'koa';
 
-
+const MAX_PRIORITY:number = 9999;
 class CoreLoader extends Loader {
     app!: BaseApplication;
     coreEntries!: CoreEntry[];
@@ -143,6 +143,9 @@ class CoreLoader extends Loader {
             const loaderConfig = mergedLoaderConfig[name];
             if(!loaderConfig.name) {
                 loaderConfig.name = name;
+            }
+            if(!loaderConfig.priority) {
+                loaderConfig.priority = MAX_PRIORITY;
             }
             loadersQueue.push(loaderConfig);
         }
