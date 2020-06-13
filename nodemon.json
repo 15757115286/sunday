@@ -6,7 +6,7 @@
     ],
     "verbose": true,
     "execMap": {
-      "ts": "node -r ts-node/register"
+      "ts": "node -r ts-node/register/files"
     },
     "events": {
       "restart": "osascript -e 'display notification \"App restarted due to:\n'$FILENAME'\" with title \"nodemon\"'"

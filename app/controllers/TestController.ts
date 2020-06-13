@@ -1,4 +1,4 @@
-import { BaseContext } from 'koa';
+import { BaseContext, Request, Context } from 'koa';
 import { Controller, Method, Route, Get, Post, Inject } from '../../plugins/sunday-decorator/app/lib';
 import { BaseApplication } from '../../definitions/core';
 import TestService from '../services/TestService';
@@ -6,7 +6,7 @@ import TestService from '../services/TestService';
 @Controller('/test')
 class TestController {
     app!: BaseApplication;
-    ctx!: BaseContext;
+    ctx!: Context;
     
     @Inject(TestService) 
     testService!: TestService;
@@ -17,6 +17,9 @@ class TestController {
     @Route('/getName')
     getName() {
         this.ctx.body = 'my name is '  + this.name + this.testService.getAge();
+        const req = this.ctx.request;
+        console.log(req.version);
+        req.version = '2.0.0';
     }
 
     @Route('/getAge')
