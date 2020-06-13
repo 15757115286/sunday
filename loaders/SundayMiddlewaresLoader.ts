@@ -28,7 +28,8 @@ class SundayMiddlewaresLoader extends Loader {
                 this.getGlobalEntry(pattern, (entries => {
                     entries.forEach(entry => {
                         const middlewareName = this.resolvePathName(entry);
-                        const middleware = <WrappedMiddleware>require(entry);
+                        const _middleware = require(entry);
+                        const middleware: WrappedMiddleware = _middleware.default || _middleware;
                         if (!isFunction(middleware)) {
                             throw new TypeError(`【${middlewareName}】 is not a middleware!`);
                         }

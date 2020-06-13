@@ -10,6 +10,10 @@ const pluginConfig: PureObject<Partial<PluginConfigItem>> = {
     'sunday-decorator': {
         enable: true,
         path: getPluginPath(__dirname, 'sunday-decorator')
+    },
+    'sunday-body': {
+        enable: true,
+        path: getPluginPath(__dirname, 'sunday-body')
     }
 }
 

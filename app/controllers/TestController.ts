@@ -20,11 +20,13 @@ class TestController {
         const req = this.ctx.request;
         console.log(req.version);
         req.version = '2.0.0';
-        console.log(this.app.appName);
+        console.log(this.ctx.hasDecorator);
     }
 
+    @Post
     @Route('/getAge')
     getAge() {
+        console.log(this.ctx.request.body);
         this.ctx.body = 'my age is 18ss'
     }
 }
