@@ -18,14 +18,18 @@ class SundayExtendsLoader extends Loader {
                     const _currentObj:any = require(entry);
                     const currentObj:PureObject = _currentObj.default || _currentObj
                     if (!isPlainObject(currentObj)) return;
-                    const mergedObj:PureObject = require(`${BASE_PATH}/${fileName}`);
+                    const mergedObj:PureObject | Function = require(`${BASE_PATH}/${fileName}`);
                     this.merge(mergedObj, currentObj, entry);
                 });
             });
         });
     }
 
-    merge(merged:PureObject, current:PureObject, entry:string) {
+    merge(merged:PureObject | Function, current:PureObject, entry:string) {
+        // application中导出的是一个类，所以需要定义在它原型上
+        if (typeof merged === 'function') {
+            merged = merged.prototype;
+        }
         const descriptors = Object.getOwnPropertyDescriptors(current);
         for (let key in descriptors) {
             if (Object.prototype.hasOwnProperty.call(merged, key)) {

@@ -20,6 +20,7 @@ class TestController {
         const req = this.ctx.request;
         console.log(req.version);
         req.version = '2.0.0';
+        console.log(this.app.appName);
     }
 
     @Route('/getAge')
