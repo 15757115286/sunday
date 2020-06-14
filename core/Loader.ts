@@ -26,7 +26,11 @@ abstract class Loader {
             pattern = [pattern];
         }
         const basePath = isCoreEntry(base) ? base.path : base;
-        pattern = pattern.map(pat => path.join(basePath, pat));
+        pattern = pattern.map(pat => {
+            const temp = path.join(basePath, pat);
+            // 为了兼容window文件路径
+            return temp.replace(/\\/g, '/');
+        });
         const entries:string[] = glob.sync(pattern);
         callback(entries.filter(entry => !NOT_INCLUDE_SUFFIX.test(entry)), base);
     }
