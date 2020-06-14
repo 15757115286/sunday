@@ -1,6 +1,6 @@
 import { PureObject } from "../../../definitions/common";
 import { MiddlewareConfig } from '../../../definitions/core';
-import { Context } from 'koa';
+import { ServerResponse } from 'http';
 
 const middlewaresConfig:PureObject<MiddlewareConfig> = {
     'sunday-body': {
@@ -16,10 +16,22 @@ const middlewaresConfig:PureObject<MiddlewareConfig> = {
                 'static'
             ],
             options: {
-                setHeaders(response: any) {
+                setHeaders(response: ServerResponse) {
                     response.setHeader('Served-By', 'koa-static')
                 }
             }
+        }
+    },
+    'sunday-auto-refresh': {
+        enable: true,
+        priority: 75,
+        options: {
+            root:'static',
+            port: 4000,
+            watch:[
+                'static'
+            ],
+            socketPath:'/monitor'
         }
     }
 }

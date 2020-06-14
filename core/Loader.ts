@@ -27,7 +27,7 @@ abstract class Loader {
         }
         const basePath = isCoreEntry(base) ? base.path : base;
         pattern = pattern.map(pat => path.join(basePath, pat));
-        const entries = glob.sync(pattern);
+        const entries:string[] = glob.sync(pattern);
         callback(entries.filter(entry => !NOT_INCLUDE_SUFFIX.test(entry)), base);
     }
 
