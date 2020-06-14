@@ -42,9 +42,7 @@ function factory(config: MiddlewareItemConfig, app: BaseApplication) {
                 }
             }
             if (!has) {
-                ctx.status = 404;
-                ctx.body = 'Not Found!';
-                return;
+                await next();
             }
             const html = fs.readFileSync(destination, 'utf8');
             const $ = cheerio.load(html);
