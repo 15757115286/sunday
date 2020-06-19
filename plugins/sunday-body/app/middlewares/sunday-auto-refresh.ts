@@ -42,7 +42,7 @@ function factory(config: MiddlewareItemConfig, app: BaseApplication) {
                 }
             }
             if (!has) {
-                await next();
+                return await next();
             }
             const html = fs.readFileSync(destination, 'utf8');
             const $ = cheerio.load(html);
@@ -58,22 +58,24 @@ function factory(config: MiddlewareItemConfig, app: BaseApplication) {
 function getDynamicScript(port:number, path: string): string {
     const script = `
         <script>
-            const socket = new WebSocket('ws://localhost:${port}/${path.replace(/^\//, '')}');
-            // Connection opened
-            socket.addEventListener('open', function (event) {
-                console.log('[HMR]已经和服务器建立连结，文件变更将自动刷新！')
-            });
+            (function(){
+                const socket = new WebSocket('ws://localhost:${port}/${path.replace(/^\//, '')}');
+                // Connection opened
+                socket.addEventListener('open', function (event) {
+                    console.log('[HMR]已经和服务器建立连结，文件变更将自动刷新！')
+                });
 
-            // Listen for messages
-            socket.addEventListener('message', function (event) {
-                const data = event.data;
-                if (data === 'refresh') {
-                    window.location.reload();
-                }
-            });
-            socket.addEventListener('close', function () {
-                console.log('socket连结关闭！');
-            });
+                // Listen for messages
+                socket.addEventListener('message', function (event) {
+                    const data = event.data;
+                    if (data === 'refresh') {
+                        window.location.reload();
+                    }
+                });
+                socket.addEventListener('close', function () {
+                    console.log('socket连结关闭！');
+                });
+            })();
         </script>
    `;
    return script;
