@@ -1,5 +1,6 @@
 import Koa from 'koa';
 import { PureObject, NumberLike, StringLike } from '../definitions/common';
+import Application from 'koa';
 
 type EntryType = 'framework' | 'plugin' | 'app';
 export interface CoreEntry {
@@ -7,7 +8,7 @@ export interface CoreEntry {
     name: string;
     path: string;
 }
-export interface BaseApplication<A = any, C = any> extends Koa<A, C>, PureObject {
+export interface BaseApplication<A = any, C = any> extends Application<A, C> {
     options: SundayOptions;
     pluginConfig: PureObject<PluginConfigItem>;
     loaderConfig: PureObject<LoaderConfigItem>;
@@ -74,5 +75,10 @@ export interface Middleware<T = any> {
 }
 export interface WrappedMiddleware {
     (config:MiddlewareItemConfig, app:BaseApplication): Middleware;
+}
+
+export interface MergeFunction {
+    (...objs: PureObject[]): PureObject;
+    (clone:boolean, ...objs: PureObject[]):PureObject;
 }
 

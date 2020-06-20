@@ -1,10 +1,10 @@
 import * as path from 'path';
 import { PureObject, StringLike } from '../../definitions/common';
-import { CoreEntry } from '../../definitions/core';
+import { CoreEntry, MergeFunction } from '../../definitions/core';
 const fs = require('fs-extra');
 const _merge = require('merge');
 
-const merge = _merge.recursive;
+const merge: MergeFunction = _merge.recursive;
 
 function getPluginPath(baseConfigPath: string, pluginNameÏ: string): string {
     if (!baseConfigPath || !pluginNameÏ) return '';

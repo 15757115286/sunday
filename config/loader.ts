@@ -9,7 +9,17 @@ const loaderConfig: PureObject<Partial<LoaderConfigItem>> = {
         enable: true,
         priority: 5,
         options: {
-            pattern: `config/**/*.${EXTENDSION}`
+            pattern: [
+                `config/**/config.${EXTENDSION}`,
+                `config/**/config.${ENV}.${EXTENDSION}`
+            ]
+        }
+    },
+    'SundayBootstrapLoader': {
+        enable: true,
+        priority: 10,
+        options: {
+            pattern: `plugins/**/bootstrap.${EXTENDSION}`
         }
     },
     'SundayExtendsLoader': {

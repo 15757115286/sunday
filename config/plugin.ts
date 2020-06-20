@@ -3,10 +3,6 @@ import { PureObject } from '../definitions/common';
 import { getPluginPath } from '../core/lib/util';
 
 const pluginConfig: PureObject<Partial<PluginConfigItem>> = {
-    'sunday-router': {
-        enable: false,
-        path: getPluginPath(__dirname, 'sunday-router')
-    },
     'sunday-decorator': {
         enable: true,
         path: getPluginPath(__dirname, 'sunday-decorator')
@@ -14,6 +10,10 @@ const pluginConfig: PureObject<Partial<PluginConfigItem>> = {
     'sunday-body': {
         enable: true,
         path: getPluginPath(__dirname, 'sunday-body')
+    },
+    'sunday-nunjucks': {
+        enable: true,
+        path: getPluginPath(__dirname, 'sunday-nunjucks')
     }
 }
 

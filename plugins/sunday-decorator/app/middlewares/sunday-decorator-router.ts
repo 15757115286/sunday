@@ -1,6 +1,6 @@
 import { MiddlewareItemConfig, BaseApplication } from "../../../../definitions/core";
 import { RouterItem } from '../../definitions';
-import { BaseContext, Next } from 'koa';
+import { Context, Next } from 'koa';
 const compose = require('koa-compose');
 const Router = require('koa-router');
 
@@ -28,7 +28,7 @@ function factory(config:MiddlewareItemConfig, app:BaseApplication) {
                 }
             }
             methods.forEach(method => {
-                AllRoute[method.toLocaleLowerCase()](finalRoute, async (ctx: BaseContext, next:Next) => {
+                AllRoute[method.toLocaleLowerCase()](finalRoute, async (ctx: Context, next:Next) => {
                     await (new controller({ app, ctx }))[actionName]();
                     await next();
                 });
