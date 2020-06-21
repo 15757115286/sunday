@@ -11,9 +11,13 @@ const pluginConfig: PureObject<Partial<PluginConfigItem>> = {
         enable: true,
         path: getPluginPath(__dirname, 'sunday-body')
     },
-    'sunday-nunjucks': {
+    'sunday-view-manager': {
         enable: true,
-        path: getPluginPath(__dirname, 'sunday-nunjucks')
+        path: getPluginPath(__dirname, 'sunday-view-manager')
+    },
+    'sunday-view-nunjucks': {
+        enable: true,
+        path: getPluginPath(__dirname, 'sunday-view-nunjucks')
     }
 }
 

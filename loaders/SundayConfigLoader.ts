@@ -20,6 +20,9 @@ class SundayConfigLoader extends Loader {
             entries.forEach(entry => {
                 let config = require(entry);
                 config = config.default || config;
+                if (typeof config === 'function') {
+                    config = config(this.app);
+                }
                 merge(result, config);
             });
 

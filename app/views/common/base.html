@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ getTitle() }}</title>
+</head>
+<body>
+    {# body占位符 #}
+    {% block body %}
+        <div>this is body</div>
+    {% endblock %}
+    <script>
+        window._global={{ _global }};
+    </script>
+</body>
+</html>
