@@ -54,7 +54,14 @@ function factory(config: MiddlewareItemConfig, app: BaseApplication) {
         }
     }
 }
-
+/**
+ * TODO
+ * 1. 只有自己被修改的时候才触发刷新
+ * 2. 根据path监听动态生成的文件，内容可配置
+ * 
+ * @param port 服务端监听端口
+ * @param path 服务端监听路径
+ */
 function getDynamicScript(port:number, path: string): string {
     const script = `
     <script>
