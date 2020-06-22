@@ -47,7 +47,6 @@ function factory(config: MiddlewareItemConfig, app: BaseApplication) {
             const html = fs.readFileSync(destination, 'utf8');
             const $ = cheerio.load(html);
             $('body').append(getDynamicScript(port, socketPath));
-            ctx.status = 200;
             ctx.body = $.html();
         } else {
             await next();
