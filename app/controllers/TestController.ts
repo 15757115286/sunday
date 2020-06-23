@@ -1,15 +1,17 @@
-import Application, { BaseContext, Request, Context } from 'koa';
-import { Controller, Method, Route, Get, Post, Inject } from '../../plugins/sunday-decorator/app/lib';
+import { Context } from 'koa';
+import { Controller, Route, Get, Post, Inject } from '../../plugins/sunday-decorator/app/lib';
 import { BaseApplication } from '../../definitions/core';
 import TestService from '../services/TestService';
+import 'reflect-metadata';
+
 
 @Controller('/test')
 class TestController {
-    app!: BaseApplication;
-    ctx!: Context;
+    app: BaseApplication;
+    ctx: Context;
     
-    @Inject(TestService) 
-    testService!: TestService;
+    @Inject
+    testService: TestService;
 
     name:string = 'xwt';
 
@@ -19,7 +21,7 @@ class TestController {
         this.ctx.setGlobal('name', [1,2,3,4]);
         this.ctx.setGlobal('title', '曹敏周日');
         await this.ctx.render('cm.html' ,{
-            username: 'xwt'
+            username: this.testService.getAge()
         });
     }
 
@@ -27,7 +29,7 @@ class TestController {
     @Route('/getAge')
     async getAge() {
         console.log(this.ctx.request.body);
-        this.ctx.body = 'my age is 18ss'
+        this.ctx.body = 'my age is 18ss';
     }
 }
 export default TestController;

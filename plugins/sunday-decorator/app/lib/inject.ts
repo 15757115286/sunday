@@ -1,16 +1,19 @@
 import { IService, IClass, IServiceInstance } from '../../definitions';
 import { getProvides } from './util';
 import { PureObject } from '../../../../definitions/common';
+import "reflect-metadata";
 
-export default function Inject(service: IService) {
+// 如果使用reflect-metadata来后去元数据类型，必须在tsconfig中配置如下属性：
+// emitDecoratorMetadata:true，@see https://www.tslang.cn/docs/handbook/decorators.html
+// 同时必须配合 reflect-metadata 这个库一起使用
+export default function Inject(target:any, key:string) {
+    const service = Reflect.getMetadata("design:type", target, key);
     if(!service.__isService) {
         throw new TypeError(`${ service.name || service} is not a service!`);
     }
-    return function(target:any, key:string) {
-        const controller:IClass = target.constructor!;
-        const provides = getProvides(controller);
-        provides[key] = service;
-    }
+    const controller:IClass = target.constructor!;
+    const provides = getProvides(controller);
+    provides[key] = service;
 }
 
 export function initService(instance:PureObject, controller:IClass, config:PureObject) {

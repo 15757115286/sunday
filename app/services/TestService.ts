@@ -4,8 +4,8 @@ import { BaseContext } from 'koa';
 
 @Service('TestService')
 class TestService {
-    options!: ServiceOptions;
-    ctx!: BaseContext;
+    options: ServiceOptions;
+    ctx: BaseContext;
     getAge() {
         return 20 + this.ctx.url;
     }

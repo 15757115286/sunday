@@ -12,7 +12,10 @@
     "importHelpers": true,
     "declarationDir":"./dist/@types/sunday",
     "outDir": "./dist",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": false
   },
   "include": [
     "app",
