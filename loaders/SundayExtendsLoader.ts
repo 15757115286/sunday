@@ -1,7 +1,7 @@
 import Loader from '../core/Loader';
 import { isPlainObject } from '../core/lib/util';
 import { PureObject } from '../definitions/common';
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 const BASE_PATH = 'koa/lib';
 const VALID_FILENAME_REG = /^request|response|application|context$/;
 
