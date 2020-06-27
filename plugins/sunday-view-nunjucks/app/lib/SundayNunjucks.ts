@@ -5,6 +5,9 @@ import { NunjucksConfig } from '../../definitions';
 import { Context } from 'koa';
 import { ViewEngine } from '../../../sunday-view-manager/app/lib/ViewEngine';
 import { PureObject } from '../../../../definitions/common';
+import * as fs from 'fs-extra';
+import * as path from 'path';
+import { getConfig } from './util';
 const VIEW_ENGINE_NAME = 'nunjucks';
 // 坑，init会覆盖Environment中的init
 const INIT = Symbol('init');
@@ -25,6 +28,8 @@ class SundayNunjucks extends ViewEngine {
         const viewEngine = this.viewEngine;
         const _global = this.ctx._global || {};
         viewEngine.addGlobal('_global', JSON.stringify(_global));
+        viewEngine.addGlobal('loadJs', this.loadJs.bind(this));
+        viewEngine.addGlobal('loadCss', this.loadCss.bind(this));
         viewEngine.addGlobal('getTitle', () => {
             return _global.title || 'sunday';
         });
@@ -45,7 +50,7 @@ class SundayNunjucks extends ViewEngine {
         return this.viewEngine.render(name, context); 
     }
 
-    renderString(str: string, context: PureObject, isAsync = false):string | Promise<string> {
+    renderString(str: string, context: PureObject, isAsync = true):string | Promise<string> {
         if(isAsync) {
             return new Promise<string>((resolve, reject) => {
                 this.viewEngine.render(str, context, (err, result) => {
@@ -58,7 +63,69 @@ class SundayNunjucks extends ViewEngine {
             }) ;
         }
         return this.viewEngine.render(str, context);  
-    }    
+    }
+
+    loadCss(fileName: string, isInline: boolean = false) {
+        const [root, js, css] = getConfig(this.app);
+        const abs = path.resolve(root, css);
+        const isExistReflectJson = fs.existsSync(abs);
+        if (!isExistReflectJson) {
+            throw new Error(`file ${ css } is not exists`);
+        }
+        const reflect = fs.readJSONSync(abs);
+        const reflectFile = reflect[fileName];
+        if (reflectFile === undefined) {
+            return '';
+        }
+        if (isInline) {
+            const content = fs.readFileSync(reflectFile.path); 
+            return `
+                <style>
+                    ${ content }
+                </style>
+            `.trim();
+        } else {
+            let fileName = reflectFile.fileName;
+            if (!/^\//.test(fileName)) {
+                fileName = '/' + fileName;
+            }
+            const href = '/' + VIEW_ENGINE_NAME + fileName;
+            return `
+                <link rel="stylesheet" type="text/css" href="${ href }" />
+            `.trim();
+        }
+    }
+
+    loadJs(fileName: string, isInline: boolean = false, isAsync: boolean = false) {
+        const [root, js] = getConfig(this.app);
+        const abs = path.resolve(root, js);
+        const isExistReflectJson = fs.existsSync(abs);
+        if (!isExistReflectJson) {
+            throw new Error(`file ${ js } is not exists`);
+        }
+        const reflect = fs.readJSONSync(abs);
+        const reflectFile = reflect[fileName];
+        if (reflectFile === undefined) {
+            return '';
+        }
+        if (isInline) {
+            const content = fs.readFileSync(reflectFile.path); 
+            return `
+                <script>
+                    ${ content }
+                </script>
+            `.trim();
+        } else {
+            let fileName = reflectFile.fileName;
+            if (!/^\//.test(fileName)) {
+                fileName = '/' + fileName;
+            }
+            const src = '/' + VIEW_ENGINE_NAME + fileName;
+            return `
+                <script src="${ src }" ${ isAsync ? 'async' : '' }></script>
+            `.trim();
+        }
+    }
     
 }
 

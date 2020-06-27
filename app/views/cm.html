@@ -1,5 +1,13 @@
 {% extends "common/base.html" %}
-
+<!-- 单页挂载点占位符 -->
+{% block style %}
+    {{ loadCss('css/sunday.css') }}
+{% endblock %}
 {% block body %}
-    <div>{{ username }}</div>
+    <div id="app"></div>
+    <div>cm is a beautiful woman</div>
+{% endblock %}
+{% block page_script %}
+    {{ loadJs('js/vendors.js') }}
+    {{ loadJs('js/sunday.js') }}
 {% endblock %}

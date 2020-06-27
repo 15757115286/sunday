@@ -3,15 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 样式挂载点占位符 -->
+    {% block style %}
+    {% endblock %}
     <title>{{ getTitle() }}</title>
 </head>
 <body>
     {# body占位符 #}
+    <!-- 单页挂载点占位符 -->
     {% block body %}
-        <div>this is body</div>
+        <div id="app"></div>
     {% endblock %}
-    <script>
-        window._global={{ _global }};
-    </script>
+    <!-- 全局对象占位符 -->
+    {% block global_script %}
+        <script>
+            window._global={{ _global }};
+        </script>
+    {% endblock %}
+    <!-- 页尾脚本占位符 -->
+    {% block page_script %}
+    {% endblock %}
 </body>
 </html>

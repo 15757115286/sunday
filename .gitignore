@@ -6,9 +6,11 @@ package-lock.json
 dist/
 # 忽略vscode配置
 .vscode/
-# 忽略yarn.lock配置文件
-yarn.lock
 # 忽略运行时输出文件
 run/
 # 忽略yarn-error.log
 yarn-error.log
+
+# 忽略client下的一些文件
+client/node_modules
+client/dist
