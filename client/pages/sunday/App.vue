@@ -6,6 +6,7 @@
 </template>
 <script>
 import { add } from './utils';
+import './asset/comm.scss';
 add(1, 2);
 
 export default {
