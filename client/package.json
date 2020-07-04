@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "the client of the sunday app",
   "scripts": {
-    "build": "ts-node build/build.ts"
+    "build": "node node_modules/ts-node/dist/bin build/build.ts --prod",
+    "dev": "node node_modules/ts-node/dist/bin build/build.ts"
   },
   "keywords": [
     "sunday",
@@ -34,6 +35,8 @@
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.43.0",
-    "webpackbar": "^4.0.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpackbar": "^4.0.0",
+    "yargs-parser": "^18.1.3"
   }
 }

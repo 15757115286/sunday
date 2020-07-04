@@ -2,7 +2,7 @@ import { default as config } from './webpack.config';
 import * as path from 'path';
 import webpack = require('webpack');
 import { printEnvBox } from './helper';
-
+import WebpackDevServer = require('webpack-dev-server');
 
 printEnvBox(path.resolve(__dirname, '../package.json'));
 const callback = (err, stats) => { // Stats Object
@@ -10,15 +10,24 @@ const callback = (err, stats) => { // Stats Object
         console.error(err || stats.toString({
             // Add console colors
             colors: true
-          }));
+        }));
     }
-// Done processing
+    // Done processing
 }
 
 const compiler = webpack(config);
 
-const watching = compiler.watch({
-    // Example watchOptions
-    aggregateTimeout: 300,
-    poll: undefined
-  }, callback);
+const server = new WebpackDevServer(compiler, {
+    stats: {
+        colors: true,
+        modules: false,
+        entrypoints: false
+    },
+    host: 'localhost',
+    port: 7009
+});
+
+server.listen(7009);
+process.on('exit', () => {
+    server.close();
+})

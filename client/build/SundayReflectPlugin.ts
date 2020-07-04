@@ -1,7 +1,6 @@
 import * as webpack from "webpack";
 import * as path from 'path';
 import * as fs from 'fs-extra';
-import * as crypto from 'crypto';
 
 interface SundayReflectPluginOption {
     delimitor?: string;
@@ -28,6 +27,12 @@ class SundayReflectPlugin {
         this.refReg = new RegExp(regString);
     }
     apply(compiler: webpack.Compiler) {
+        const chunksHash = Object.create(null);
+        compiler.hooks.compilation.tap('SundayReflectPlugin', compilation => {
+            compilation.hooks.chunkAsset.tap('SundayReflectPlugin', (chunk, filename) => {
+                chunksHash[filename] = chunk.hash;
+            });
+        });
         compiler.hooks.afterEmit.tap('SundayReflectPlugin' , compilation => {
             const { assets } = compilation;
             const result = {};
@@ -54,8 +59,7 @@ class SundayReflectPlugin {
             const { assets } = compilation;
             const _assets = {};
             for(let key in assets) {
-                const hash = crypto.createHash('sha256');
-                const assetHash = hash.update(Math.random().toString()).digest('hex').slice(0, 20);
+                const assetHash = chunksHash[key].slice(0, 20);
                 const newKey = key.replace(/(\.[^\.]+)$/, `_${ assetHash }$1`);
                 _assets[newKey] = assets[key];
             }

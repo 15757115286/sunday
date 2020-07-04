@@ -1,7 +1,7 @@
 <template>
     <div class="sunday">
         this is sunday app {{ name }}
-        <button @click="beatCm">触发点击</button>
+        <button @click="beatCm">触发点击ccc</button>
     </div>
 </template>
 <script>
@@ -13,7 +13,7 @@ export default {
     name: 'sunday',
     data() {
         return {
-            name:'xwt44sgg'
+            name:'xwt44sxw'
         }
     },
     methods: {
@@ -22,7 +22,7 @@ export default {
             await new Promise(resolve => {
                 setTimeout(resolve, 2000);
             });
-            console.log('xwt3' + (Date.now() - _now));
+            console.log('xwt33' + (Date.now() - _now));
         }
     }
 }

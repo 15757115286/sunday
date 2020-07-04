@@ -1,6 +1,7 @@
 import path = require('path');
 
 export default {
+    'mode': 'prod',
     'nunjucks': {
         root: [
             path.resolve(__dirname, '../app/views')

@@ -4,11 +4,13 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import { getConfig } from '../lib/util';
 import * as util from 'util';
+import url = require('url');
 const fileNameReg = /nunjucks\/(.+)/;
 
 const readFile = util.promisify(fs.readFile);
 
 const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
+    const mode = app.config.mode;
     return async function(ctx: Context, next: Next) {
         const urlPath = ctx.path;
         const match = urlPath.match(fileNameReg);
@@ -23,14 +25,25 @@ const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
             await next();
         }
         const realName = fileName.replace(/_[^_\.]+\.(js|css)$/, '.$1');
-        try {
-            const content = await readFile(reflect[realName].path);
-            // 游览器当只有收到响应头为 text/css的link时才会重新渲染样式
-            ctx.set('Content-Type', isJs ? 'application/javascript' : 'text/css')
-            ctx.body = content;
-        }catch {
-            ctx.status = 404;
-            ctx.body = 'Not Found';
+        if (mode === 'prod') {
+            try {
+                const content = await readFile(reflect[realName].path);
+                // 游览器当只有收到响应头为 text/css的link时才会重新渲染样式
+                ctx.set('Content-Type', isJs ? 'application/javascript' : 'text/css')
+                ctx.body = content;
+            }catch {
+                ctx.status = 404;
+                ctx.body = 'Not Found';
+            }
+        } else {
+            const { hostname, port, protocol, publicPath } = config;
+            const dest = url.format({
+                hostname,
+                port,
+                protocol,
+                pathname: path.resolve(publicPath, realName)
+            });
+            ctx.redirect(dest);
         }
     }
 }

@@ -9,6 +9,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackBar = require('webpackbar');
 
 // 获取pages下面所有的文件夹，默认是一个独立的入口
+import parser = require('yargs-parser');
+const isDev = !parser.prod;
+const args = parser(process.argv.slice(2));
 const ENTRY_SPOT = path.resolve(__dirname, '../pages');
 const CACHE_DIR = path.resolve(__dirname, '../../run/cache');
 const MAIN_FILE = 'main.js';
@@ -21,12 +24,32 @@ pathes.forEach(dirname => {
     entry[dirname] = path.resolve(__dirname, '../pages', dirname, MAIN_FILE);
 });
 
-const mode = 'development';
+const mode = isDev ? 'development' : 'production';
+
+const plugins = [
+    new CleanWebpackPlugin(),
+    // 给每个模块创造不同的hash @see https://webpack.js.org/plugins/hashed-module-ids-plugin/
+    new webpack.HashedModuleIdsPlugin(),
+    new VueLoaderPlugin(),
+    new WebpackBar(),
+    new MiniCssExtractPlugin({
+        filename: 'css/[name].css',
+        chunkFilename: 'css/[id].css',
+    })
+];
+
+if (!isDev) {
+    plugins.push(
+        new SundayReflectPlugin({
+            output: path.resolve(__dirname, '../../run')
+        })
+    );
+}
 
 const webpackConfig: webpack.Configuration = {
     entry,
     mode,
-    resolve:{
+    resolve: {
         extensions: ['.vue', '.js', '.ts']
     },
     output: {
@@ -34,20 +57,8 @@ const webpackConfig: webpack.Configuration = {
         filename: 'js/[name].js',
         chunkFilename: 'js/[id].js'
     },
-    plugins: [
-        new CleanWebpackPlugin(),
-        // 给每个模块创造不同的hash @see https://webpack.js.org/plugins/hashed-module-ids-plugin/
-        new VueLoaderPlugin(),
-        new WebpackBar(),
-        new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
-            chunkFilename: 'css/[id].css',
-        }),
-        new SundayReflectPlugin({
-            output: path.resolve(__dirname, '../../run')
-        })
-    ],
-    module: {    
+    plugins,
+    module: {
         rules: [
             {
                 test: /\.vue$/,
