@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 样式挂载点占位符 -->
-    {{ loadCss('css/vendors.css') }}
+    {% if prod %}
+        {{ loadCss('css/vendors.css') }}
+    {% endif %}
     {% block style %}
     {% endblock %}
     <title>{{ getTitle() }}</title>
@@ -22,7 +24,9 @@
         </script>
     {% endblock %}
     <!-- 页尾脚本占位符 -->
-    {{ loadJs('js/vendors.js') }}
+    {% if prod %}
+        {{ loadJs('js/vendors.js') }}
+    {% endif %}
     {% block page_script %}
     {% endblock %}
 </body>

@@ -6,14 +6,16 @@ interface SundayReflectPluginOption {
     delimitor?: string;
     prefix?: string | string[]
     output?: string;
+    mode?: string;
 }
 
 class SundayReflectPlugin {
     delimitor!: string;
     refReg!: RegExp;
     output: string = path.resolve(process.cwd(), 'run');
+    mode: string = 'dev';
     constructor(option: SundayReflectPluginOption = {}) {
-        let { delimitor = '_', prefix = ['css', 'js'], output } = option;
+        let { delimitor = '_', prefix = ['css', 'js'], output, mode } = option;
         if (delimitor) {
             this.delimitor = delimitor;
         }
@@ -25,6 +27,7 @@ class SundayReflectPlugin {
         }
         const regString = `^(${ (<string[]>prefix).join('|') })\\/([^${ delimitor }]+)(?:${ delimitor }.+)?\\.(.+)`;
         this.refReg = new RegExp(regString);
+        this.mode = mode || this.mode;
     }
     apply(compiler: webpack.Compiler) {
         const chunksHash = Object.create(null);
@@ -55,16 +58,20 @@ class SundayReflectPlugin {
                 });
             }
         });
-        compiler.hooks.emit.tap('SundayReflectPlugin' ,compilation => {
-            const { assets } = compilation;
-            const _assets = {};
-            for(let key in assets) {
-                const assetHash = chunksHash[key].slice(0, 20);
-                const newKey = key.replace(/(\.[^\.]+)$/, `_${ assetHash }$1`);
-                _assets[newKey] = assets[key];
-            }
-            compilation.assets = _assets;
-        });
+        if (this.mode === 'prod') {
+            compiler.hooks.emit.tap('SundayReflectPlugin' ,compilation => {
+                const { assets } = compilation;
+                const _assets = {};
+                for(let key in assets) {
+                    const assetHash = chunksHash[key];
+                    if (assetHash) {
+                        const newKey = key.replace(/(\.[^\.]+)$/, `_${ assetHash }$1`);
+                        _assets[newKey] = assets[key];
+                    }
+                }
+                compilation.assets = _assets;
+            });
+        }
     }
 }
 
