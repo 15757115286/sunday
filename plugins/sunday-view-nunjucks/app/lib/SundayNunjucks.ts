@@ -25,11 +25,13 @@ class SundayNunjucks extends ViewEngine {
     }
 
     [INIT]() {
+        const mode = this.app.config.mode;
         const viewEngine = this.viewEngine;
         const _global = this.ctx._global || {};
         viewEngine.addGlobal('_global', JSON.stringify(_global));
         viewEngine.addGlobal('loadJs', this.loadJs.bind(this));
         viewEngine.addGlobal('loadCss', this.loadCss.bind(this));
+        viewEngine.addGlobal('prod', mode === 'prod');
         viewEngine.addGlobal('getTitle', () => {
             return _global.title || 'sunday';
         });

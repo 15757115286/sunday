@@ -857,6 +857,13 @@
   dependencies:
     source-map "^0.6.1"
 
+"@types/webpack-merge@^4.1.5":
+  version "4.1.5"
+  resolved "https://registry.npm.taobao.org/@types/webpack-merge/download/@types/webpack-merge-4.1.5.tgz#265fbee4810474860d0f4c17e0107032881eed47"
+  integrity sha1-Jl++5IEEdIYND0wX4BBwMoge7Uc=
+  dependencies:
+    "@types/webpack" "*"
+
 "@types/webpack-sources@*":
   version "1.4.0"
   resolved "https://registry.npm.taobao.org/@types/webpack-sources/download/@types/webpack-sources-1.4.0.tgz?cache=0&sync_timestamp=1591056416062&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fwebpack-sources%2Fdownload%2F%40types%2Fwebpack-sources-1.4.0.tgz#e58f1f05f87d39a5c64cf85705bdbdbb94d4d57e"
@@ -866,7 +873,7 @@
     "@types/source-list-map" "*"
     source-map "^0.7.3"
 
-"@types/webpack@^4.4.31", "@types/webpack@^4.41.18":
+"@types/webpack@*", "@types/webpack@^4.4.31", "@types/webpack@^4.41.18":
   version "4.41.18"
   resolved "https://registry.npm.taobao.org/@types/webpack/download/@types/webpack-4.41.18.tgz?cache=0&sync_timestamp=1593104505892&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fwebpack%2Fdownload%2F%40types%2Fwebpack-4.41.18.tgz#2945202617866ecdffa582087f1b6de04a7eed55"
   integrity sha1-KUUgJheGbs3/pYIIfxtt4Ep+7VU=
@@ -6153,6 +6160,13 @@ webpack-log@^2.0.0:
   dependencies:
     ansi-colors "^3.0.0"
     uuid "^3.3.2"
+
+webpack-merge@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.npm.taobao.org/webpack-merge/download/webpack-merge-4.2.2.tgz?cache=0&sync_timestamp=1593787660867&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwebpack-merge%2Fdownload%2Fwebpack-merge-4.2.2.tgz#a27c52ea783d1398afd2087f547d7b9d2f43634d"
+  integrity sha1-onxS6ng9E5iv0gh/VH17nS9DY00=
+  dependencies:
+    lodash "^4.17.15"
 
 webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-sources@^1.4.1:
   version "1.4.3"

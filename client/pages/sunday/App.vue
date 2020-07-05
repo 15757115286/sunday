@@ -1,7 +1,7 @@
 <template>
     <div class="sunday">
         this is sunday app {{ name }}
-        <button @click="beatCm">触发点击ccc</button>
+        <button @click="beatCm">触发点击</button>
     </div>
 </template>
 <script>

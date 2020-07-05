@@ -4,7 +4,7 @@
   "description": "the client of the sunday app",
   "scripts": {
     "build": "node node_modules/ts-node/dist/bin build/build.ts --prod",
-    "dev": "node node_modules/ts-node/dist/bin build/build.ts"
+    "dev": "node node_modules/ts-node/dist/bin build/dev.ts"
   },
   "keywords": [
     "sunday",
@@ -22,6 +22,7 @@
     "@babel/plugin-transform-runtime": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
     "@types/webpack": "^4.41.18",
+    "@types/webpack-merge": "^4.1.5",
     "@vue/compiler-sfc": "^3.0.0-beta.15",
     "babel-loader": "^8.1.0",
     "cache-loader": "^4.1.0",
@@ -36,6 +37,7 @@
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.43.0",
     "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2",
     "webpackbar": "^4.0.0",
     "yargs-parser": "^18.1.3"
   }

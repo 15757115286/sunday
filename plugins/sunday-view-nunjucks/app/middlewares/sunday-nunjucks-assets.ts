@@ -5,6 +5,7 @@ import * as path from 'path';
 import { getConfig } from '../lib/util';
 import * as util from 'util';
 import url = require('url');
+import http = require('http');
 const fileNameReg = /nunjucks\/(.+)/;
 
 const readFile = util.promisify(fs.readFile);
@@ -20,13 +21,13 @@ const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
         const [root, js, css] = getConfig(app);
         const fileName = match![1];
         const isJs = /\.js$/.test(fileName);
-        const reflect = fs.readJSONSync(path.resolve(root, isJs ? js : css));
-        if (!reflect) {
-            await next();
-        }
         const realName = fileName.replace(/_[^_\.]+\.(js|css)$/, '.$1');
         if (mode === 'prod') {
             try {
+                const reflect = fs.readJSONSync(path.resolve(root, isJs ? js : css));
+                if (!reflect) {
+                    await next();
+                }
                 const content = await readFile(reflect[realName].path);
                 // 游览器当只有收到响应头为 text/css的link时才会重新渲染样式
                 ctx.set('Content-Type', isJs ? 'application/javascript' : 'text/css')
@@ -37,11 +38,12 @@ const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
             }
         } else {
             const { hostname, port, protocol, publicPath } = config;
+            // 兼容window路径
             const dest = url.format({
                 hostname,
                 port,
                 protocol,
-                pathname: path.resolve(publicPath, realName)
+                pathname: path.resolve(publicPath, realName).replace(/\\/g, '/')
             });
             ctx.redirect(dest);
         }
