@@ -42,7 +42,7 @@ const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
             }
         } else {
             const dest = resolveUrl(realName, config);
-            ctx.redirect(dest);
+            ctx.body = await easyGet(dest);
         }
     }
 }
