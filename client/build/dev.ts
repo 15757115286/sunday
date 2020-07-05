@@ -19,7 +19,8 @@ const server = new WebpackDevServer(compiler, {
         poll: 1000
     },
     host: 'localhost',
-    port: 7009
+    port: 7009,
+    hot: true
 });
 
 server.listen(7009);

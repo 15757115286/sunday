@@ -1,6 +1,7 @@
 <template>
     <div>
-        <button>1245</button>
+        <button>hef</button>
+        <div>444</div>
     </div>
 </template>
 <script>
@@ -9,3 +10,8 @@ export default {
     name:'sun-button'
 }
 </script>
+<style lang="scss" scoped>
+div {
+    color: green;
+}
+</style>

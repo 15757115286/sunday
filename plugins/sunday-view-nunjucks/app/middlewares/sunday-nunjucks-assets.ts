@@ -2,9 +2,8 @@ import { MiddlewareItemConfig, BaseApplication } from '../../../../definitions/c
 import { Context, Next } from 'koa';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import { getConfig } from '../lib/util';
+import { getConfig, resolveUrl, easyGet } from '../lib/util';
 import * as util from 'util';
-import url = require('url');
 import http = require('http');
 const fileNameReg = /nunjucks\/(.+)/;
 
@@ -14,6 +13,11 @@ const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
     const mode = app.config.mode;
     return async function(ctx: Context, next: Next) {
         const urlPath = ctx.path;
+        if (/hot-update/.test(urlPath)) {
+            const dest = resolveUrl(urlPath, config);
+            ctx.body = await easyGet(dest);
+            return;
+        }
         const match = urlPath.match(fileNameReg);
         if (match === null) {
             await next();
@@ -37,14 +41,7 @@ const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
                 ctx.body = 'Not Found';
             }
         } else {
-            const { hostname, port, protocol, publicPath } = config;
-            // 兼容window路径
-            const dest = url.format({
-                hostname,
-                port,
-                protocol,
-                pathname: path.join(publicPath, realName).replace(/\\/g, '/')
-            });
+            const dest = resolveUrl(realName, config);
             ctx.redirect(dest);
         }
     }

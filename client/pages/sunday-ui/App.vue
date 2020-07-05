@@ -14,7 +14,7 @@ export default {
 </script>
 <style lang="scss">
 div {
-    color: red;
+    color: green;
 }
 </style>
 

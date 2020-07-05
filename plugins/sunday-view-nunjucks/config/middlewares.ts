@@ -5,7 +5,7 @@ const middlewaresConfig:PureObject<MiddlewareConfig> = {
     'sunday-nunjucks-assets': {
         enable: true,
         priority: 65,
-        match: /^\/?nunjucks\/(?:js|css)\/.+?\.(?:js|css)$/,
+        match: /(?:^\/?nunjucks\/(?:js|css)\/.+?\.(?:js|css)$)|(?:hot-update)/,
         options: {
             port: 7009,
             hostname: '127.0.0.1',

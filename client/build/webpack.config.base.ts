@@ -44,10 +44,6 @@ const webpackConfig: webpack.Configuration = {
     plugins: [
         new VueLoaderPlugin(),
         new WebpackBar(),
-        new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
-            chunkFilename: 'css/[name].css',
-        }),
         new SundayReflectPlugin({
             output: path.resolve(__dirname, '../../run'),
             mode: isDev ? 'dev' : 'prod'
@@ -57,7 +53,10 @@ const webpackConfig: webpack.Configuration = {
         rules: [
             {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
+                options: {
+                    hotReload: isDev // 关闭热重载
+                }
             },
             {
                 test: /js$/,
@@ -77,12 +76,7 @@ const webpackConfig: webpack.Configuration = {
             {
                 test: /\.scss$/,
                 use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            hmr: isDev,
-                        },
-                    },
+                    isDev ? 'vue-style-loader' : { loader: MiniCssExtractPlugin.loader, },
                     'css-loader',
                     'sass-loader'
                 ]

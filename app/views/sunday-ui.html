@@ -1,8 +1,12 @@
 {% extends "common/base.html" %}
 
+
 {% block style %}
-    {{ loadCss('css/sunday-ui.css') }}
+    {% if prod %}
+        {{ loadCss('css/sunday-ui.css') }}
+    {% endif %}
 {% endblock %}
+
 {% block page_script %}
     {{ loadJs('js/sunday-ui.js') }}
 {% endblock %}
