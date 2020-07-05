@@ -4,7 +4,7 @@ import webpack = require('webpack');
 
 const webpackDevConfig: webpack.Configuration = {
     mode: 'development',
-    devtool: 'cheap-module-source-map'
+    devtool: 'inline-cheap-module-source-map'
 }
 
 export default webpackMerge.smart(webpackBaseConfig, webpackDevConfig);

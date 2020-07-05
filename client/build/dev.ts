@@ -14,6 +14,10 @@ const server = new WebpackDevServer(compiler, {
         modules: false,
         entrypoints: false
     },
+    watchOptions:{
+        aggregateTimeout: 300,
+        poll: 1000
+    },
     host: 'localhost',
     port: 7009
 });
