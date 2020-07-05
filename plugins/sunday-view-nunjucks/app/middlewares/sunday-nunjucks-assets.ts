@@ -43,7 +43,7 @@ const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
                 hostname,
                 port,
                 protocol,
-                pathname: path.resolve(publicPath, realName).replace(/\\/g, '/')
+                pathname: path.join(publicPath, realName).replace(/\\/g, '/')
             });
             ctx.redirect(dest);
         }
