@@ -13,7 +13,13 @@ function getPluginPath(baseConfigPath: string, pluginNameÏ: string): string {
 
 function outputJSON(path: string, object: PureObject, options: PureObject = {}): void {
     fs.outputJsonSync(path, object, merge({
-        spaces: 2
+        spaces: 2,
+        replacer(key: string, value: any) {
+            if (value instanceof RegExp) {
+                return `RegExp->  ${ value.toString() }`;
+            }
+            return value;
+        }
     }, options));
 }
 

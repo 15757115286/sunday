@@ -5,22 +5,28 @@ import * as path from 'path';
 import { getConfig, resolveUrl, easyGet } from '../lib/util';
 import * as util from 'util';
 import http = require('http');
-const fileNameReg = /nunjucks\/(.+)/;
+import { isMatch } from '../../../../core/lib/util';
+const DEFAULT_FILENAME_REG = /nunjucks\/(.+)/;
 
 const readFile = util.promisify(fs.readFile);
 
 const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
-    const mode = app.config.mode;
+    const mode = app.config.mode || 'dev';
     return async function(ctx: Context, next: Next) {
         const urlPath = ctx.path;
-        if (/hot-update/.test(urlPath)) {
+        let redirectMatch = config.redirectMatch || [];
+        if (!Array.isArray(redirectMatch)) {
+            redirectMatch = [redirectMatch];
+        }
+        if (isMatch(urlPath, redirectMatch)) {
             const dest = resolveUrl(urlPath, config);
             ctx.body = await easyGet(dest);
             return;
         }
+        const fileNameReg = config.fileNameReg || DEFAULT_FILENAME_REG;
         const match = urlPath.match(fileNameReg);
         if (match === null) {
-            await next();
+            return await next();
         }
         const [root, js, css] = getConfig(app);
         const fileName = match![1];
