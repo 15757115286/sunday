@@ -20,7 +20,7 @@ const server = new WebpackDevServer(compiler, {
     },
     host: 'localhost',
     port: 7009,
-    hot: true,
+    hot: false,
     clientLogLevel:'silent'
 });
 
