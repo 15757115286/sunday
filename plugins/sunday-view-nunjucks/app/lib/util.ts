@@ -43,8 +43,21 @@ function easyGet(url):Promise<string> {
     return promise;
 }
 
+function isMatch(url: string | undefined, patterns:(string | RegExp)[]): boolean {
+    if (url === undefined) {
+        return false;
+    }
+    return patterns.some(pat => {
+        if (typeof pat === 'string') {
+            return pat === url;
+        }
+        return pat.test(url);
+    });
+}
+
 export {
     getConfig,
     resolveUrl,
-    easyGet
+    easyGet,
+    isMatch
 }
