@@ -24,9 +24,7 @@
         </script>
     {% endblock %}
     <!-- 页尾脚本占位符 -->
-    {% if prod %}
-        {{ loadJs('js/vendors.js') }}
-    {% endif %}
+    {{ loadJs('js/vendors.js') }}
     {% block page_script %}
     {% endblock %}
 </body>
