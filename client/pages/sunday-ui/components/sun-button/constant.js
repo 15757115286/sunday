@@ -1,0 +1,1 @@
+export const BUTTON_TYPE_LIST = ["info", "primary", "success", "warning", "danger","secondary","light","dark","link"];

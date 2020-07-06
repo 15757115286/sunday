@@ -1,6 +1,6 @@
 {
   "name": "sunday-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "the client of the sunday app",
   "scripts": {
     "build": "node node_modules/ts-node/dist/bin build/build.ts --prod",
@@ -23,6 +23,7 @@
     "@babel/plugin-transform-runtime": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
     "@types/webpack": "^4.41.18",
+    "@types/webpack-dev-server": "^3.11.0",
     "@types/webpack-merge": "^4.1.5",
     "@vue/compiler-sfc": "^3.0.0-beta.15",
     "babel-loader": "^8.1.0",
