@@ -2,10 +2,19 @@
   <div style="padding:32px">
     <div style="margin-bottom:24px">
       <p>基本用法</p>
-      <sun-button type="primary">基本按钮</sun-button>
-      <sun-button type="primary" plain>朴素按钮</sun-button>
-      <sun-button type="primary" round>圆形按钮</sun-button>
-      <sun-button type="link">文字按钮</sun-button>
+      <div style="margin-bottom:12px">
+        <sun-button type="primary">基本按钮</sun-button>
+        <sun-button type="info">信息按钮</sun-button>
+        <sun-button type="success">成功按钮</sun-button>
+        <sun-button type="warning">告警按钮</sun-button>
+        <sun-button type="danger">危险按钮</sun-button>
+      </div>
+      <div>
+        <sun-button type="primary">基本按钮</sun-button>
+        <sun-button type="primary" plain>朴素按钮</sun-button>
+        <sun-button type="primary" round>圆形按钮</sun-button>
+        <sun-button type="link">文字按钮</sun-button>
+      </div>
     </div>
     <div style="margin-bottom:24px">
       <p>禁用状态</p>

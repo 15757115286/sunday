@@ -1,6 +1,6 @@
 <template>
   <button :class="btnClass">
-    <i v-if="loading" class="iconfont sun-icon-loading animate__animated animate__rotateIn animate__infinite"></i>
+    <i v-if="loading" class="iconfont sun-icon-loading animate__animated animate__rotating animate__infinite"></i>
     <i v-if="icon" :class="iconClass"></i>
     <span>
       <slot></slot>
@@ -40,7 +40,7 @@ export default {
     },
     size: {
       type: String,
-      default:"",
+      default:"lg",
       validator(value) {
         return BUTTON_SIZE_LIST.indexOf(value) !== -1;
       }
@@ -58,7 +58,7 @@ export default {
       };
     },
     iconClass() {
-      return ["iconfont",this.icon];
+      return ["iconfont", this.icon];
     }
   }
 };
