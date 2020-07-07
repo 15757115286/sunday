@@ -8,7 +8,8 @@ const middlewaresConfig:PureObject<MiddlewareConfig> = {
         options: {
             redirectMatch: [
                 /hot-update/,
-                /js\/(?:vendors~)?saturday\//
+                /js\/(?:vendors~)?saturday\//,
+                /iconfont\.(?:svg|woff|eot|ttf)/
             ]
         }
     }

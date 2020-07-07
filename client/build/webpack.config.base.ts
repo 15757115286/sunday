@@ -68,9 +68,7 @@ const webpackConfig: webpack.Configuration = {
                             cacheDirectory: CACHE_DIR
                         }
                     },
-                    {
-                        loader: 'babel-loader'
-                    }
+                    'babel-loader'
                 ]
             },
             {
@@ -80,12 +78,7 @@ const webpackConfig: webpack.Configuration = {
                     'css-loader',
                     'sass-loader'
                 ]
-            },
-            { 
-                test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, 
-                loader: 'url-loader?limit=8192'
             }
-
         ]
     }
 }

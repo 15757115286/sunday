@@ -14,17 +14,17 @@
     </div>
      <div style="margin-bottom:24px">
       <p>图标按钮</p>
-      <sun-button type="primary" icon="sunicon-xinxi">图标按钮</sun-button>
-      <sun-button type="primary" icon="sunicon-xinxi"></sun-button>
+      <sun-button type="primary" icon="sun-icon-xiangqu">图标按钮</sun-button>
+      <sun-button type="primary" icon="sun-icon-xiangqu"></sun-button>
     </div>
     <div style="margin-bottom:24px">
       <p>加载中按钮</p>
       <sun-button type="primary" :loading="true">加载中...</sun-button>
     </div>
      <div style="margin-bottom:24px">
-      <p>按钮尺寸</p>
-      <sun-button type="primary" size="sm">small</sun-button>
+      <p>按钮尺寸</p>    
       <sun-button type="primary" size="lg">large</sun-button>
+      <sun-button type="primary" size="sm">small</sun-button>
     </div>
   </div>
 </template>
