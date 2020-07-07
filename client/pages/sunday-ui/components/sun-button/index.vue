@@ -1,7 +1,7 @@
 <template>
     <button :class="btnClass" >
       <span> <slot></slot></span> 
-      <i class="iconfont icon-jinwenzi"></i>
+      <i class="iconfont sun-icon-loading"></i>
     </button>
 </template>
 
