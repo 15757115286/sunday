@@ -21,6 +21,11 @@
       <p>加载中按钮</p>
       <sun-button type="primary" :loading="true">加载中...</sun-button>
     </div>
+     <div style="margin-bottom:24px">
+      <p>按钮尺寸</p>
+      <sun-button type="primary" size="sm">small</sun-button>
+      <sun-button type="primary" size="lg">large</sun-button>
+    </div>
   </div>
 </template>
 <script>
