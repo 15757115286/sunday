@@ -37,8 +37,8 @@ class SundayNunjucks extends ViewEngine {
         });
     }
 
-    render(name: string, context?: PureObject, isAsync:boolean = false):string | Promise<string> {
-        if(isAsync) {
+    render(name: string, context?: PureObject, isAsync: boolean = false): string | Promise<string> {
+        if (isAsync) {
             return new Promise<string>((resolve, reject) => {
                 this.viewEngine.render(name, context, (err, result) => {
                     if (err) {
@@ -47,13 +47,13 @@ class SundayNunjucks extends ViewEngine {
                         resolve(result || '');
                     }
                 });
-            }) ;
+            });
         }
-        return this.viewEngine.render(name, context); 
+        return this.viewEngine.render(name, context);
     }
 
-    renderString(str: string, context: PureObject, isAsync = true):string | Promise<string> {
-        if(isAsync) {
+    renderString(str: string, context: PureObject, isAsync = true): string | Promise<string> {
+        if (isAsync) {
             return new Promise<string>((resolve, reject) => {
                 this.viewEngine.render(str, context, (err, result) => {
                     if (err) {
@@ -62,73 +62,85 @@ class SundayNunjucks extends ViewEngine {
                         resolve(result || '');
                     }
                 });
-            }) ;
+            });
         }
-        return this.viewEngine.render(str, context);  
+        return this.viewEngine.render(str, context);
     }
 
     loadCss(fileName: string, isInline: boolean = false) {
-        const [root, js, css] = getConfig(this.app);
-        const abs = path.resolve(root, css);
-        const isExistReflectJson = fs.existsSync(abs);
-        if (!isExistReflectJson) {
-            throw new Error(`file ${ css } is not exists`);
-        }
-        const reflect = fs.readJSONSync(abs);
-        const reflectFile = reflect[fileName];
-        if (reflectFile === undefined) {
-            return '';
-        }
-        if (isInline) {
-            const content = fs.readFileSync(reflectFile.path); 
-            return `
+        try {
+            const [root, js, css] = getConfig(this.app);
+            const abs = path.resolve(root, css);
+            const isExistReflectJson = fs.existsSync(abs);
+            if (!isExistReflectJson) {
+                throw new Error(`file ${css} is not exists`);
+            }
+            const reflect = fs.readJSONSync(abs);
+            const reflectFile = reflect[fileName];
+            if (reflectFile === undefined) {
+                return '';
+            }
+            if (isInline) {
+                const content = fs.readFileSync(reflectFile.path);
+                return `
                 <style>
-                    ${ content }
+                    ${ content}
                 </style>
             `.trim();
-        } else {
-            let fileName = reflectFile.fileName;
-            if (!/^\//.test(fileName)) {
-                fileName = '/' + fileName;
-            }
-            const href = '/' + VIEW_ENGINE_NAME + fileName;
-            return `
-                <link rel="stylesheet" type="text/css" href="${ href }" />
+            } else {
+                let fileName = reflectFile.fileName;
+                if (fileName === undefined) return '';
+                if (!/^\//.test(fileName)) {
+                    fileName = '/' + fileName;
+                }
+                const href = '/' + VIEW_ENGINE_NAME + fileName;
+                return `
+                <link rel="stylesheet" type="text/css" href="${ href}" />
             `.trim();
+            }
+        } catch (e) {
+            console.error(e);
+            return '';
         }
     }
 
     loadJs(fileName: string, isInline: boolean = false, isAsync: boolean = false) {
-        const [root, js] = getConfig(this.app);
-        const abs = path.resolve(root, js);
-        const isExistReflectJson = fs.existsSync(abs);
-        if (!isExistReflectJson) {
-            throw new Error(`file ${ js } is not exists`);
-        }
-        const reflect = fs.readJSONSync(abs);
-        const reflectFile = reflect[fileName];
-        if (reflectFile === undefined) {
-            return '';
-        }
-        if (isInline) {
-            const content = fs.readFileSync(reflectFile.path); 
-            return `
+        try {
+            const [root, js] = getConfig(this.app);
+            const abs = path.resolve(root, js);
+            const isExistReflectJson = fs.existsSync(abs);
+            if (!isExistReflectJson) {
+                throw new Error(`file ${js} is not exists`);
+            }
+            const reflect = fs.readJSONSync(abs);
+            const reflectFile = reflect[fileName];
+            if (reflectFile === undefined) {
+                return '';
+            }
+            if (isInline) {
+                const content = fs.readFileSync(reflectFile.path);
+                return `
                 <script>
-                    ${ content }
+                    ${ content}
                 </script>
             `.trim();
-        } else {
-            let fileName = reflectFile.fileName;
-            if (!/^\//.test(fileName)) {
-                fileName = '/' + fileName;
-            }
-            const src = '/' + VIEW_ENGINE_NAME + fileName;
-            return `
-                <script src="${ src }" ${ isAsync ? 'async' : '' }></script>
+            } else {
+                let fileName = reflectFile.fileName;
+                if (fileName === undefined) return '';
+                if (!/^\//.test(fileName)) {
+                    fileName = '/' + fileName;
+                }
+                const src = '/' + VIEW_ENGINE_NAME + fileName;
+                return `
+                <script src="${ src}" ${isAsync ? 'async' : ''}></script>
             `.trim();
+            }
+        } catch (e) {
+            console.error(e);
+            return '';
         }
     }
-    
+
 }
 
 export default SundayNunjucks;

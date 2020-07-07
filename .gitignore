@@ -14,3 +14,6 @@ yarn-error.log
 # 忽略client下的一些文件
 client/node_modules
 client/dist
+
+# 忽略.Ds_Store
+**/.Ds_Store

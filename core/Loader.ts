@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as glob from 'fast-glob';
 import { isCoreEntry } from './lib/util';
 
-const NOT_INCLUDE_SUFFIX = /d\.ts$/;
+const NOT_INCLUDE_SUFFIX = /\.d\.ts$/;
 
 /**
  * 基本的加载器，用于读取配置文件或者插件等作用

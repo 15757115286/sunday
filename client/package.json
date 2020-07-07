@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "the client of the sunday app",
   "scripts": {
-    "build": "node node_modules/ts-node/dist/bin build/build.ts --prod",
+    "build": "node node_modules/ts-node/dist/bin build/build.ts --prod --entry=sunday-ui",
     "dev": "node node_modules/ts-node/dist/bin build/dev.ts --entry=sunday-ui"
   },
   "keywords": [
@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/runtime-corejs3": "^7.10.3",
+    "copy-webpack-plugin": "5.1.0",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-router": "^3.3.4"

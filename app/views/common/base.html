@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 样式挂载点占位符 -->
-    {% if prod %}
-        {{ loadCss('css/vendors.css') }}
-    {% endif %}
+    {{ loadCss('css/vendors.css') }}
     {% block style %}
     {% endblock %}
     <title>{{ getTitle() }}</title>

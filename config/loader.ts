@@ -35,7 +35,7 @@ const loaderConfig: PureObject<Partial<LoaderConfigItem>> = {
             pattern: `app/middlewares/*.${EXTENDSION}`,
             configPattern: [
                 `config/**/middlewares.${EXTENDSION}`,
-                `config/**/middlewares.${ENV}.${EXTENDSION}`
+                `config/**/middlewares\.${ENV}\.${EXTENDSION}`
             ]
         }
     }
