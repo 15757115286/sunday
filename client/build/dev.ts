@@ -21,7 +21,9 @@ const server = new WebpackDevServer(compiler, {
     host: 'localhost',
     port: 7009,
     hot: false,
-    clientLogLevel:'silent'
+    clientLogLevel:'silent',
+    contentBase: path.resolve(__dirname, '../pages/sunday-ui/assets'),
+    contentBasePublicPath: '/assets'
 });
 
 server.listen(7009);
