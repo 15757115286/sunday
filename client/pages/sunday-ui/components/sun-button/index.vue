@@ -1,11 +1,13 @@
 <template>
     <button :class="btnClass" >
       <span> <slot></slot></span> 
+      <i class="iconfont icon-jinwenzi"></i>
     </button>
 </template>
 
 <script>
 import "../../assets/scss/style.vue.scss";
+import "../../assets/scss/vendor/iconfont.scss";
 import { BUTTON_TYPE_LIST } from "./constant";
 import {PREFIX} from "../../prefix"
 export default {

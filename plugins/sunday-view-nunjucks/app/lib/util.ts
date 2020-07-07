@@ -27,12 +27,12 @@ function resolveUrl (realtive, config) {
     return dest;
 }
 
-function easyGet(url):Promise<string> {
-    const promise = new Promise<string>(resolve => {
+function easyGet(url):Promise<string|Buffer> {
+    const promise = new Promise<string|Buffer>(resolve => {
         http.request(url, res => {
-            let data = '';
+            let data = Buffer.alloc(0);
             res.on('data', d => {
-                data += d;
+                data = Buffer.concat([data, d]);
             });
             res.on('end', () => {
                 resolve(data);
