@@ -1,12 +1,13 @@
 <template>
     <button :class="btnClass" >
-      <span><slot></slot></span> 
+      <span> <slot></slot></span> 
     </button>
 </template>
 
 <script>
 import "../../assets/scss/style.vue.scss";
 import { BUTTON_TYPE_LIST } from "./constant";
+import {PREFIX} from "../../prefix"
 export default {
   name: "sun-button",
   props: {
@@ -29,9 +30,9 @@ export default {
   computed: {
     btnClass() {
       return {
-        "sun-button": true,
-        ["sun-button-" + this.type]: !this.plain, //基本按钮
-        ["sun-button-outline-" + this.type]: this.plain, //朴素按钮
+        [ PREFIX+"button"]: true,
+        [PREFIX+"button-" + this.type]: !this.plain, //基本按钮
+        [PREFIX+"button-outline-" + this.type]: this.plain, //朴素按钮
         "is-round":this.round //圆形按钮
       };
     }

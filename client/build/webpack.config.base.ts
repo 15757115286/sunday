@@ -80,7 +80,12 @@ const webpackConfig: webpack.Configuration = {
                     'css-loader',
                     'sass-loader'
                 ]
+            },
+            { 
+                test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, 
+                loader: 'url-loader?limit=8192'
             }
+
         ]
     }
 }
