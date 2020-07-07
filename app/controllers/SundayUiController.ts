@@ -3,7 +3,7 @@ import { Controller, Route, Get } from '../../plugins/sunday-decorator/app/lib';
 import { BaseApplication } from '../../definitions/core';
 
 @Controller('/ui')
-class TestController {
+class SundayUiController {
     app: BaseApplication;
     ctx: Context;
     
@@ -14,4 +14,4 @@ class TestController {
         await this.ctx.render('sunday-ui.html');
     }
 }
-export default TestController;
+export default SundayUiController;
