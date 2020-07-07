@@ -1,6 +1,6 @@
 <template>
   <button :class="btnClass">
-    <i v-if="loading" class="iconfont sun-icon-loading animate__animated animate__bounce"></i>
+    <i v-if="loading" class="iconfont sun-icon-loading animate__animated animate__rotateIn animate__infinite"></i>
     <i v-if="icon" :class="iconClass"></i>
     <span>
       <slot></slot>
@@ -64,16 +64,3 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@keyframes rotating{       
-		 
-				0%{-webkit-transform:rotate(0deg);}
-		 
-				50%{-webkit-transform:rotate(180deg);}
-		 
-				100%{-webkit-transform:rotate(360deg);}
-}
-.sun-icon-loading {
-  animation-iteration-count: infinite;
-}
-</style>
