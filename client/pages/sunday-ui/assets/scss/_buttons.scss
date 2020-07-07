@@ -27,7 +27,6 @@
   &:focus,
   &.focus {
     outline: 0;
-    box-shadow: $btn-focus-box-shadow;
   }
 
   // Disabled comes first so active can properly restyle
@@ -41,9 +40,6 @@
   &:not(:disabled):not(.disabled).active {
     @include box-shadow($btn-active-box-shadow);
 
-    &:focus {
-      @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
-    }
   }
 }
 
@@ -137,4 +133,9 @@ input[type="button"] {
   &.sun-button-block {
     width: 100%;
   }
+}
+.sun-button.is-loading{
+  pointer-events: none;
+  opacity: 0.7;
+  position: relative;
 }
