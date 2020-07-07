@@ -138,3 +138,8 @@ input[type="button"] {
     width: 100%;
   }
 }
+.sun-button .is-loading{
+  pointer-events: none;
+  opacity: 0.7;
+  position: relative;
+}

@@ -12,6 +12,15 @@
       <sun-button type="primary" disabled>基本按钮</sun-button>
       <sun-button type="primary" plain disabled>朴素按钮</sun-button>
     </div>
+     <div style="margin-bottom:24px">
+      <p>图标按钮</p>
+      <sun-button type="primary" icon="sunicon-xinxi">图标按钮</sun-button>
+      <sun-button type="primary" icon="sunicon-xinxi"></sun-button>
+    </div>
+    <div style="margin-bottom:24px">
+      <p>加载中按钮</p>
+      <sun-button type="primary" :loading="true">加载中...</sun-button>
+    </div>
   </div>
 </template>
 <script>
