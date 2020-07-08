@@ -42,16 +42,23 @@
         <sun-button type="primary">下一页</sun-button>
       </sun-button-group>
     </div>
+     <div style="margin-bottom:24px">
+      <p>图标</p>
+      <sun-icon type="xiangqu" style="margin-right:16px"></sun-icon>
+      会转动的图标：<sun-icon type="xiangqu" rotate></sun-icon>
+    </div>
   </div>
 </template>
 <script>
 import { SunButton } from "./components";
 import { SunButtonGroup } from "./components";
+import {SunIcon} from "./components"
 export default {
   name: "app",
   components: {
     [SunButton.name]: SunButton,
-    [SunButtonGroup.name]: SunButtonGroup
+    [SunButtonGroup.name]: SunButtonGroup,
+    [SunIcon.name]:SunIcon,
   }
 };
 </script>

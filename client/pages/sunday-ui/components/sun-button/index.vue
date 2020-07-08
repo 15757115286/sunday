@@ -1,6 +1,6 @@
 <template>
   <button :class="btnClass">
-    <i v-if="loading" class="iconfont sun-icon-loading animate__animated animate__rotating animate__infinite"></i>
+    <sun-icon v-if="loading" type="loading" rotate></sun-icon>
     <i v-if="icon" :class="iconClass"></i>
     <span>
       <slot></slot>
@@ -11,9 +11,13 @@
 <script>
 import "../../assets/scss/style.vue.scss";
 import { BUTTON_TYPE_LIST, BUTTON_SIZE_LIST } from "./constant";
+import SunIcon from "../sun-icon"
 import { PREFIX } from "../../prefix";
 export default {
   name: "sun-button",
+  components:{
+    [SunIcon.name]:SunIcon
+  },
   props: {
     type: {
       type: String,
@@ -40,7 +44,7 @@ export default {
     },
     size: {
       type: String,
-      default:"lg",
+      default:"",
       validator(value) {
         return BUTTON_SIZE_LIST.indexOf(value) !== -1;
       }
