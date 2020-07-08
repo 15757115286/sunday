@@ -11,12 +11,12 @@
 <script>
 import "../../assets/scss/style.vue.scss";
 import { BUTTON_TYPE_LIST, BUTTON_SIZE_LIST } from "./constant";
-import SunIcon from "../sun-icon"
+import SunIcon from "../sun-icon";
 import { PREFIX } from "../../prefix";
 export default {
   name: "sun-button",
-  components:{
-    [SunIcon.name]:SunIcon
+  components: {
+    [SunIcon.name]: SunIcon
   },
   props: {
     type: {
@@ -44,7 +44,7 @@ export default {
     },
     size: {
       type: String,
-      default:"",
+      default: "",
       validator(value) {
         return BUTTON_SIZE_LIST.indexOf(value) !== -1;
       }
@@ -58,7 +58,7 @@ export default {
         [PREFIX + "button-outline-" + this.type]: this.plain, //朴素按钮
         "is-round": this.round, //圆形按钮
         "is-loading": this.loading, //加载中按钮
-        [PREFIX+"button-"+this.size]:this.size
+        [PREFIX + "button-" + this.size]: this.size
       };
     },
     iconClass() {

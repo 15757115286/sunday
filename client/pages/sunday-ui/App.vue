@@ -47,46 +47,63 @@
       <sun-icon type="xiangqu" style="margin-right:16px"></sun-icon>会转动的图标：
       <sun-icon type="xiangqu" rotate></sun-icon>
     </div>
-    <div style="margin-bottom:24px">
-      <p>输入框组</p>
-       <div style="width:25%">
-        <sun-input v-model="inputText" placeholder="请输入内容" >
-            <template #prepend>Http://</template>
-        </sun-input> 
+    <p>基本输入框</p>
+    <sun-row style="margin-bottom:24px">
+      <sun-col :span="6" style="padding-left:0">
+        <sun-input v-model="inputText3" placeholder="请输入徐伟涛大大嘴"></sun-input>
+        test---- {{inputText3}}
+      </sun-col>
+    </sun-row>
+    <p style="white-space:pre-wrap">输入框组    同时测试可以设置格数span和gutter的流式布局，共24格</p>
+    <sun-row :gutter="20" style="margin-bottom:24px">
+      <sun-col :span="6">
+        <sun-input v-model="inputText" placeholder="请输入内容">
+          <template #prepend>Http://</template>
+        </sun-input>
         test---- {{inputText}}
-      </div>
-       <div style="width:25%">
-        <sun-input v-model="inputText1" placeholder="请输入内容" >
-            <template #append>.com</template>
-        </sun-input> 
+      </sun-col>
+      <sun-col :span="6">
+        <sun-input v-model="inputText1" placeholder="请输入内容">
+          <template #append>.com</template>
+        </sun-input>
         test---- {{inputText1}}
-      </div>
-      <div style="width:25%">
-        <sun-input v-model="inputText2" placeholder="请输入内容" >
-            <template #prepend>Http://</template>
-            <template #append>.com</template>
-        </sun-input> 
+      </sun-col>
+      <sun-col :span="6">
+        <sun-input v-model="inputText2" placeholder="请输入内容">
+          <template #prepend>Http://</template>
+          <template #append>.com</template>
+        </sun-input>
         test---- {{inputText2}}
-      </div>
-    </div>
+      </sun-col>
+    </sun-row>
   </div>
 </template>
 <script>
-import { SunButton, SunButtonGroup, SunIcon, SunInput } from "./components";
+import {
+  SunButton,
+  SunButtonGroup,
+  SunIcon,
+  SunInput,
+  SunRow,
+  SunCol
+} from "./components";
 export default {
   name: "app",
   components: {
     [SunButton.name]: SunButton,
     [SunButtonGroup.name]: SunButtonGroup,
     [SunIcon.name]: SunIcon,
-    [SunInput.name]: SunInput
+    [SunInput.name]: SunInput,
+    [SunRow.name]: SunRow,
+    [SunCol.name]: SunCol
   },
   data: function() {
     return {
       type: "info",
       inputText: "",
       inputText1: "",
-      inputText2: ""
+      inputText2: "",
+      inputText3: ""
     };
   },
   methods: {

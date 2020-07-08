@@ -1,11 +1,21 @@
 <template>
   <div class="sun-input-group">
-    <div class="sun-input-group-prepend"  v-if="$slots.prepend">
-      <span class="sun-input-group-text"><slot name="prepend"></slot></span>
+    <div class="sun-input-group-prepend" v-if="$slots.prepend">
+      <span class="sun-input-group-text">
+        <slot name="prepend"></slot>
+      </span>
     </div>
-    <input type="text" class="sun-form-control" :value="value" v-on="inputListeners" v-bind="$attrs" />
+    <input
+      type="text"
+      class="sun-form-control"
+      :value="value"
+      v-on="inputListeners"
+      v-bind="$attrs"
+    />
     <div class="sun-input-group-append" v-if="$slots.append">
-      <span class="sun-input-group-text"><slot name="append"></slot></span>
+      <span class="sun-input-group-text">
+        <slot name="append"></slot>
+      </span>
     </div>
   </div>
 </template>
