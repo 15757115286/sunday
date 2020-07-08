@@ -10,7 +10,7 @@
         <sun-button type="danger">危险按钮</sun-button>
       </div>
       <div>
-        <sun-button type="primary">基本按钮</sun-button>
+        <sun-button :type="type" v-on:click.native="switchType">测试click：点击换色</sun-button>
         <sun-button type="primary" plain>朴素按钮</sun-button>
         <sun-button type="primary" round>圆形按钮</sun-button>
         <sun-button type="link">文字按钮</sun-button>
@@ -42,23 +42,61 @@
         <sun-button type="primary">下一页</sun-button>
       </sun-button-group>
     </div>
-     <div style="margin-bottom:24px">
+    <div style="margin-bottom:24px">
       <p>图标</p>
-      <sun-icon type="xiangqu" style="margin-right:16px"></sun-icon>
-      会转动的图标：<sun-icon type="xiangqu" rotate></sun-icon>
+      <sun-icon type="xiangqu" style="margin-right:16px"></sun-icon>会转动的图标：
+      <sun-icon type="xiangqu" rotate></sun-icon>
+    </div>
+    <div style="margin-bottom:24px">
+      <p>输入框组</p>
+       <div style="width:25%">
+        <sun-input v-model="inputText" placeholder="请输入内容" >
+            <template #prepend>Http://</template>
+        </sun-input> 
+        test---- {{inputText}}
+      </div>
+       <div style="width:25%">
+        <sun-input v-model="inputText1" placeholder="请输入内容" >
+            <template #append>.com</template>
+        </sun-input> 
+        test---- {{inputText1}}
+      </div>
+      <div style="width:25%">
+        <sun-input v-model="inputText2" placeholder="请输入内容" >
+            <template #prepend>Http://</template>
+            <template #append>.com</template>
+        </sun-input> 
+        test---- {{inputText2}}
+      </div>
     </div>
   </div>
 </template>
 <script>
-import { SunButton } from "./components";
-import { SunButtonGroup } from "./components";
-import {SunIcon} from "./components"
+import { SunButton, SunButtonGroup, SunIcon, SunInput } from "./components";
 export default {
   name: "app",
   components: {
     [SunButton.name]: SunButton,
     [SunButtonGroup.name]: SunButtonGroup,
-    [SunIcon.name]:SunIcon,
+    [SunIcon.name]: SunIcon,
+    [SunInput.name]: SunInput
+  },
+  data: function() {
+    return {
+      type: "info",
+      inputText: "",
+      inputText1: "",
+      inputText2: ""
+    };
+  },
+  methods: {
+    switchType() {
+      if (this.type === "primary") {
+        this.type = "info";
+      } else {
+        this.type = "primary";
+      }
+    }
   }
 };
 </script>
