@@ -8,7 +8,7 @@ class SundayUiController {
     ctx: Context;
     
     @Get
-    @Route()
+    @Route('/:component?/(.*)')
     async getName() {
         this.ctx.setGlobal('title', 'sunday-ui');
         await this.ctx.render('sunday-ui.html');
