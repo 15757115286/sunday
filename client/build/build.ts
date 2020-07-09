@@ -19,7 +19,7 @@ async function start() {
     const copyPatterns = contentBase.map(pat => {
         return {
             from: path.resolve(pat, '**/*'),
-            transformPath: t => t.replace('pages/', '/')
+            transformPath: t => t.replace(/pages(\/|\\)/, '/')
         }
     });
     webpackProdConfig.plugins!.push(new CopyPlugin(copyPatterns));
