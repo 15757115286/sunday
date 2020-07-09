@@ -70,7 +70,7 @@
   // Ensure buttons are always above inputs for more visually pleasing borders.
   // This isn't needed for `.sun-input-group-text` since it shares the same border-color
   // as our inputs.
-  .btn {
+  .sun-button {
     position: relative;
     z-index: 2;
 
@@ -79,10 +79,10 @@
     }
   }
 
-  .btn + .btn,
-  .btn + .sun-input-group-text,
+  .sun-button + .sun-button,
+  .sun-button + .sun-input-group-text,
   .sun-input-group-text + .sun-input-group-text,
-  .sun-input-group-text + .btn {
+  .sun-input-group-text + .sun-button {
     margin-left: -$input-border-width;
   }
 }
@@ -133,8 +133,8 @@
 .sun-input-group-lg > .custom-select,
 .sun-input-group-lg > .sun-input-group-prepend > .sun-input-group-text,
 .sun-input-group-lg > .sun-input-group-append > .sun-input-group-text,
-.sun-input-group-lg > .sun-input-group-prepend > .btn,
-.sun-input-group-lg > .sun-input-group-append > .btn {
+.sun-input-group-lg > .sun-input-group-prepend > .sun-button,
+.sun-input-group-lg > .sun-input-group-append > .sun-button {
   padding: $input-padding-y-lg $input-padding-x-lg;
   @include font-size($input-font-size-lg);
   line-height: $input-line-height-lg;
@@ -150,8 +150,8 @@
 .sun-input-group-sm > .custom-select,
 .sun-input-group-sm > .sun-input-group-prepend > .sun-input-group-text,
 .sun-input-group-sm > .sun-input-group-append > .sun-input-group-text,
-.sun-input-group-sm > .sun-input-group-prepend > .btn,
-.sun-input-group-sm > .sun-input-group-append > .btn {
+.sun-input-group-sm > .sun-input-group-prepend > .sun-button,
+.sun-input-group-sm > .sun-input-group-append > .sun-button {
   padding: $input-padding-y-sm $input-padding-x-sm;
   @include font-size($input-font-size-sm);
   line-height: $input-line-height-sm;
@@ -171,20 +171,59 @@
 // with the `.sun-input-group >` part, but without it, we cannot override the sizing.
 
 
-.sun-input-group > .sun-input-group-prepend > .btn,
+.sun-input-group > .sun-input-group-prepend  .sun-button,
 .sun-input-group > .sun-input-group-prepend > .sun-input-group-text,
-.sun-input-group > .sun-input-group-append:not(:last-child) > .btn,
+.sun-input-group > .sun-input-group-append:not(:last-child) > .sun-button,
 .sun-input-group > .sun-input-group-append:not(:last-child) > .sun-input-group-text,
-.sun-input-group > .sun-input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.sun-input-group > .sun-input-group-append:last-child  .sun-button:not(:last-child):not(.dropdown-toggle),
 .sun-input-group > .sun-input-group-append:last-child > .sun-input-group-text:not(:last-child) {
   @include border-right-radius(0);
 }
 
-.sun-input-group > .sun-input-group-append > .btn,
+.sun-input-group > .sun-input-group-append  .sun-button,
 .sun-input-group > .sun-input-group-append > .sun-input-group-text,
-.sun-input-group > .sun-input-group-prepend:not(:first-child) > .btn,
+.sun-input-group > .sun-input-group-prepend:not(:first-child) > .sun-button,
 .sun-input-group > .sun-input-group-prepend:not(:first-child) > .sun-input-group-text,
-.sun-input-group > .sun-input-group-prepend:first-child > .btn:not(:first-child),
+.sun-input-group > .sun-input-group-prepend:first-child  .sun-button:not(:first-child),
 .sun-input-group > .sun-input-group-prepend:first-child > .sun-input-group-text:not(:first-child) {
   @include border-left-radius(0);
 }
+.sun-input-suffix{
+  padding-right: 40px;
+}
+.sun-input-prefix{
+  padding-left: 40px;
+}
+.suffix-icon i{
+  position: absolute;
+  z-index: 2;
+  right:12px;
+  line-height: 38px;
+}
+.sun-input-group-sm{
+ .suffix-icon i{
+   line-height: 31px;
+ }
+}
+.sun-input-group-lg{
+  .suffix-icon i{
+    line-height: 48px;
+  }
+ }
+ .prefix-icon i{
+  position: absolute;
+  z-index: 2;
+  left: 12px;
+  line-height: 38px;
+}
+.sun-input-group-sm{
+ .prefix-icon i{
+   line-height: 31px;
+ }
+}
+.sun-input-group-lg{
+  .prefix-icon i{
+    line-height: 48px;
+  }
+ }
+ 
