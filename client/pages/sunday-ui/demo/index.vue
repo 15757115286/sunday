@@ -2,7 +2,7 @@
     <div class="demo-container">
         <div class="demo-menu">
             <div v-for="link in links" :key="link">
-                <router-link :to="link" >{{ nameMap[link] }}</router-link>
+                <router-link :to="link" >{{ nameMap[link] || link }}</router-link>
             </div>
         </div>
         <div class="demo-content">

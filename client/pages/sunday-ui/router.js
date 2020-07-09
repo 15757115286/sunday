@@ -4,12 +4,13 @@ const links = [];
 
 const config = {
     button: '按钮组件',
-    input: '输入框组件'
+    input: '输入框组件',
+    icon: '图标组件'
 }
 
 // 第一层的index
 const context = require.context('./demo', true, /\.\/[^\/]+\/index.vue$/, 'lazy');
-const rootPath = '/sunday-ui';
+const rootPath = '/ui';
 context.keys().forEach(dir => {
     const paths = dir.split('/');
     const link = `${ rootPath }/${ paths[1] }`;

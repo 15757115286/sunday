@@ -2,7 +2,7 @@ import { Context } from 'koa';
 import { Controller, Route, Get } from '../../plugins/sunday-decorator/app/lib';
 import { BaseApplication } from '../../definitions/core';
 
-@Controller('/ui')
+@Controller('/ui/:component')
 class SundayUiController {
     app: BaseApplication;
     ctx: Context;
