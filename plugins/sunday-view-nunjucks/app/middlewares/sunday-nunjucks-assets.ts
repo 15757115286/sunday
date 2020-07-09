@@ -16,6 +16,7 @@ const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
     return async function(ctx: Context, next: Next) {
         const urlPath = ctx.path;
         const emptyReg = config.emptyReg;
+        // 为了兼容异步组件提取的公共样式在加载时候会重复引入，导致程序crash的问题
         if (emptyReg && emptyReg.test(urlPath)) {
             return ctx.body = '';
         }
@@ -38,6 +39,7 @@ const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
         const [root, js, css] = getConfig(app);
         const fileName = match[1] || match.input!;
         const isJs = /\.js$/.test(fileName);
+        // 同时有兼容异步组件
         const realName = fileName.replace(/_[^_\.]+\.(js|css)$/, '.$1').replace(/^\//, '');
         if (mode === 'prod') {
             try {
