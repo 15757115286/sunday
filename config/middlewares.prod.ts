@@ -10,6 +10,14 @@ const middlewaresConfig:PureObject<MiddlewareConfig> = {
                 'client/dist'
             ]
         }
+    },
+    'sunday-nunjucks-assets': {
+        enable: true,
+        priority: 65,
+        options: {
+            fileNameReg: /nunjucks\/(.+)|(?:js|css)\/sunday-chunks/,
+            emptyReg: /^\/css\/vendors/
+        }
     }
 }
 
