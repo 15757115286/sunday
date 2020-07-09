@@ -10,7 +10,7 @@ export default {
   props: {
     span: {
       type: Number,
-      required: true
+      default:6
     }
   },
   computed: {

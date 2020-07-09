@@ -76,6 +76,10 @@
         test---- {{inputText2}}
       </sun-col>
     </sun-row>
+    <p>禁用输入框</p>
+    <sun-row>
+        <sun-col :span="6"> <sun-input v-model="inputText4" disabled ></sun-input> </sun-col>
+    </sun-row>
   </div>
 </template>
 <script>
@@ -103,7 +107,8 @@ export default {
       inputText: "",
       inputText1: "",
       inputText2: "",
-      inputText3: ""
+      inputText3: "",
+      inputText4:""
     };
   },
   methods: {
