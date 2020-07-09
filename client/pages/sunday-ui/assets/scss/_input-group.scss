@@ -196,7 +196,7 @@
 }
 .suffix-icon i{
   position: absolute;
-  z-index: 2;
+  z-index: 1001;
   right:12px;
   line-height: 38px;
 }
@@ -212,7 +212,7 @@
  }
  .prefix-icon i{
   position: absolute;
-  z-index: 2;
+  z-index: 1001;
   left: 12px;
   line-height: 38px;
 }
@@ -226,4 +226,6 @@
     line-height: 48px;
   }
  }
- 
+ .suffix-icon .sun-icon-roundclosefill{
+   color:#cecece
+ }

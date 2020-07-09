@@ -79,6 +79,12 @@
          <sun-input v-model="inputText3" placeholder="请输入徐伟涛大大嘴" suffix-icon="kanguo" prefix-icon="jiesuo"></sun-input>
       </sun-col>
     </sun-row>
+     <p style="white-space:pre-wrap">可清空</p>
+    <sun-row :gutter="20" style="margin-bottom:24px">
+       <sun-col :span="6">
+         <sun-input v-model="inputText5" placeholder="请输入徐伟涛大大嘴" clearable ></sun-input>
+      </sun-col>
+    </sun-row>
   </div>
 </template>
 <script>
@@ -106,6 +112,7 @@ export default {
       inputText2: "",
       inputText3: "",
       inputText4: "",
+      inputText5:''
     };
   },
   methods:{

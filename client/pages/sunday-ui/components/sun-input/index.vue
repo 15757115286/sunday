@@ -1,7 +1,11 @@
 <template>
   <div class="sun-input-group" :class="inputGroupObject">
-    <span v-if="suffixIcon" class="suffix-icon"><sun-icon :type="suffixIcon"></sun-icon></span>
-    <span v-if="prefixIcon" class="prefix-icon"><sun-icon :type="prefixIcon"></sun-icon></span>
+    <span v-if="suffixIcon" class="suffix-icon">
+      <sun-icon :type="suffixIcon"></sun-icon>
+    </span>
+    <span v-if="prefixIcon" class="prefix-icon">
+      <sun-icon :type="prefixIcon"></sun-icon>
+    </span>
     <div class="sun-input-group-prepend" v-if="$slots.prepend">
       <span :class="{'sun-input-group-text': !isButtonPrepend}">
         <slot name="prepend"></slot>
@@ -9,12 +13,15 @@
     </div>
     <input
       type="text"
-      class="sun-form-control" 
-      :class="{'sun-input-suffix':suffixIcon,'sun-input-prefix':prefixIcon}"
+      class="sun-form-control"
+      :class="{'sun-input-suffix':suffixIcon||clearable,'sun-input-prefix':prefixIcon}"
       :value="value"
       v-on="inputListeners"
       v-bind="$attrs"
     />
+    <span v-if="clearable&&value!==''" @click="$emit('input','')" class="suffix-icon">
+      <sun-icon type="roundclosefill"></sun-icon>
+    </span>
     <div class="sun-input-group-append" v-if="$slots.append">
       <span :class="{'sun-input-group-text': !isButtonAppend}">
         <slot name="append"></slot>
@@ -43,13 +50,17 @@ export default {
         return INPUT_SIZE_GROUP.indexOf(value) !== -1;
       }
     },
-    suffixIcon:{
-      type:String,
-      default:""
+    suffixIcon: {
+      type: String,
+      default: ""
     },
-    prefixIcon:{
-      type:String,
-      default:""
+    prefixIcon: {
+      type: String,
+      default: ""
+    },
+    clearable: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -65,8 +76,8 @@ export default {
     },
     //当左边slot是按钮时，去掉.sun-input-group-text
     isButtonPrepend() {
-      let nodes=this.$slots.prepend;
-      if (nodes!== undefined) {
+      let nodes = this.$slots.prepend;
+      if (nodes !== undefined) {
         if (nodes[0].tag !== undefined) {
           return nodes[0].tag.includes("button");
         }
@@ -75,8 +86,8 @@ export default {
     },
     //当右边slot是按钮时，去掉.sun-input-group-text
     isButtonAppend() {
-      let nodes=this.$slots.append;
-      if (nodes!== undefined) {
+      let nodes = this.$slots.append;
+      if (nodes !== undefined) {
         if (nodes[0].tag !== undefined) {
           return nodes[0].tag.includes("button");
         }
