@@ -18,7 +18,9 @@ const webpackProdConfig: webpack.Configuration = {
     mode: 'production',
     plugins,
     optimization: {
-        // 这个为了兼容异步组件打包
+        // 这个为了兼容异步组件打包。这个后续有很大的优化空间
+        // @see https://webpack.js.org/plugins/mini-css-extract-plugin/ 
+        // @see https://webpack.js.org/plugins/split-chunks-plugin/
         splitChunks: {
             chunks: 'all',
             minChunks: 2,
