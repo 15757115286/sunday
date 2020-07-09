@@ -2,6 +2,11 @@ import DemoHome from './demo';
 const demoRoutes = [];
 const links = [];
 
+const config = {
+    button: '按钮组件',
+    input: '输入框组件'
+}
+
 // 第一层的index
 const context = require.context('./demo', true, /\.\/[^\/]+\/index.vue$/, 'lazy');
 const rootPath = '/sunday-ui';
@@ -26,8 +31,6 @@ const routes = [
     }
 ];
 
-
-
 routes.push({
     path:'/',
     redirect:links[0]
@@ -36,7 +39,13 @@ routes.push({
     redirect:links[0]
 });
 
+const nameMap = {};
+Object.keys(config).forEach(name => {
+    nameMap[`${ rootPath }/${name}`] = config[name];
+})
+
 export {
     routes,
-    links
+    links,
+    nameMap
 }
