@@ -29,6 +29,12 @@
         test---- {{inputText2}}
       </sun-col>
     </sun-row>
+    <p>禁用输入框</p>
+    <sun-row :gutter="20">
+       <sun-col :span="4">
+         <sun-input  disabled></sun-input>
+       </sun-col>
+    </sun-row>
   </div>
 </template>
 <script>
@@ -50,7 +56,8 @@ export default {
       inputText: "",
       inputText1: "",
       inputText2: "",
-      inputText3: ""
+      inputText3: "",
+      inputText4: "",
     };
   }
 };
