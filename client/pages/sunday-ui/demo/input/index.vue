@@ -44,7 +44,7 @@
           <template #append><sun-button>搜索</sun-button></template>
         </sun-input>
       </sun-col>
-      <sun-col :span="6">
+      <sun-col :span="12">
         <sun-input v-model="inputText1" placeholder="请输入内容">
           <template #prepend><sun-button plain>按钮一</sun-button><sun-button plain>按钮二</sun-button></template>
           <template #append><sun-button plain>搜索</sun-button></template>

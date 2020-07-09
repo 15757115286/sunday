@@ -33,7 +33,7 @@ export default {
     flex: 0 0 200px;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow: auto;
     padding: 20px;
 }
 .demo-content {

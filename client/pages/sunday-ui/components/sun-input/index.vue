@@ -1,11 +1,5 @@
 <template>
   <div class="sun-input-group" :class="inputGroupObject">
-    <span v-if="suffixIcon" class="suffix-icon">
-      <sun-icon :type="suffixIcon"></sun-icon>
-    </span>
-    <span v-if="prefixIcon" class="prefix-icon">
-      <sun-icon :type="prefixIcon"></sun-icon>
-    </span>
     <div class="sun-input-group-prepend" v-if="$slots.prepend">
       <span :class="{'sun-input-group-text': !isButtonPrepend}">
         <slot name="prepend"></slot>
@@ -14,11 +8,17 @@
     <input
       type="text"
       class="sun-form-control"
-      :class="{'sun-input-suffix':suffixIcon||clearable,'sun-input-prefix':prefixIcon}"
+      :class="inputClass"
       :value="value"
       v-on="inputListeners"
       v-bind="$attrs"
     />
+    <span v-if="suffixIcon" class="suffix-icon">
+      <sun-icon :type="suffixIcon"></sun-icon>
+    </span>
+    <span v-if="prefixIcon" class="prefix-icon">
+      <sun-icon :type="prefixIcon"></sun-icon>
+    </span>
     <span v-if="clearable&&value!==''" @click="$emit('input','')" class="suffix-icon">
       <sun-icon type="roundclosefill"></sun-icon>
     </span>
@@ -98,6 +98,15 @@ export default {
     inputGroupObject() {
       return {
         ["sun-input-group-" + this.size]: this.size
+      };
+    },
+    inputClass() {
+      const { suffixIcon, prefixIcon, clearable, value } = this;
+      return {
+        "sun-input-suffix": suffixIcon || clearable,
+        "sun-input-prefix": prefixIcon,
+        "input-border-radius":
+        suffixIcon || prefixIcon || (clearable && value !== "")
       };
     }
   }
