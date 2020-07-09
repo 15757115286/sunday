@@ -22,7 +22,6 @@ async function start() {
             transformPath: t => t.replace('pages/', '/')
         }
     });
-    console.log(copyPatterns);
     webpackProdConfig.plugins!.push(new CopyPlugin(copyPatterns));
     const compiler = webpack(webpackProdConfig);
     compiler.run(callback);

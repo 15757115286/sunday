@@ -7,7 +7,7 @@ import * as util from 'util';
 import http = require('http');
 import { isMatch } from '../../../../core/lib/util';
 const mime = require('mime');
-const DEFAULT_FILENAME_REG = /nunjucks\/(.+)/;
+const DEFAULT_FILENAME_REG = /nunjucks\/(.+)|(?:js|css)\/sunday-chunks/;
 
 const readFile = util.promisify(fs.readFile);
 
@@ -15,6 +15,10 @@ const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
     const mode = app.config.mode || 'dev';
     return async function(ctx: Context, next: Next) {
         const urlPath = ctx.path;
+        const emptyReg = config.emptyReg;
+        if (emptyReg && emptyReg.test(urlPath)) {
+            return ctx.body = '';
+        }
         let redirectMatch = config.redirectMatch || [];
         if (!Array.isArray(redirectMatch)) {
             redirectMatch = [redirectMatch];
@@ -32,9 +36,9 @@ const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
             return await next();
         }
         const [root, js, css] = getConfig(app);
-        const fileName = match![1];
+        const fileName = match[1] || match.input!;
         const isJs = /\.js$/.test(fileName);
-        const realName = fileName.replace(/_[^_\.]+\.(js|css)$/, '.$1');
+        const realName = fileName.replace(/_[^_\.]+\.(js|css)$/, '.$1').replace(/^\//, '');
         if (mode === 'prod') {
             try {
                 const reflect = fs.readJSONSync(path.resolve(root, isJs ? js : css));

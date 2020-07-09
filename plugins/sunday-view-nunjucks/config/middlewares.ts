@@ -14,7 +14,7 @@ const middlewaresConfig:PureObject<MiddlewareConfig> = {
             redirectMatch: [
                 /hot-update/
             ],
-            fileNameReg: /nunjucks\/(.+)/
+            fileNameReg: /nunjucks\/(.+)|js\/sunday-chunks/
         }
     }
 }

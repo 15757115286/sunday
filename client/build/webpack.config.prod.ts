@@ -18,6 +18,7 @@ const webpackProdConfig: webpack.Configuration = {
     mode: 'production',
     plugins,
     optimization: {
+        // 这个为了兼容异步组件打包
         splitChunks: {
             chunks: 'all',
             minChunks: 2,
