@@ -13,13 +13,13 @@
       v-on="inputListeners"
       v-bind="$attrs"
     />
-    <span v-if="suffixIcon" class="suffix-icon">
+    <span v-if="suffixIcon" class="suffix-icon" @click="$emit('icon-click',$event.target)">
       <sun-icon :type="suffixIcon"></sun-icon>
     </span>
-    <span v-if="prefixIcon" class="prefix-icon">
+    <span v-if="prefixIcon" class="prefix-icon" @click="$emit('icon-click',$event.target)">
       <sun-icon :type="prefixIcon"></sun-icon>
     </span>
-    <span v-if="clearable&&value!==''" @click="$emit('input','')" class="suffix-icon">
+    <span class="suffix-icon" v-if="clearable && value !== ''" @click="$emit('input','')">
       <sun-icon type="roundclosefill"></sun-icon>
     </span>
     <div class="sun-input-group-append" v-if="$slots.append">

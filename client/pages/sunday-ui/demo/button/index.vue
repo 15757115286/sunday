@@ -3,7 +3,7 @@
     <div style="margin-bottom:24px">
       <p>基本用法</p>
       <div style="margin-bottom:12px">
-        <sun-button type="primary">基本按钮</sun-button>
+        <sun-button type="primary" >基本按钮</sun-button>
         <sun-button type="info">信息按钮</sun-button>
         <sun-button type="success">成功按钮</sun-button>
         <sun-button type="warning">告警按钮</sun-button>
@@ -41,11 +41,6 @@
         <sun-button type="primary">上一页</sun-button>
         <sun-button type="primary">下一页</sun-button>
       </sun-button-group>
-    </div>
-    <div style="margin-bottom:24px">
-      <p>图标</p>
-      <sun-icon type="xiangqu" style="margin-right:16px"></sun-icon>会转动的图标：
-      <sun-icon type="xiangqu" rotate></sun-icon>
     </div>
   </div>
 </template>

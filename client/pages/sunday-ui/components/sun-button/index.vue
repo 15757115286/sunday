@@ -1,5 +1,5 @@
 <template>
-  <button :class="btnClass">
+  <button :class="btnClass" v-on="$listeners">
     <sun-icon v-if="loading" type="loading" rotate></sun-icon>
     <i v-if="icon" :class="iconClass"></i>
     <span>

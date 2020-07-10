@@ -24,7 +24,7 @@ export default {
         [PREFIX + "icon-" + this.type]: this.type,
         'animate__animated':this.rotate,
         'animate__rotating':this.rotate,
-         'animate__infinite':this.rotate
+        'animate__infinite':this.rotate
       };
     }
   }

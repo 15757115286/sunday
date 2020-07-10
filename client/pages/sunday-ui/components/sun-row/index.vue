@@ -16,7 +16,7 @@ export default {
   computed: {
     styleObject() {
       return {
-        marginLeft: -this.gutter / 2 + "px",
+        "margin-left": -this.gutter / 2 + "px",
         "margin-right": -this.gutter / 2 + "px"
       };
     }
