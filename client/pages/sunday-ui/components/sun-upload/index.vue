@@ -30,11 +30,10 @@
   </div>
 </template>
 <script>
-import "../../assets/scss/style.vue.scss";
-import SunIcon from "../sun-icon";
-import { PREFIX } from "../../prefix";
+import '../../assets/scss/style.vue.scss';
+import SunIcon from '../sun-icon';
 export default {
-  name: "sun-upload",
+  name: 'sun-upload',
   components: {
     [SunIcon.name]: SunIcon
   },
@@ -48,27 +47,27 @@ export default {
       type: Number,
       defalut: 100
     },
-    filesList:{
-        type:Array,
-        defalut:null
+    filesList: {
+      type: Array,
+      defalut: null
     }
   },
   methods: {
-    dropFile(e) {
-      let dt = e.dataTransfer;
-      let files = dt.files;
+    dropFile (e) {
+      const dt = e.dataTransfer;
+      const files = dt.files;
       if (files.length > this.limit) {
-        this.$emit("on-exceed", files); //文件超过limit时会触发on-exceed事件
+        this.$emit('on-exceed', files); // 文件超过limit时会触发on-exceed事件
       }
-      this.$emit("on-change",files);//文件上传的钩子函数
-      console.log(files)
+      this.$emit('on-change', files);// 文件上传的钩子函数
+      console.log(files);
     },
-    changeFile() {
-      let files = this.$refs.input.files;
+    changeFile () {
+      const files = this.$refs.input.files;
       if (files.length > this.limit) {
-        this.$emit("on-exceed", files); //文件超过limit时会触发on-exceed事件
+        this.$emit('on-exceed', files); // 文件超过limit时会触发on-exceed事件
       }
-      this.$emit("on-change",files) //文件上传的钩子函数
+      this.$emit('on-change', files); // 文件上传的钩子函数
     }
   }
 };

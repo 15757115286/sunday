@@ -1,1 +1,1 @@
-export const PREFIX = "sun-";
+export const PREFIX = 'sun-';

@@ -5,6 +5,6 @@ add(1, 2);
 
 console.log(App);
 new Vue({
-    el:'#app',
-    render: (h) => { return h(App) }
+  el: '#app',
+  render: (h) => { return h(App); }
 });

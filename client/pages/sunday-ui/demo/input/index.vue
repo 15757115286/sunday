@@ -90,32 +90,31 @@ import {
   SunCol,
   SunButton,
   SunIcon
-} from "../../components";
+} from '../../components';
 export default {
-  name: "input-demo",
+  name: 'input-demo',
   components: {
     [SunInput.name]: SunInput,
     [SunRow.name]: SunRow,
     [SunCol.name]: SunCol,
-    [SunButton.name]:SunButton,
-    [SunIcon.name]:SunIcon
+    [SunButton.name]: SunButton,
+    [SunIcon.name]: SunIcon
   },
-  data: function() {
+  data: function () {
     return {
-      type: "info",
-      inputText: "",
-      inputText1: "",
-      inputText2: "",
-      inputText3: "",
-      inputText4: "",
-      inputText5:''
+      type: 'info',
+      inputText: '',
+      inputText1: '',
+      inputText2: '',
+      inputText3: '',
+      inputText4: '',
+      inputText5: ''
     };
   },
-  methods:{
-    getSlot(){
-     console.log(this.$refs.nihao)
+  methods: {
+    getSlot () {
+      console.log(this.$refs.nihao);
     }
   }
 };
 </script>
-

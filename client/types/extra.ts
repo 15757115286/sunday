@@ -1,7 +1,7 @@
-import webpack from "webpack";
+import webpack from 'webpack';
 
 type Chunk = webpack.compilation.Chunk;
-type CustomChunk  = {
+type CustomChunk = {
     contentHash: {
         javascript?: string;
     }

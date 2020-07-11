@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import "../../assets/scss/style.vue.scss";
-import { PREFIX } from "../../prefix";
+import '../../assets/scss/style.vue.scss';
+import { PREFIX } from '../../prefix';
 export default {
-  name: "sun-button-group",
-  data() {
+  name: 'sun-button-group',
+  data () {
     return {
       btnGroupClasss: {
-        [PREFIX + "button-group"]: true
+        [PREFIX + 'button-group']: true
       }
     };
   }

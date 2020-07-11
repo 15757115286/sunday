@@ -3,28 +3,28 @@
 </template>
 
 <script>
-import "../../assets/scss/style.vue.scss";
-import { PREFIX } from "../../prefix";
+import '../../assets/scss/style.vue.scss';
+import { PREFIX } from '../../prefix';
 export default {
-  name: "sun-icon",
+  name: 'sun-icon',
   props: {
     type: {
       type: String,
-      default: ""
+      default: ''
     },
-    rotate:{
-        type:Boolean,
-        default:false
+    rotate: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
-    iconClass() {
+    iconClass () {
       return {
         iconfont: this.type,
-        [PREFIX + "icon-" + this.type]: this.type,
-        'animate__animated':this.rotate,
-        'animate__rotating':this.rotate,
-        'animate__infinite':this.rotate
+        [PREFIX + 'icon-' + this.type]: this.type,
+        animate__animated: this.rotate,
+        animate__rotating: this.rotate,
+        animate__infinite: this.rotate
       };
     }
   }
