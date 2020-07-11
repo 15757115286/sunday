@@ -7,7 +7,6 @@ import chalk from 'chalk';
 import VueLoaderPlugin = require('vue-loader/lib/plugin');
 import WebpackBar = require('webpackbar');
 import MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// 获取pages下面所有的文件夹，默认是一个独立的入口
 import parser = require('yargs-parser');
 const args = parser(process.argv.slice(2));
 const isDev = !args.prod;

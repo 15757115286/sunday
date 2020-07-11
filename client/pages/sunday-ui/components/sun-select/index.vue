@@ -43,7 +43,6 @@ export default {
         this.suffixIcon = 'xiala';
         this.drop = false;
       }
-      console.log(this.$root);
     }
   }
 };

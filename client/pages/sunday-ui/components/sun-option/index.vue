@@ -1,5 +1,5 @@
 <template>
-    <li class="sun-select-dorpdown_item">
+    <li class="sun-select-dorpdown_item" @click="handle" :class="{'selected':$parent.value===lable}">
         {{lable}}
     </li>
 </template>
@@ -15,6 +15,18 @@ export default {
     value: {
       type: String,
       required: true
+    }
+  },
+  methods: {
+    handle () {
+      this.$parent.$emit('input', this.lable);
+      if (this.$parent.suffixIcon === 'xiala') {
+        this.$parent.suffixIcon = 'shouqi';
+        this.$parent.drop = true;
+      } else {
+        this.$parent.suffixIcon = 'xiala';
+        this.$parent.drop = false;
+      }
     }
   }
 };
