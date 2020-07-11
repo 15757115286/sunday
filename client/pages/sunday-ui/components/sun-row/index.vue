@@ -4,9 +4,9 @@
   </div>
 </template>
 <script>
-import "../../assets/scss/style.vue.scss";
+import '../../assets/scss/style.vue.scss';
 export default {
-  name: "sun-row",
+  name: 'sun-row',
   props: {
     gutter: {
       type: Number,
@@ -14,10 +14,10 @@ export default {
     }
   },
   computed: {
-    styleObject() {
+    styleObject () {
       return {
-        "margin-left": -this.gutter / 2 + "px",
-        "margin-right": -this.gutter / 2 + "px"
+        'margin-left': -this.gutter / 2 + 'px',
+        'margin-right': -this.gutter / 2 + 'px'
       };
     }
   }

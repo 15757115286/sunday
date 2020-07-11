@@ -10,25 +10,25 @@
   </div>
 </template>
 <script>
-import { SunSelect, SunOption, SunRow, SunCol } from "../../components";
+import { SunSelect, SunOption, SunRow, SunCol } from '../../components';
 export default {
-  name: "select-demo",
+  name: 'select-demo',
   components: {
     [SunSelect.name]: SunSelect,
     [SunOption.name]: SunOption,
     [SunCol.name]: SunCol,
     [SunRow.name]: SunRow
   },
-  data() {
+  data () {
     return {
       lists: [
-          { value: "选项1", label: "奶茶" },
-          { value: "选项2", label: "可乐" },
-          { value: "选项3", label: "薯片" },
-          { value: "选项4", label: "炸鸡" },
-          { value: "选项5", label: "汉堡" }
-          ],
-          value:''
+        { value: '选项1', label: '奶茶' },
+        { value: '选项2', label: '可乐' },
+        { value: '选项3', label: '薯片' },
+        { value: '选项4', label: '炸鸡' },
+        { value: '选项5', label: '汉堡' }
+      ],
+      value: ''
     };
   }
 };

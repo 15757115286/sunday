@@ -12,15 +12,12 @@
 </template>
 <script>
 import {
-  SunButton,
-  SunButtonGroup,
-  SunIcon,
-} from "../../components";
+  SunIcon
+} from '../../components';
 export default {
-  name: "icon-demo",
+  name: 'icon-demo',
   components: {
-    [SunIcon.name]: SunIcon,
+    [SunIcon.name]: SunIcon
   }
 };
 </script>
-

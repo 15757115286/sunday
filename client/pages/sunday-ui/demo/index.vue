@@ -13,14 +13,14 @@
 <script>
 import { links, nameMap } from '../router';
 export default {
-    name:'demo-home',
-    data() {
-        return {
-            links,
-            nameMap
-        }
-    }
-}
+  name: 'demo-home',
+  data () {
+    return {
+      links,
+      nameMap
+    };
+  }
+};
 </script>
 <style lang="scss">
 .demo-container {

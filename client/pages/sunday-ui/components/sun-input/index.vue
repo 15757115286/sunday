@@ -30,33 +30,32 @@
   </div>
 </template>
 <script>
-import "../../assets/scss/style.vue.scss";
-import SunIcon from "../sun-icon";
-import { PREFIX } from "../../prefix";
-import { INPUT_SIZE_GROUP } from "./constant";
+import '../../assets/scss/style.vue.scss';
+import SunIcon from '../sun-icon';
+import { INPUT_SIZE_GROUP } from './constant';
 export default {
-  name: "sun-input",
+  name: 'sun-input',
   components: {
     [SunIcon.name]: SunIcon
   },
   inheritAttrs: false,
   props: {
     value: {
-      default: ""
+      default: ''
     },
     size: {
-      default: "",
-      validator: function(value) {
+      default: '',
+      validator: function (value) {
         return INPUT_SIZE_GROUP.indexOf(value) !== -1;
       }
     },
     suffixIcon: {
       type: String,
-      default: ""
+      default: ''
     },
     prefixIcon: {
       type: String,
-      default: ""
+      default: ''
     },
     clearable: {
       type: Boolean,
@@ -64,49 +63,49 @@ export default {
     }
   },
   computed: {
-    inputListeners() {
-      let vm = this;
+    inputListeners () {
+      const vm = this;
       return Object.assign({}, this.$listeners, {
-        //配合v-model工作
-        input(event) {
-          //这个方法的this为window
-          vm.$emit("input", event.target.value);
+        // 配合v-model工作
+        input (event) {
+          // 这个方法的this为window
+          vm.$emit('input', event.target.value);
         }
       });
     },
-    //当左边slot是按钮时，去掉.sun-input-group-text
-    isButtonPrepend() {
-      let nodes = this.$slots.prepend;
+    // 当左边slot是按钮时，去掉.sun-input-group-text
+    isButtonPrepend () {
+      const nodes = this.$slots.prepend;
       if (nodes !== undefined) {
         if (nodes[0].tag !== undefined) {
-          return nodes[0].tag.includes("button");
+          return nodes[0].tag.includes('button');
         }
       }
       return false;
     },
-    //当右边slot是按钮时，去掉.sun-input-group-text
-    isButtonAppend() {
-      let nodes = this.$slots.append;
+    // 当右边slot是按钮时，去掉.sun-input-group-text
+    isButtonAppend () {
+      const nodes = this.$slots.append;
       if (nodes !== undefined) {
         if (nodes[0].tag !== undefined) {
-          return nodes[0].tag.includes("button");
+          return nodes[0].tag.includes('button');
         }
       }
       return false;
     },
-    //更改尺寸
-    inputGroupObject() {
+    // 更改尺寸
+    inputGroupObject () {
       return {
-        ["sun-input-group-" + this.size]: this.size
+        ['sun-input-group-' + this.size]: this.size
       };
     },
-    inputClass() {
+    inputClass () {
       const { suffixIcon, prefixIcon, clearable, value } = this;
       return {
-        "sun-input-suffix": suffixIcon || clearable,
-        "sun-input-prefix": prefixIcon,
-        "input-border-radius":
-        suffixIcon || prefixIcon || (clearable && value !== "")
+        'sun-input-suffix': suffixIcon || clearable,
+        'sun-input-prefix': prefixIcon,
+        'input-border-radius':
+        suffixIcon || prefixIcon || (clearable && value !== '')
       };
     }
   }

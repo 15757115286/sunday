@@ -9,20 +9,20 @@
 </template>
 
 <script>
-import "../../assets/scss/style.vue.scss";
-import { BUTTON_TYPE_LIST, BUTTON_SIZE_LIST } from "./constant";
-import SunIcon from "../sun-icon";
-import { PREFIX } from "../../prefix";
+import '../../assets/scss/style.vue.scss';
+import { BUTTON_TYPE_LIST, BUTTON_SIZE_LIST } from './constant';
+import SunIcon from '../sun-icon';
+import { PREFIX } from '../../prefix';
 export default {
-  name: "sun-button",
+  name: 'sun-button',
   components: {
     [SunIcon.name]: SunIcon
   },
   props: {
     type: {
       type: String,
-      default: "primary",
-      validator: function(value) {
+      default: 'primary',
+      validator: function (value) {
         return BUTTON_TYPE_LIST.indexOf(value) !== -1;
       }
     },
@@ -36,7 +36,7 @@ export default {
     },
     icon: {
       type: String,
-      default: ""
+      default: ''
     },
     loading: {
       type: Boolean,
@@ -44,27 +44,26 @@ export default {
     },
     size: {
       type: String,
-      default: "",
-      validator(value) {
+      default: '',
+      validator (value) {
         return BUTTON_SIZE_LIST.indexOf(value) !== -1;
       }
     }
   },
   computed: {
-    btnClass() {
+    btnClass () {
       return {
-        [PREFIX + "button"]: true,
-        [PREFIX + "button-" + this.type]: !this.plain, //基本按钮
-        [PREFIX + "button-outline-" + this.type]: this.plain, //朴素按钮
-        "is-round": this.round, //圆形按钮
-        "is-loading": this.loading, //加载中按钮
-        [PREFIX + "button-" + this.size]: this.size
+        [PREFIX + 'button']: true,
+        [PREFIX + 'button-' + this.type]: !this.plain, // 基本按钮
+        [PREFIX + 'button-outline-' + this.type]: this.plain, // 朴素按钮
+        'is-round': this.round, // 圆形按钮
+        'is-loading': this.loading, // 加载中按钮
+        [PREFIX + 'button-' + this.size]: this.size
       };
     },
-    iconClass() {
-      return ["iconfont", this.icon];
+    iconClass () {
+      return ['iconfont', this.icon];
     }
   }
 };
 </script>
-

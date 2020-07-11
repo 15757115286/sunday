@@ -10,22 +10,22 @@ import './asset/comm.scss';
 add(1, 2);
 
 export default {
-    name: 'sunday',
-    data() {
-        return {
-            name:'xwt44sxw'
-        }
-    },
-    methods: {
-        async beatCm() {
-            const _now = Date.now();
-            await new Promise(resolve => {
-                setTimeout(resolve, 2000);
-            });
-            console.log('xwt33' + (Date.now() - _now));
-        }
+  name: 'sunday',
+  data () {
+    return {
+      name: 'xwt44sxw'
+    };
+  },
+  methods: {
+    async beatCm () {
+      const _now = Date.now();
+      await new Promise(resolve => {
+        setTimeout(resolve, 2000);
+      });
+      console.log('xwt33' + (Date.now() - _now));
     }
-}
+  }
+};
 </script>
 <style lang="scss">
 .sunday {

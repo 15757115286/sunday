@@ -25,24 +25,24 @@
   </div>
 </template>
 <script>
-import { SunUpload, SunButton } from "../../components";
+import { SunUpload, SunButton } from '../../components';
 export default {
-  name: "upload-demo",
+  name: 'upload-demo',
   components: {
     [SunUpload.name]: SunUpload,
     [SunButton.name]: SunButton
   },
-  data() {
+  data () {
     return {
-      filesList: [{ name: "xwt.jpg" }, { name: "cmcm.jpg" }]
+      filesList: [{ name: 'xwt.jpg' }, { name: 'cmcm.jpg' }]
     };
   },
   methods: {
-    handleExceed(e) {
+    handleExceed (e) {
       alert(e.length);
     },
-    handleView() {
-      alert("必须是图片");
+    handleView () {
+      alert('必须是图片');
     }
   }
 };

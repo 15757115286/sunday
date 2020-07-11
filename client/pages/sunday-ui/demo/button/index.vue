@@ -48,29 +48,28 @@
 import {
   SunButton,
   SunButtonGroup,
-  SunIcon,
-} from "../../components";
+  SunIcon
+} from '../../components';
 export default {
-  name: "button-demo",
+  name: 'button-demo',
   components: {
     [SunButton.name]: SunButton,
     [SunButtonGroup.name]: SunButtonGroup,
-    [SunIcon.name]: SunIcon,
+    [SunIcon.name]: SunIcon
   },
-  data: function() {
+  data: function () {
     return {
-      type: "info"
+      type: 'info'
     };
   },
   methods: {
-    switchType() {
-      if (this.type === "primary") {
-        this.type = "info";
+    switchType () {
+      if (this.type === 'primary') {
+        this.type = 'info';
       } else {
-        this.type = "primary";
+        this.type = 'primary';
       }
     }
   }
 };
 </script>
-

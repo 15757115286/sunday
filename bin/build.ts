@@ -2,6 +2,7 @@ import * as fs from 'fs-extra';
 import * as chalk from 'chalk';
 import * as path from 'path';
 import * as cp from 'child_process';
+import { BorderStyle } from 'boxen';
 const ora = require('ora');
 const boxen = require('boxen');
 
@@ -18,7 +19,7 @@ const info = [
 console.log(boxen(info.join('\n'), {
     padding: 1,
     borderColor: 'green',
-    borderStyle: 'round'
+    borderStyle: BorderStyle.Round
 }));
 console.log();
 

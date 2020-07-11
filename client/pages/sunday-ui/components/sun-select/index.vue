@@ -2,7 +2,7 @@
   <div>
     <div class="sun-select" @click="toggle">
       <sun-input ref="select" :suffix-icon="suffixIcon" autocomplete="off" readonly :value="value" @input="$emit('input',$event.target.value)"></sun-input>
-    </div> 
+    </div>
     <div v-if="drop" class="sun-select-dropdown">
       <div class="poper_arrow"></div>
       <div class="sun-scrollbar">
@@ -16,34 +16,34 @@
   </div>
 </template>
 <script>
-import "../../assets/scss/style.vue.scss";
-import SunInput from "../sun-input";
+import '../../assets/scss/style.vue.scss';
+import SunInput from '../sun-input';
 export default {
-  name: "sun-select",
+  name: 'sun-select',
   components: {
     [SunInput.name]: SunInput
   },
-  data() {
+  data () {
     return {
-      suffixIcon: "xiala",
-      drop:false
+      suffixIcon: 'xiala',
+      drop: false
     };
   },
   props: {
-      value:{
-          
-      }
+    value: {
+
+    }
   },
   methods: {
-    toggle() {
-      if (this.suffixIcon == "xiala") {
-        this.suffixIcon = "shouqi";
-        this.drop=true;
+    toggle () {
+      if (this.suffixIcon === 'xiala') {
+        this.suffixIcon = 'shouqi';
+        this.drop = true;
       } else {
-        this.suffixIcon = "xiala";
-        this.drop=false
+        this.suffixIcon = 'xiala';
+        this.drop = false;
       }
-      console.log(this.$root)
+      console.log(this.$root);
     }
   }
 };
