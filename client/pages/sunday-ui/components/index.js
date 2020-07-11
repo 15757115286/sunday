@@ -5,6 +5,8 @@ import SunInput from "./sun-input";
 import SunRow from "./sun-row";
 import SunCol from "./sun-col";
 import SunUpload from "./sun-upload"
+import SunSelect from "./sun-select";
+import SunOption from "./sun-option"
 
 export {
     SunButton,
@@ -13,5 +15,7 @@ export {
     SunInput,
     SunRow,
     SunCol,
-    SunUpload
+    SunUpload,
+    SunSelect,
+    SunOption
 }

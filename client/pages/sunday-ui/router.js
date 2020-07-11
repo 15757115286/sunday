@@ -6,7 +6,7 @@ const config = {
     button: '按钮组件',
     input: '输入框组件',
     icon: '图标组件',
-    upload : '上转组件'
+    upload : '上传组件（部分）'
 }
 
 // 第一层的index

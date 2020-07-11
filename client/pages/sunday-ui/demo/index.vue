@@ -5,7 +5,7 @@
                 <router-link :to="link" >{{ nameMap[link] || link }}</router-link>
             </div>
         </div>
-        <div class="demo-content">
+        <div class="demo-content" >
             <router-view></router-view>
         </div>
     </div>
@@ -38,6 +38,7 @@ export default {
 }
 .demo-content {
     display: auto;
+    width: 100%;
     display: flex;
 }
 </style>
