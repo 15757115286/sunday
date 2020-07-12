@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="sun-select" @click="toggle">
+    <div class="sun-select" @click.stop="toggle">
       <sun-input ref="select" :suffix-icon="suffixIcon" autocomplete="off" readonly :value="value" @input="$emit('input',$event.target.value)"></sun-input>
     </div>
     <div v-if="drop" class="sun-select-dropdown">
@@ -44,6 +44,13 @@ export default {
         this.drop = false;
       }
     }
+  },
+  mounted () {
+    const vm = this;
+    document.addEventListener('click', function () {
+      vm.drop = false;
+      vm.suffixIcon = 'xiala';
+    });
   }
 };
 </script>
