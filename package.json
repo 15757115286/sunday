@@ -7,7 +7,8 @@
     "start": "ts-node index.ts",
     "watch-server": "nodemon --inspect --watch 'index.ts' -e ts,tsx --exec 'node -r ts-node/register/files' index.ts",
     "dev": "nodemon --inspect index.ts",
-    "build": "ts-node bin/build.ts"
+    "build": "ts-node bin/build.ts",
+    "lint": "eslint ./ --fix --ext .js,.ts"
   },
   "repository": {
     "url": "https://github.com/15757115286/sunday/tree/master"
@@ -39,7 +40,15 @@
     "@types/node": "^14.0.13",
     "@types/nunjucks": "^3.1.3",
     "@types/ws": "^7.2.5",
+    "@typescript-eslint/eslint-plugin": "^3.6.0",
+    "@typescript-eslint/parser": "^3.6.0",
     "boxen": "^4.2.0",
+    "eslint": "^7.4.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "nodemon": "^2.0.4",
     "ora": "^4.0.4",
     "reflect-metadata": "^0.1.13",

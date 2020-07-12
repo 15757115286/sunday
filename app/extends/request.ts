@@ -5,12 +5,12 @@ declare module 'koa' {
     }
 }
 export default {
-    set version(v: string) {
-        console.log('set version')
-        version = v;
-    },
-    
-    get version() {
-        return version;
-    }
-}
+  set version (v: string) {
+    console.log('set version');
+    version = v;
+  },
+
+  get version () {
+    return version;
+  }
+};

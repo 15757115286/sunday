@@ -4,5 +4,5 @@ declare module 'koa' {
     }
 }
 export default {
-    hasDecorator: true
-}
+  hasDecorator: true
+};

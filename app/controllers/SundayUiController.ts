@@ -6,12 +6,12 @@ import { BaseApplication } from '../../definitions/core';
 class SundayUiController {
     app: BaseApplication;
     ctx: Context;
-    
+
     @Get
     @Route('/:component*')
-    async getName() {
-        this.ctx.setGlobal('title', 'sunday-ui');
-        await this.ctx.render('sunday-ui.html');
+    async getComponent () {
+      this.ctx.setGlobal('title', 'sunday-ui');
+      await this.ctx.render('sunday-ui.html');
     }
 }
 export default SundayUiController;

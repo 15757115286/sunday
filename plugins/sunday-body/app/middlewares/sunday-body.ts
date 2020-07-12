@@ -1,4 +1,4 @@
-import { MiddlewareItemConfig, BaseApplication } from "../../../../definitions/core";
+import { MiddlewareItemConfig } from '../../../../definitions/core';
 const bodyParser = require('koa-bodyparser');
 declare module 'koa' {
     interface Request {
@@ -9,8 +9,8 @@ declare module 'koa' {
         disableBodyParser?: boolean;
     }
 }
-function factory (config:MiddlewareItemConfig, app:BaseApplication){
-    return bodyParser(config);
+function factory (config:MiddlewareItemConfig) {
+  return bodyParser(config);
 }
 
 export default factory;

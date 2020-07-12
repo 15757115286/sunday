@@ -7,7 +7,7 @@ interface BaseOptions {
     app: BaseApplication;
     ctx: BaseContext;
 }
-export interface BaseController extends BaseOptions{}
+export type BaseController = BaseOptions
 export interface BaseService extends BaseOptions{
     options: ServiceOptions;
 }
@@ -44,17 +44,17 @@ interface _ServiceOptions {
 export interface ControllerRouterInfo {
     baseRoute: string;
     controllerName: string;
-    controller: IClass,
-    routeItems: PureObject<Partial<RouterItem>>
+    controller: IClass;
+    routeItems: PureObject<Partial<RouterItem>>;
 }
 
 export interface RouterItem {
-    methods: Method[],
-    action: (ctx: BaseContext, next:Next) => void,
-    route: string;
+    methods: Method[];
+    action: (ctx: BaseContext, next:Next) => void;
+    route: string[];
 }
 
-export interface Provides extends PureObject<IService> {}
+export type Provides = PureObject<IService>
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'OPTIONS' | 'CONNECT' | 'DELETE' | 'TRACE' | 'HEAD';
 

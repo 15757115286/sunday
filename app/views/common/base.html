@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/">
     <!-- 样式挂载点占位符 -->
-    {{ loadCss('css/vendors.css') }}
+    {% if prod %}
+        {{ loadCss('css/vendors.css') }}
+    {% endif %}
     {% block style %}
     {% endblock %}
     <title>{{ getTitle() }}</title>

@@ -1,5 +1,5 @@
 import SundayViewManager from '../app/lib/SundayViewManager';
-import { StringLike, PureObject } from '../../../definitions/common';
+import { PureObject } from '../../../definitions/common';
 
 declare module '../../../definitions/core' {
     interface BaseApplication {

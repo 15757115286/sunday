@@ -19,8 +19,8 @@ context.keys().forEach(dir => {
   demoRoutes.push({
     path: link,
     component: () => import(
-            /* webpackChunkName: "sunday-chunks/[request]" */
-            `./demo/${paths[1]}`
+      /* webpackChunkName: "sunday-chunks/[request]" */
+      `./demo/${paths[1]}`
     )
   });
 });

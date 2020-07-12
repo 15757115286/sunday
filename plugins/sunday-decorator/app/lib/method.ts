@@ -1,15 +1,19 @@
 import { Method as _Method, IClass } from '../../definitions';
 import { getControllStore } from './util';
 
-export default function Method(methods: _Method[]| _Method) {
-    return function (target: any, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
-        const constructor:IClass = target.constructor;
-        const controllerStore = getControllStore(constructor);
-        const routeItems = controllerStore.routeItems = controllerStore.routeItems || {};
-        const item = routeItems[propertyKey] = routeItems[propertyKey] || {};
-        if(typeof methods === 'string') methods = [methods];
-        item.methods = methods;
+export default function Method (methods: _Method[]| _Method) {
+  return function (target: any, propertyKey: string) {
+    const constructor:IClass = target.constructor;
+    const controllerStore = getControllStore(constructor);
+    const routeItems = controllerStore.routeItems = controllerStore.routeItems || {};
+    const item = routeItems[propertyKey] = routeItems[propertyKey] || {};
+    if (typeof methods === 'string') methods = [methods];
+    if (item.methods === undefined) {
+      item.methods = methods;
+    } else {
+      item.methods.push(...methods);
     }
+  };
 }
 
 export const Get = Method('GET');

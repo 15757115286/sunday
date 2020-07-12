@@ -4,13 +4,13 @@ declare module '../../definitions/core' {
     }
 }
 
-let appName: string = 'appName';
+let appName = 'appName';
 export default {
-    set appName(name: string) {
-        appName = name;
-    },
+  set appName (name: string) {
+    appName = name;
+  },
 
-    get appName(): string {
-        return appName;
-    }
-}
+  get appName (): string {
+    return appName;
+  }
+};

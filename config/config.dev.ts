@@ -1,3 +1,3 @@
 module.exports = {
-    mode: 'dev'
-}
+  mode: 'dev'
+};
