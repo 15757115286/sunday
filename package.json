@@ -13,6 +13,11 @@
   "repository": {
     "url": "https://github.com/15757115286/sunday/tree/master"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && cd client && yarn lint"
+    }
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -49,6 +54,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.5",
     "nodemon": "^2.0.4",
     "ora": "^4.0.4",
     "reflect-metadata": "^0.1.13",
