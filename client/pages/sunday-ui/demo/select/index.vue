@@ -26,7 +26,11 @@ export default {
         { value: '选项2', label: '可乐' },
         { value: '选项3', label: '薯片' },
         { value: '选项4', label: '炸鸡' },
-        { value: '选项5', label: '汉堡' }
+        { value: '选项5', label: '汉堡' },
+        { value: '选项6', label: '汉堡' },
+       { value: '选项7', label: '汉堡' },
+       { value: '选项8', label: '汉堡' },
+      { value: '选项9', label: '汉堡' }
       ],
       value: '奶茶'
     };

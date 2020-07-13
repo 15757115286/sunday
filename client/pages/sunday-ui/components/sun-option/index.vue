@@ -1,5 +1,5 @@
 <template>
-    <li class="sun-select-dorpdown_item" @click.stop="handle" :class="{'selected':$parent.value===lable}">
+    <li class="sun-select-dorpdown_item" @click.stop="handle" :class="{'selected':select.value===lable}">
         <slot>{{lable}}</slot> 
     </li>
 </template>
@@ -17,15 +17,16 @@ export default {
       required: true
     }
   },
+  inject: ['select'],
   methods: {
     handle () {
-      this.$parent.$emit('input', this.lable);
-      if (this.$parent.suffixIcon === 'xiala') {
-        this.$parent.suffixIcon = 'shouqi';
-        this.$parent.drop = true;
+      this.select.$emit('input', this.lable);
+      if (this.select.suffixIcon === 'xiala') {
+        this.select.suffixIcon = 'shouqi';
+        this.select.drop = true;
       } else {
-        this.$parent.suffixIcon = 'xiala';
-        this.$parent.drop = false;
+        this.select.suffixIcon = 'xiala';
+        this.select.drop = false;
       }
     }
   }

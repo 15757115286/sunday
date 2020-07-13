@@ -114,16 +114,6 @@ ul.sun-up-list{
 .sun-select-dropdown__wrap{
     max-height: 274px;
 }
-// .sun-scrollbar__wrap {
-//     overflow: scroll;
-//     height: 100%;
-//     margin-bottom: -17px;
-//     margin-left: -17px;
-// }
-// .sun-scrollbar{
-//     overflow: hidden;
-//     position: relative;
-// }
 .sun-select-dropdown{
     border: 1px solid #e4e7ed;
     border-radius: 4px;
@@ -166,4 +156,53 @@ ul.sun-up-list{
          border-top-width: 0;
          border-bottom-color: #fff;
     }
+}
+//scroll
+.sun-scrollbar{
+    overflow: hidden;
+    position: relative;
+}
+.sun-scrollbar__bar {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    z-index: 1;
+    border-radius: 4px;
+    opacity: 0;
+    -webkit-transition: opacity 120ms ease-out;
+    transition: opacity 120ms ease-out;
+}
+.sun-scrollbar:active>.sun-scrollbar__bar, .sun-scrollbar:focus>.sun-scrollbar__bar, .sun-scrollbar:hover>.sun-scrollbar__bar {
+    opacity: 1;
+    -webkit-transition: opacity 340ms ease-out;
+    transition: opacity 340ms ease-out;
+}
+.sun-scrollbar__bar.is-vertical{
+    width: 6px;
+    top: 2px;
+}
+.sun-scrollbar__bar.is-horizontal {
+    height: 6px;
+    left: 2px;
+}
+.sun-scrollbar__thumb {
+    position: relative;
+    display: block;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+    border-radius: inherit;
+    background-color: rgba(144,147,153,.3);
+    -webkit-transition: .3s background-color;
+    transition: .3s background-color;
+}
+.sun-scrollbar__bar.is-vertical>div {
+    width: 100%;
+}
+.sun-scrollbar__bar.is-horizontal>div {
+    height: 100%;
+}
+.sun-scrollbar__wrap {
+    overflow: scroll;
+    height: 100%;
 }

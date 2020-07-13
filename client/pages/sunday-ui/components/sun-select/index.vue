@@ -5,14 +5,12 @@
     </div>
     <transition  name="sun-zoom-in-top">
       <div v-if="drop" class="sun-select-dropdown">
-        <div class="poper_arrow"></div>
-        <div class="sun-scrollbar">
-          <div class="sun-select-dropdown__wrap sun-scrollbar__wrap">
+        <div class="poper_arrow"></div>   
+        <sun-scrollbar :max-height="270">   
             <ul class="sun-select-dropdown__list">
               <slot></slot>
             </ul>
-          </div>
-        </div>
+        </sun-scrollbar> 
       </div>
     </transition>
   </div>
@@ -20,10 +18,12 @@
 <script>
 import '../../assets/scss/style.vue.scss';
 import SunInput from '../sun-input';
+import SunScrollbar from '../sun-scrollbar'
 export default {
   name: 'sun-select',
   components: {
-    [SunInput.name]: SunInput
+    [SunInput.name]: SunInput,
+    [SunScrollbar.name]:SunScrollbar
   },
   data () {
     return {
@@ -31,6 +31,11 @@ export default {
       drop: false
     };
   },
+  provide() {
+  return {
+    select: this
+  }
+},
   props: {
     value: {
 
