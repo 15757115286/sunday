@@ -1,6 +1,6 @@
 <template>
     <li class="sun-select-dorpdown_item" @click.stop="handle" :class="{'selected':$parent.value===lable}">
-        {{lable}}
+        <slot>{{lable}}</slot> 
     </li>
 </template>
 <script>

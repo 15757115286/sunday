@@ -3,16 +3,18 @@
     <div class="sun-select" @click.stop="toggle">
       <sun-input ref="select" :suffix-icon="suffixIcon" autocomplete="off" readonly :value="value" @input="$emit('input',$event.target.value)"></sun-input>
     </div>
-    <div v-if="drop" class="sun-select-dropdown">
-      <div class="poper_arrow"></div>
-      <div class="sun-scrollbar">
-        <div class="sun-select-dropdown__wrap sun-scrollbar__wrap">
-          <ul class="sun-select-dropdown__list">
-            <slot></slot>
-          </ul>
+    <transition  name="sun-zoom-in-top">
+      <div v-if="drop" class="sun-select-dropdown">
+        <div class="poper_arrow"></div>
+        <div class="sun-scrollbar">
+          <div class="sun-select-dropdown__wrap sun-scrollbar__wrap">
+            <ul class="sun-select-dropdown__list">
+              <slot></slot>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 <script>
