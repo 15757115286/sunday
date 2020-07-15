@@ -7,7 +7,7 @@
       <div v-if="drop" class="sun-select-dropdown">
         <div class="poper_arrow"></div>
         <sun-scrollbar :max-height="270">
-            <ul class="sun-select-dropdown__list">
+            <ul class="sun-select-dropdown__list" >
               <slot></slot>
             </ul>
         </sun-scrollbar>

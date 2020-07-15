@@ -1,5 +1,5 @@
 <template>
-    <li class="sun-select-dorpdown_item" @click.stop="handle" :class="{'selected':select.value===lable}">
+    <li class="sun-select-dorpdown_item" @click.stop="handle" :class="{'selected':select.value===lable}" @mousemove.prevent>
         <slot>{{lable}}</slot>
     </li>
 </template>
