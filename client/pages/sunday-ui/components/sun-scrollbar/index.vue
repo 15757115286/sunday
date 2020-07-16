@@ -21,6 +21,7 @@
             <div class="sun-scrollbar__thumb"
               :style="{'width':scrollbarWidth+'px','transform':'translateX('+moveX+'px)'}"
               @click.stop
+               @mousedown="handleMousedownX"
               ref="barX"></div>
         </div>
     </div>
@@ -40,17 +41,17 @@ export default {
       mousedownY: 0,
       mousedownX: 0,
       bindMousemoveY: this.handleMoveY.bind(this),
-      bindMouseupY: this.hanleMouseupY.bind(this)
+      bindMouseupY: this.hanleMouseupY.bind(this),
+      bindMousemoveX: this.handleMoveX.bind(this),
+      bindMouseupX: this.hanleMouseupX.bind(this)
     };
   },
   props: {
     maxHeight: {
-      type: Number,
-      default: 1500
+      default: 'false'
     },
     maxWidth: {
-      type: Number,
-      default: 1500
+      default: 'false'
     }
   },
   computed: {
@@ -58,8 +59,8 @@ export default {
       return {
         'max-height': this.maxHeight + 'px',
         'max-width': this.maxWidth + 'px',
-        'margin-right': '-21px',
-        'margin-bottom': '-21px'
+        'margin-right': '-17px',
+        'margin-bottom': '-17px'
       };
     }
   },
@@ -67,12 +68,8 @@ export default {
     const scrollElement = this.$refs.view;
     this.viewHeight = Math.max(scrollElement.clientHeight, scrollElement.scrollHeight);
     this.viewWidth = Math.max(scrollElement.clientWidth, scrollElement.scrollWidth);
-    this.scrollbarHeight = (this.maxHeight - 21) / this.viewHeight * (this.maxHeight - 21);
-    this.scrollbarWidth = (this.maxWidth - 21) / this.viewWidth * (this.maxWidth - 21);
-  },
-  updated () {
-    //  console.log(this.$refs.barY.getBoundingClientRect());
-    // console.log(this.$refs.view.getBoundingClientRect());
+    this.scrollbarHeight = (this.maxHeight - 17) / this.viewHeight * (this.maxHeight - 21);
+    this.scrollbarWidth = (this.maxWidth - 17) / this.viewWidth * (this.maxWidth - 21);
   },
   methods: {
     handleScroll () {
@@ -89,7 +86,7 @@ export default {
         range = e.clientY - barPointY - this.scrollbarHeight;
       }
       this.moveY = this.moveY + range;
-      view.scrollTop = view.scrollTop + range / (this.maxHeight - 21) * this.viewHeight;
+      view.scrollTop = view.scrollTop + range / (this.maxHeight - 17) * this.viewHeight;
     },
     trackXHandle (e) {
       const barPointX = this.$refs.barX.getBoundingClientRect().x;
@@ -101,35 +98,64 @@ export default {
         range = e.clientX - barPointX - this.scrollbarWidth;
       }
       this.moveX = this.moveX + range;
-      view.scrollLeft = view.scrollLeft + range / (this.maxWidth - 21) * this.viewWidth;
+      view.scrollLeft = view.scrollLeft + range / (this.maxWidth - 17) * this.viewWidth;
     },
     handleMousedownY (e) {
       e.stopImmediatePropagation();
       this.mousedownY = e.clientY;
       this.y = this.moveY;
-      this.scrollTop = this.$refs.view.scrollTop;
       document.addEventListener('mousemove', this.bindMousemoveY);
       document.addEventListener('mouseup', this.bindMouseupY);
     },
     handleMoveY (e) {
       e.preventDefault();
       if (!this.mousedownY) return;
-      const viewY = this.$refs.view.getBoundingClientRect().y;
-      const offset = this.mousedownY - (this.y + viewY + 2);
-      if ((e.clientY - offset) <= (viewY + 2)) return;
-      if ((e.clientY - offset) >= (viewY + this.maxHeight - 2 - this.scrollbarHeight)) return; //如何计算下边界存在问题？
-      const range = e.clientY - this.mousedownY;
-      // 计算
-      this.moveY = this.y + range;
-      this.$refs.view.scrollTop = this.scrollTop + range;
+      const currentPos = e.clientY - this.mousedownY + this.y;
+      const maxMoveY = this.maxHeight - 21 - this.scrollbarHeight;
+      if (currentPos <= 0) {
+        this.moveY = 0;
+      } else if (currentPos >= maxMoveY) {
+        this.moveY = maxMoveY;
+      } else {
+        this.moveY = this.y + e.clientY - this.mousedownY;
+      }
+
+      this.$refs.view.scrollTop = this.moveY / (this.maxHeight - 21) * this.viewHeight;
     },
     hanleMouseupY () {
       this.mousedownY = 0;
+    },
+    handleMousedownX (e) {
+      e.stopImmediatePropagation();
+      this.mousedownX = e.clientX;
+      this.x = this.moveX;
+      document.addEventListener('mousemove', this.bindMousemoveX);
+      document.addEventListener('mouseup', this.bindMouseupX);
+    },
+    handleMoveX (e) {
+      e.preventDefault();
+      if (!this.mousedownX) return;
+      const currentPos = e.clientX - this.mousedownX + this.x;
+      const maxMoveX = this.maxWidth - 21 - this.scrollbarWidth;
+      if (currentPos <= 0) {
+        this.moveX = 0;
+      } else if (currentPos >= maxMoveX) {
+        this.moveX = maxMoveX;
+      } else {
+        this.moveX = this.x + e.clientX - this.mousedownX;
+      }
+
+      this.$refs.view.scrollLeft = this.moveX / (this.maxWidth - 21) * this.viewWidth;
+    },
+    hanleMouseupX () {
+      this.mousedownX = 0;
     }
   },
   destroyed () {
     document.removeEventListener('mousemove', this.bindMousemoveY);
     document.removeEventListener('mouseup', this.bindMouseupY);
+    document.removeEventListener('mousemove', this.bindMousemoveX);
+    document.removeEventListener('mouseup', this.bindMouseupX);
   }
 };
 </script>
