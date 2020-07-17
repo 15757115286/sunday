@@ -1,7 +1,16 @@
 <template>
   <div>
     <div class="sun-select" @click.stop="toggle">
-      <sun-input ref="select" :suffix-icon="suffixIcon" autocomplete="off" readonly :value="value" @input="$emit('input',$event.target.value)"></sun-input>
+      <sun-input
+        ref="select"
+        :suffix-icon="suffixIcon"
+        autocomplete="off"
+        readonly
+        :value="value"
+        :disabled="disabled"
+        :clearable="clearable"
+        @input="$emit('input',$event)">
+      </sun-input>
     </div>
     <transition  name="sun-zoom-in-top">
       <div v-if="drop" class="sun-select-dropdown">
@@ -40,10 +49,19 @@ export default {
   props: {
     value: {
 
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    clearable: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     toggle () {
+      if (this.disabled) return;
       if (this.suffixIcon === 'xiala') {
         this.suffixIcon = 'shouqi';
         this.drop = true;
@@ -52,16 +70,12 @@ export default {
         this.drop = false;
       }
     },
-    handleClick () {
-      this.drop = false;
-      this.suffixIcon = 'xiala';
+    handleClick (e) {
+      if (e.target !== this.$refs.select.$vnode.elm) {
+        this.drop = false;
+        this.suffixIcon = 'xiala';
+      }
     }
-  },
-  mounted () {
-    document.addEventListener('click', this.handle);
-  },
-  beforeDestroy () {
-    document.removeEventListener('click', this.handle);
   }
 };
 </script>

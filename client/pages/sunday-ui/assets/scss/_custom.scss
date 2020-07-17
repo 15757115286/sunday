@@ -85,7 +85,7 @@ ul.sun-up-list{
     color: $success;
 }
 //下类菜单
-.sun-select-dorpdown_item{
+.sun-select-dorpdown__item{
     font-size: 14px;
     padding: 0 20px;
     position: relative;
@@ -103,6 +103,10 @@ ul.sun-up-list{
     &.selected{
         color:$primary;
         font-weight: 700;
+    }
+    &.is-disabled {
+        color: #c0c4cc;
+        cursor: not-allowed;
     }
 }
 .sun-select-dropdown__list{
@@ -124,6 +128,7 @@ ul.sun-up-list{
     margin-top: 12px;
     position: absolute;
     width: 100%;
+    z-index: 1002;
 }
 .poper_arrow{
     position: absolute;
