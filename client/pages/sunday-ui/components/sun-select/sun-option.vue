@@ -33,6 +33,12 @@ export default {
         this.select.drop = false;
       }
     }
+  },
+  mounted(){
+    document.addEventListener('click',this.select.handle);
+  },
+  destroyed(){
+    document.removeEventListener('click',this.select.handle)
   }
 };
 </script>

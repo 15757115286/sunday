@@ -1,16 +1,20 @@
 <template>
   <div>
-    <div class="sun-select" @click.stop="toggle">
-      <sun-input
-        ref="select"
-        :suffix-icon="suffixIcon"
-        autocomplete="off"
-        readonly
-        :value="value"
-        :disabled="disabled"
-        :clearable="clearable"
-        @input="$emit('input',$event)">
-      </sun-input>
+    <div class="sun-select" @click="toggle">
+      <input
+      type="text"
+      class="sun-form-control"
+      autocomplete="off"
+      readonly
+      ref="input"
+      :class="inputClass"
+      :value="value"
+      :disabled="disabled"
+      @input="$emit('input',$event.target.value)"
+    />
+     <span  class="suffix-icon" @click="$emit('icon-click',$event.target)">
+      <sun-icon :type="suffixIcon"></sun-icon>
+    </span>
     </div>
     <transition  name="sun-zoom-in-top">
       <div v-if="drop" class="sun-select-dropdown">
@@ -28,11 +32,13 @@
 import '../../assets/scss/style.vue.scss';
 import SunInput from '../sun-input';
 import SunScrollbar from '../sun-scrollbar';
+import SunIcon from '../sun-icon'
 export default {
   name: 'sun-select',
   components: {
     [SunInput.name]: SunInput,
-    [SunScrollbar.name]: SunScrollbar
+    [SunScrollbar.name]: SunScrollbar,
+    [SunIcon.name]:SunIcon
   },
   data () {
     return {
@@ -71,7 +77,7 @@ export default {
       }
     },
     handleClick (e) {
-      if (e.target !== this.$refs.select.$vnode.elm) {
+      if (e.target !== this.$refs.input) {
         this.drop = false;
         this.suffixIcon = 'xiala';
       }
