@@ -3,6 +3,7 @@ import * as path from 'path';
 import { printEnvBox, getDevServerContentConfig } from './helper';
 import webpack = require('webpack');
 import WebpackDevServer = require('webpack-dev-server');
+const noop = () => {};
 
 // 所有的静态资源都需要/<pkg>/assets/xxx.png去引用
 async function start() {
@@ -26,7 +27,7 @@ async function start() {
     contentBase,
     contentBasePublicPath
   });
-
+  (server as any).showStatus = noop;
   server.listen(7009);
   process.on('exit', () => {
     server.close();
