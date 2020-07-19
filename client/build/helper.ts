@@ -14,7 +14,7 @@ function outputJSON (fileName: string, obj: PureObject) {
   });
 }
 
-function printEnvBox (pkgPath) {
+function printEnvBox(pkgPath) {
   const { version, name } = require(pkgPath);
   const mode = process.env.NODE_ENV || 'dev';
   const info = [

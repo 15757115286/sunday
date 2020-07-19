@@ -32,13 +32,13 @@
 import '../../assets/scss/style.vue.scss';
 import SunInput from '../sun-input';
 import SunScrollbar from '../sun-scrollbar';
-import SunIcon from '../sun-icon'
+import SunIcon from '../sun-icon';
 export default {
   name: 'sun-select',
   components: {
     [SunInput.name]: SunInput,
     [SunScrollbar.name]: SunScrollbar,
-    [SunIcon.name]:SunIcon
+    [SunIcon.name]: SunIcon
   },
   data () {
     return {

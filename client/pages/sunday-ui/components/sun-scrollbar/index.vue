@@ -1,30 +1,39 @@
 <template>
-    <div class="sun-scrollbar">
-        <div class="sun-scrollbar__wrap" :style="styleObject"  @scroll="handleScroll" ref="view">
-           <div class="sun-scrollbar__view" ><slot></slot></div>
-        </div>
-        <div v-if="viewHeight>maxHeight"
-             class="is-vertical sun-scrollbar__bar"
-             @click.stop
-             @mousedown="trackYHandle($event)">
-            <div class="sun-scrollbar__thumb"
-                 :style="{'height':scrollbarHeight+'px','transform':'translateY('+moveY+'px)'}"
-                  @click.stop
-                  @mousedown="handleMousedownY"
-                  ref="barY">
-            </div>
-        </div>
-         <div v-if="viewWidth>maxWidth"
-              class="is-horizontal sun-scrollbar__bar"
-              @click.stop
-              @mousedown="trackXHandle($event)" >
-            <div class="sun-scrollbar__thumb"
-              :style="{'width':scrollbarWidth+'px','transform':'translateX('+moveX+'px)'}"
-              @click.stop
-               @mousedown="handleMousedownX"
-              ref="barX"></div>
-        </div>
+  <div class="sun-scrollbar">
+    <div class="sun-scrollbar__wrap" :style="styleObject" @scroll="handleScroll" ref="view">
+      <div class="sun-scrollbar__view">
+        <slot></slot>
+      </div>
     </div>
+    <div
+      v-if="viewHeight>maxHeight"
+      class="is-vertical sun-scrollbar__bar"
+      @click.stop
+      @mousedown="trackYHandle($event)"
+    >
+      <div
+        class="sun-scrollbar__thumb"
+        :style="{'height':scrollbarHeight+'px','transform':'translateY('+moveY+'px)'}"
+        @click.stop
+        @mousedown="handleMousedownY"
+        ref="barY"
+      ></div>
+    </div>
+    <div
+      v-if="viewWidth>maxWidth"
+      class="is-horizontal sun-scrollbar__bar"
+      @click.stop
+      @mousedown="trackXHandle($event)"
+    >
+      <div
+        class="sun-scrollbar__thumb"
+        :style="{'width':scrollbarWidth+'px','transform':'translateX('+moveX+'px)'}"
+        @click.stop
+        @mousedown="handleMousedownX"
+        ref="barX"
+      ></div>
+    </div>
+  </div>
 </template>
 <script>
 import '../../assets/scss/style.vue.scss';
@@ -59,22 +68,32 @@ export default {
       return {
         'max-height': this.maxHeight + 'px',
         'max-width': this.maxWidth + 'px',
-        'margin-right': '-17px',
-        'margin-bottom': '-17px'
+        'margin-right': this.maxWidth < this.viewWidth ? '-17px' : 0,
+        'margin-bottom': this.maxHeight < this.viewHeight ? '-17px' : 0
       };
     }
   },
   mounted () {
     const scrollElement = this.$refs.view;
-    this.viewHeight = Math.max(scrollElement.clientHeight, scrollElement.scrollHeight);
-    this.viewWidth = Math.max(scrollElement.clientWidth, scrollElement.scrollWidth);
-    this.scrollbarHeight = (this.maxHeight - 17) / this.viewHeight * (this.maxHeight - 21);
-    this.scrollbarWidth = (this.maxWidth - 17) / this.viewWidth * (this.maxWidth - 21);
+    this.viewHeight = Math.max(
+      scrollElement.clientHeight,
+      scrollElement.scrollHeight
+    );
+    this.viewWidth = Math.max(
+      scrollElement.clientWidth,
+      scrollElement.scrollWidth
+    );
+    this.scrollbarHeight =
+      ((this.maxHeight - 17) / this.viewHeight) * (this.maxHeight - 21);
+    this.scrollbarWidth =
+      ((this.maxWidth - 17) / this.viewWidth) * (this.maxWidth - 21);
   },
   methods: {
     handleScroll () {
-      this.moveY = (this.$refs.view.scrollTop / this.viewHeight) * (this.maxHeight - 21);
-      this.moveX = (this.$refs.view.scrollLeft / this.viewWidth) * (this.maxWidth - 21);
+      this.moveY =
+        (this.$refs.view.scrollTop / this.viewHeight) * (this.maxHeight - 21);
+      this.moveX =
+        (this.$refs.view.scrollLeft / this.viewWidth) * (this.maxWidth - 21);
     },
     trackYHandle (e) {
       const barPointY = this.$refs.barY.getBoundingClientRect().y;
@@ -86,7 +105,8 @@ export default {
         range = e.clientY - barPointY - this.scrollbarHeight;
       }
       this.moveY = this.moveY + range;
-      view.scrollTop = view.scrollTop + range / (this.maxHeight - 17) * this.viewHeight;
+      view.scrollTop =
+        view.scrollTop + (range / (this.maxHeight - 17)) * this.viewHeight;
     },
     trackXHandle (e) {
       const barPointX = this.$refs.barX.getBoundingClientRect().x;
@@ -98,7 +118,8 @@ export default {
         range = e.clientX - barPointX - this.scrollbarWidth;
       }
       this.moveX = this.moveX + range;
-      view.scrollLeft = view.scrollLeft + range / (this.maxWidth - 17) * this.viewWidth;
+      view.scrollLeft =
+        view.scrollLeft + (range / (this.maxWidth - 17)) * this.viewWidth;
     },
     handleMousedownY (e) {
       e.stopImmediatePropagation();
@@ -120,7 +141,8 @@ export default {
         this.moveY = this.y + e.clientY - this.mousedownY;
       }
 
-      this.$refs.view.scrollTop = this.moveY / (this.maxHeight - 21) * this.viewHeight;
+      this.$refs.view.scrollTop =
+        (this.moveY / (this.maxHeight - 21)) * this.viewHeight;
     },
     hanleMouseupY () {
       this.mousedownY = 0;
@@ -145,7 +167,8 @@ export default {
         this.moveX = this.x + e.clientX - this.mousedownX;
       }
 
-      this.$refs.view.scrollLeft = this.moveX / (this.maxWidth - 21) * this.viewWidth;
+      this.$refs.view.scrollLeft =
+        (this.moveX / (this.maxWidth - 21)) * this.viewWidth;
     },
     hanleMouseupX () {
       this.mousedownX = 0;

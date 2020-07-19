@@ -27,6 +27,7 @@ module.exports = {
     'no-cond-assign': 0,
     'no-prototype-builtins': 0,
     '@typescript-eslint/ban-types': 0,
-    'import/no-named-default': 0
+    'import/no-named-default': 0,
+    'space-before-function-paren': 2
   }
 };

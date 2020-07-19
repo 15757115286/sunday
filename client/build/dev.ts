@@ -5,7 +5,7 @@ import webpack = require('webpack');
 import WebpackDevServer = require('webpack-dev-server');
 
 // 所有的静态资源都需要/<pkg>/assets/xxx.png去引用
-async function start () {
+async function start() {
   printEnvBox(path.resolve(__dirname, '../package.json'));
   const [contentBase, contentBasePublicPath] = await getDevServerContentConfig(webpackDevConfig.entry, 'assets');
   const compiler = webpack(webpackDevConfig);

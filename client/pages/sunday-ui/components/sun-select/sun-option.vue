@@ -34,11 +34,11 @@ export default {
       }
     }
   },
-  mounted(){
-    document.addEventListener('click',this.select.handle);
+  mounted () {
+    document.addEventListener('click', this.select.handle);
   },
-  destroyed(){
-    document.removeEventListener('click',this.select.handle)
+  destroyed () {
+    document.removeEventListener('click', this.select.handle);
   }
 };
 </script>
