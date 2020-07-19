@@ -8,19 +8,32 @@
     <input
       type="text"
       class="sun-form-control"
+      ref="input"
       :class="inputClass"
       :value="value"
       v-on="inputListeners"
       v-bind="$attrs"
+      @mouseenter="handleIconMouseenter"
+      @mouseleave="handleIconMouseleave"
     />
-    <span v-if="suffixIcon" class="suffix-icon" @click="$emit('icon-click',$event.target)">
+    <span
+    v-if="suffixIcon && !clearable"
+    @click="$emit('icon-click',$event.target)"
+    class="suffix-icon">
       <sun-icon :type="suffixIcon"></sun-icon>
     </span>
-    <span v-if="prefixIcon" class="prefix-icon" @click="$emit('icon-click',$event.target)">
+    <span
+     v-if="prefixIcon"
+     class="prefix-icon"
+     @click="$emit('icon-click',$event.target)">
       <sun-icon :type="prefixIcon"></sun-icon>
     </span>
-    <span class="suffix-icon" v-if="clearable && value !== ''" @click="$emit('input','')">
-      <sun-icon type="roundclosefill"></sun-icon>
+    <span
+    v-if="clearIcon"
+    class="suffix-icon"
+    @mouseenter="handleIconMouseenter"
+    @click="handleIconClick">
+      <sun-icon ref="clear" type="roundclosefill"></sun-icon>
     </span>
     <div class="sun-input-group-append" v-if="$slots.append">
       <span :class="{'sun-input-group-text': !isButtonAppend}">
@@ -39,6 +52,11 @@ export default {
     [SunIcon.name]: SunIcon
   },
   inheritAttrs: false,
+  data() {
+    return {
+      clearIcon: false
+    };
+  },
   props: {
     value: {
       default: ''
@@ -70,6 +88,7 @@ export default {
         input(event) {
           // 这个方法的this为window
           vm.$emit('input', event.target.value);
+          vm.handleIconMouseenter();
         }
       });
     },
@@ -108,6 +127,33 @@ export default {
         suffixIcon || prefixIcon || (clearable && value !== '')
       };
     }
+  },
+  methods: {
+    handleIconClick() {
+      this.$emit('input', '');
+      this.$refs.input.focus();
+      this.clearIcon = false;
+    },
+    handleIconMouseenter() {
+      if (!this.clearable) return;
+      if (this.value !== '') {
+        this.clearIcon = true;
+      }
+    },
+    handleIconMouseleave() {
+      if (document.activeElement === this.$refs.input) return;
+      this.clearIcon = false;
+    },
+    handleOtherClick(e) {
+      if (!this.clearIcon) return;
+      if (e.target !== this.$refs.input && e.target !== this.$refs.clear.$vnode.elm) {
+        this.clearIcon = false;
+      }
+    }
+  },
+  mounted() {
+    this.bindHandleOtherClick = this.handleOtherClick.bind(this);
+    document.addEventListener('click', this.bindHandleOtherClick);
   }
 };
 </script>

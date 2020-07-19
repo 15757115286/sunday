@@ -25,7 +25,7 @@ export default {
     handle() {
       if (this.disabled) return;
       this.select.$emit('input', this.lable);
-      if (this.select.suffixIcon === 'xiala') {
+      if (this.select.drop === false) {
         this.select.suffixIcon = 'shouqi';
         this.select.drop = true;
       } else {

@@ -7,13 +7,14 @@
       autocomplete="off"
       readonly
       ref="input"
-      :class="inputClass"
       :value="value"
       :disabled="disabled"
       @input="$emit('input',$event.target.value)"
+      @mouseenter="handleMouseenter"
+      @mouseleave="handleMouseleave"
     />
-     <span  class="suffix-icon" @click="$emit('icon-click',$event.target)">
-      <sun-icon :type="suffixIcon"></sun-icon>
+     <span  class="suffix-icon" @click="handleIconClick" @mouseenter="handleMouseenter">
+      <sun-icon :type="suffixIcon" ref="icon"></sun-icon>
     </span>
     </div>
     <transition  name="sun-zoom-in-top">
@@ -68,7 +69,7 @@ export default {
   methods: {
     toggle() {
       if (this.disabled) return;
-      if (this.suffixIcon === 'xiala') {
+      if (this.drop === false) {
         this.suffixIcon = 'shouqi';
         this.drop = true;
       } else {
@@ -77,8 +78,24 @@ export default {
       }
     },
     handleClick(e) {
-      if (e.target !== this.$refs.input) {
+      if (e.target !== this.$refs.input && e.target !== this.$refs.icon.$vnode.elm) {
         this.drop = false;
+        this.suffixIcon = 'xiala';
+      }
+    },
+    handleMouseenter() {
+      if (!this.clearable) return;
+      if (this.value !== '') {
+        this.suffixIcon = 'roundclosefill';
+      }
+    },
+    handleIconClick() {
+      if (this.suffixIcon === 'roundclosefill') {
+        this.$emit('input', '');
+      }
+    },
+    handleMouseleave() {
+      if (this.suffixIcon === 'roundclosefill') {
         this.suffixIcon = 'xiala';
       }
     }
