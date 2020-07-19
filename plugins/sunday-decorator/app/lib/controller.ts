@@ -4,8 +4,8 @@ import { controllerRouterInfo } from './store';
 import { BaseApplication } from '../../../../definitions/core';
 import { BaseContext } from 'koa';
 import { initService } from './inject';
-function Controller (options: ControllerOptions = { route: '/' }) {
-  return function <T extends IClass, K extends T> (constructor: T): K {
+function Controller(options: ControllerOptions = { route: '/' }) {
+  return function <T extends IClass, K extends T>(constructor: T): K {
     if (isString(options)) {
       options = {
         route: options
@@ -17,7 +17,7 @@ function Controller (options: ControllerOptions = { route: '/' }) {
     constructor = class extends constructor implements BaseController {
             app!: BaseApplication;
             ctx!: BaseContext;
-            constructor (...args:any[]) {
+            constructor(...args:any[]) {
               super(args);
               const config = args[0] || {};
               const app:BaseApplication = config.app;

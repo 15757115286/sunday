@@ -6,11 +6,11 @@ declare module '../../definitions/core' {
 
 let appName = 'appName';
 export default {
-  set appName (name: string) {
+  set appName(name: string) {
     appName = name;
   },
 
-  get appName (): string {
+  get appName(): string {
     return appName;
   }
 };

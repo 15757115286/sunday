@@ -1,8 +1,8 @@
 import { Method as _Method, IClass } from '../../definitions';
 import { getControllStore } from './util';
 
-export default function Method (methods: _Method[]| _Method) {
-  return function (target: any, propertyKey: string) {
+export default function Method(methods: _Method[]| _Method) {
+  return function(target: any, propertyKey: string) {
     const constructor:IClass = target.constructor;
     const controllerStore = getControllStore(constructor);
     const routeItems = controllerStore.routeItems = controllerStore.routeItems || {};

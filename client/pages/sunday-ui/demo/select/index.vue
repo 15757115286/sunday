@@ -44,7 +44,7 @@ export default {
     [SunCol.name]: SunCol,
     [SunRow.name]: SunRow
   },
-  data () {
+  data() {
     return {
       lists: [
         { value: '选项1', label: '奶茶' },

@@ -14,12 +14,12 @@ export default {
     }
   },
   computed: {
-    colObject () {
+    colObject() {
       return {
         ['col-md-' + this.span]: true
       };
     },
-    styleObject () {
+    styleObject() {
       return {
         'padding-left': this.$parent.gutter / 2 + 'px',
         'padding-right': this.$parent.gutter / 2 + 'px'

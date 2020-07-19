@@ -39,7 +39,7 @@
 import '../../assets/scss/style.vue.scss';
 export default {
   name: 'sun-scrollbar',
-  data () {
+  data() {
     return {
       viewHeight: 0, // 滚动元素总高度
       viewWidth: 0, // 滚动元素总宽度
@@ -64,7 +64,7 @@ export default {
     }
   },
   computed: {
-    styleObject () {
+    styleObject() {
       return {
         'max-height': this.maxHeight + 'px',
         'max-width': this.maxWidth + 'px',
@@ -73,7 +73,7 @@ export default {
       };
     }
   },
-  mounted () {
+  mounted() {
     const scrollElement = this.$refs.view;
     this.viewHeight = Math.max(
       scrollElement.clientHeight,
@@ -89,13 +89,13 @@ export default {
       ((this.maxWidth - 17) / this.viewWidth) * (this.maxWidth - 21);
   },
   methods: {
-    handleScroll () {
+    handleScroll() {
       this.moveY =
         (this.$refs.view.scrollTop / this.viewHeight) * (this.maxHeight - 21);
       this.moveX =
         (this.$refs.view.scrollLeft / this.viewWidth) * (this.maxWidth - 21);
     },
-    trackYHandle (e) {
+    trackYHandle(e) {
       const barPointY = this.$refs.barY.getBoundingClientRect().y;
       const view = this.$refs.view;
       let range = 0; // 滚动条在Y移动的距离
@@ -108,7 +108,7 @@ export default {
       view.scrollTop =
         view.scrollTop + (range / (this.maxHeight - 17)) * this.viewHeight;
     },
-    trackXHandle (e) {
+    trackXHandle(e) {
       const barPointX = this.$refs.barX.getBoundingClientRect().x;
       const view = this.$refs.view;
       let range = 0; // 滚动条在X移动的距离
@@ -121,14 +121,14 @@ export default {
       view.scrollLeft =
         view.scrollLeft + (range / (this.maxWidth - 17)) * this.viewWidth;
     },
-    handleMousedownY (e) {
+    handleMousedownY(e) {
       e.stopImmediatePropagation();
       this.mousedownY = e.clientY;
       this.y = this.moveY;
       document.addEventListener('mousemove', this.bindMousemoveY);
       document.addEventListener('mouseup', this.bindMouseupY);
     },
-    handleMoveY (e) {
+    handleMoveY(e) {
       e.preventDefault();
       if (!this.mousedownY) return;
       const currentPos = e.clientY - this.mousedownY + this.y;
@@ -144,17 +144,17 @@ export default {
       this.$refs.view.scrollTop =
         (this.moveY / (this.maxHeight - 21)) * this.viewHeight;
     },
-    hanleMouseupY () {
+    hanleMouseupY() {
       this.mousedownY = 0;
     },
-    handleMousedownX (e) {
+    handleMousedownX(e) {
       e.stopImmediatePropagation();
       this.mousedownX = e.clientX;
       this.x = this.moveX;
       document.addEventListener('mousemove', this.bindMousemoveX);
       document.addEventListener('mouseup', this.bindMouseupX);
     },
-    handleMoveX (e) {
+    handleMoveX(e) {
       e.preventDefault();
       if (!this.mousedownX) return;
       const currentPos = e.clientX - this.mousedownX + this.x;
@@ -170,11 +170,11 @@ export default {
       this.$refs.view.scrollLeft =
         (this.moveX / (this.maxWidth - 21)) * this.viewWidth;
     },
-    hanleMouseupX () {
+    hanleMouseupX() {
       this.mousedownX = 0;
     }
   },
-  destroyed () {
+  destroyed() {
     document.removeEventListener('mousemove', this.bindMousemoveY);
     document.removeEventListener('mouseup', this.bindMouseupY);
     document.removeEventListener('mousemove', this.bindMousemoveX);

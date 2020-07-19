@@ -6,7 +6,7 @@ import { BaseContext } from 'koa';
 class TestService {
     options: ServiceOptions;
     ctx: BaseContext;
-    getAge () {
+    getAge() {
       return 20 + this.ctx.url;
     }
 }

@@ -1,7 +1,7 @@
 import Loader from '../core/Loader';
 
 class SundayBootstrapLoader extends Loader {
-  load () {
+  load() {
     const { pattern } = this.config;
     if (!pattern) return;
     this.getGlobalEntry(pattern, entries => {

@@ -22,7 +22,7 @@ export default {
     type: {
       type: String,
       default: 'primary',
-      validator: function (value) {
+      validator: function(value) {
         return BUTTON_TYPE_LIST.indexOf(value) !== -1;
       }
     },
@@ -45,13 +45,13 @@ export default {
     size: {
       type: String,
       default: '',
-      validator (value) {
+      validator(value) {
         return BUTTON_SIZE_LIST.indexOf(value) !== -1;
       }
     }
   },
   computed: {
-    btnClass () {
+    btnClass() {
       return {
         [PREFIX + 'button']: true,
         [PREFIX + 'button-' + this.type]: !this.plain, // 基本按钮
@@ -61,7 +61,7 @@ export default {
         [PREFIX + 'button-' + this.size]: this.size
       };
     },
-    iconClass () {
+    iconClass() {
       return ['iconfont', this.icon];
     }
   }

@@ -100,7 +100,7 @@ export default {
     [SunButton.name]: SunButton,
     [SunIcon.name]: SunIcon
   },
-  data: function () {
+  data: function() {
     return {
       type: 'info',
       inputText: '',
@@ -112,7 +112,7 @@ export default {
     };
   },
   methods: {
-    getSlot () {
+    getSlot() {
       console.log(this.$refs.nihao);
     }
   }

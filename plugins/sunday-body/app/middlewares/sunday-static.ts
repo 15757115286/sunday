@@ -3,7 +3,7 @@ import compose = require('koa-compose');
 import path = require('path');
 const serve = require('koa-static');
 
-function factory (config:MiddlewareItemConfig, app:BaseApplication) {
+function factory(config:MiddlewareItemConfig, app:BaseApplication) {
   let { root, options } = config;
   if (!root) {
     root = ['static'];

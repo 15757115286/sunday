@@ -14,7 +14,7 @@ class SundayReflectPlugin {
     refReg!: RegExp;
     output: string = path.resolve(process.cwd(), 'run');
     mode = 'dev';
-    constructor (option: SundayReflectPluginOption = {}) {
+    constructor(option: SundayReflectPluginOption = {}) {
       let { delimitor = '_', prefix = ['css', 'js'], output, mode } = option;
       if (delimitor) {
         this.delimitor = delimitor;
@@ -30,7 +30,7 @@ class SundayReflectPlugin {
       this.mode = mode || this.mode;
     }
 
-    apply (compiler: webpack.Compiler) {
+    apply(compiler: webpack.Compiler) {
       const chunksHash = Object.create(null);
       compiler.hooks.compilation.tap('SundayReflectPlugin', compilation => {
         compilation.hooks.chunkAsset.tap('SundayReflectPlugin', (chunk, filename) => {

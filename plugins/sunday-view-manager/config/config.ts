@@ -3,7 +3,7 @@ import { ViewManagerConfig } from '../definitions';
 import path = require('path');
 
 export const DEFAULT_ENGINE_NAME = 'nunjucks';
-function config (app: BaseApplication): { 'sunday-view-manager': ViewManagerConfig } {
+function config(app: BaseApplication): { 'sunday-view-manager': ViewManagerConfig } {
   return {
     'sunday-view-manager': {
       root: path.join(app.options.root, 'app/views'),

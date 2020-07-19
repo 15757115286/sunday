@@ -11,7 +11,7 @@ declare module '../definitions/core' {
 }
 
 class SundayMiddlewaresLoader extends Loader {
-  load () {
+  load() {
     let configQueue: MiddlewareConfig[] = [];
     const middlewaresMap: PureObject<WrappedMiddleware> = {};
     let middlewaresPattern = this.config.pattern;

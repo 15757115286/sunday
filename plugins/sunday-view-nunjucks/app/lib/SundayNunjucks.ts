@@ -14,7 +14,7 @@ const INIT = Symbol('init');
 
 class SundayNunjucks extends ViewEngine {
     viewEngine: nunjucks.Environment;
-    constructor (ctx: Context, app: BaseApplication, _root: string | string[]) {
+    constructor(ctx: Context, app: BaseApplication, _root: string | string[]) {
       super(ctx, app, _root);
       const config = app.config;
       const nunjucksConfig: NunjucksConfig = config[VIEW_ENGINE_NAME] || {};
@@ -24,7 +24,7 @@ class SundayNunjucks extends ViewEngine {
       this[INIT]();
     }
 
-    [INIT] () {
+    [INIT]() {
       const mode = this.app.config.mode;
       const viewEngine = this.viewEngine;
       const _global = this.ctx._global || {};
@@ -37,7 +37,7 @@ class SundayNunjucks extends ViewEngine {
       });
     }
 
-    render (name: string, context?: PureObject, isAsync = false): string | Promise<string> {
+    render(name: string, context?: PureObject, isAsync = false): string | Promise<string> {
       if (isAsync) {
         return new Promise<string>((resolve, reject) => {
           this.viewEngine.render(name, context, (err, result) => {
@@ -52,7 +52,7 @@ class SundayNunjucks extends ViewEngine {
       return this.viewEngine.render(name, context);
     }
 
-    renderString (str: string, context: PureObject, isAsync = true): string | Promise<string> {
+    renderString(str: string, context: PureObject, isAsync = true): string | Promise<string> {
       if (isAsync) {
         return new Promise<string>((resolve, reject) => {
           this.viewEngine.render(str, context, (err, result) => {
@@ -67,7 +67,7 @@ class SundayNunjucks extends ViewEngine {
       return this.viewEngine.render(str, context);
     }
 
-    loadCss (fileName: string, isInline = false) {
+    loadCss(fileName: string, isInline = false) {
       try {
         const [root, , css] = getConfig(this.app);
         const abs = path.resolve(root, css);
@@ -104,7 +104,7 @@ class SundayNunjucks extends ViewEngine {
       }
     }
 
-    loadJs (fileName: string, isInline = false, isAsync = false) {
+    loadJs(fileName: string, isInline = false, isAsync = false) {
       try {
         const [root, js] = getConfig(this.app);
         const abs = path.resolve(root, js);

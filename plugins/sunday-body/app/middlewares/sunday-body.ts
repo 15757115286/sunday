@@ -9,7 +9,7 @@ declare module 'koa' {
         disableBodyParser?: boolean;
     }
 }
-function factory (config:MiddlewareItemConfig) {
+function factory(config:MiddlewareItemConfig) {
   return bodyParser(config);
 }
 

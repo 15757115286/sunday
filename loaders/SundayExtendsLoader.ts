@@ -6,7 +6,7 @@ const BASE_PATH = 'koa/lib';
 const VALID_FILENAME_REG = /^request|response|application|context$/;
 
 class SundayExtendsLoader extends Loader {
-  load () {
+  load() {
     const pattern = this.config.pattern;
     if (!pattern) return;
     this.getGlobalEntry(pattern, entries => {
@@ -22,7 +22,7 @@ class SundayExtendsLoader extends Loader {
     });
   }
 
-  merge (merged: PureObject | Function, current: PureObject, entry: string) {
+  merge(merged: PureObject | Function, current: PureObject, entry: string) {
     // application中导出的是一个类，所以需要定义在它原型上
     if (typeof merged === 'function') {
       merged = merged.prototype;

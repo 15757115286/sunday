@@ -13,7 +13,7 @@ abstract class Loader {
     coreEntries!: CoreEntry[];
     app!: BaseApplication;
     config!: LoaderConfig;
-    constructor (params: Partial<LoaderParameter>) {
+    constructor(params: Partial<LoaderParameter>) {
       this.app = <BaseApplication>params.app;
       this.coreEntries = params.coreEntries || [];
       this.config = params.config || {};
@@ -21,7 +21,7 @@ abstract class Loader {
 
     abstract load(): void;
 
-    getEntry (base: string | CoreEntry, pattern: Pattern, callback: EntryCallback) {
+    getEntry(base: string | CoreEntry, pattern: Pattern, callback: EntryCallback) {
       if (typeof pattern === 'string') {
         pattern = [pattern];
       }
@@ -35,13 +35,13 @@ abstract class Loader {
       callback(entries.filter(entry => !NOT_INCLUDE_SUFFIX.test(entry)), base);
     }
 
-    getGlobalEntry (pattern: Pattern, callback: EntryCallback) {
+    getGlobalEntry(pattern: Pattern, callback: EntryCallback) {
       this.coreEntries.forEach(entry => {
         this.getEntry(entry, pattern, callback);
       });
     }
 
-    resolvePathName (resolvePath: string): string {
+    resolvePathName(resolvePath: string): string {
       if (!resolvePath) return '';
       return path.basename(resolvePath).replace(/\.[^.]+$/, '');
     }

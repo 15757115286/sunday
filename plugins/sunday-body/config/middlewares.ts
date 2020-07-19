@@ -16,7 +16,7 @@ const middlewaresConfig:PureObject<MiddlewareConfig> = {
         'static'
       ],
       options: {
-        setHeaders (response: ServerResponse) {
+        setHeaders(response: ServerResponse) {
           response.setHeader('Served-By', 'koa-static');
         }
       }

@@ -6,7 +6,7 @@ import { BorderStyle } from 'boxen';
 const ora = require('ora');
 const boxen = require('boxen');
 
-function getRealPath (...relativePath: string[]) {
+function getRealPath(...relativePath: string[]) {
   return path.resolve(__dirname, ...relativePath);
 }
 
@@ -27,7 +27,7 @@ const spinner = ora(chalk.green('开始进行ts编译打包'));
 const { spawn } = cp;
 const PROD_CONFIG_NAME = 'tsconfig.prod.json';
 
-function copy () {
+function copy() {
   spinner.start(chalk.blue('开始拷贝静态资源'));
   return fs.copy(getRealPath('../app/views'), getRealPath('../dist/app/views'))
     .then(() => spinner.succeed(chalk.green('静态资源拷贝成功')))

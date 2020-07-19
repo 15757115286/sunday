@@ -22,7 +22,7 @@ export default {
   },
   inject: ['select'],
   methods: {
-    handle () {
+    handle() {
       if (this.disabled) return;
       this.select.$emit('input', this.lable);
       if (this.select.suffixIcon === 'xiala') {
@@ -34,10 +34,10 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     document.addEventListener('click', this.select.handle);
   },
-  destroyed () {
+  destroyed() {
     document.removeEventListener('click', this.select.handle);
   }
 };

@@ -6,7 +6,7 @@ const compose = require('koa-compose');
 const Router = require('koa-router');
 console.log(1);
 // 把controller加载通过koa-router变成router信息
-function factory (config:MiddlewareItemConfig, app:BaseApplication) {
+function factory(config:MiddlewareItemConfig, app:BaseApplication) {
   const AllRoute = new Router();
   const controllerRouterInfo = app.controllerRouterInfo;
   for (const key in controllerRouterInfo) {
@@ -34,7 +34,7 @@ function factory (config:MiddlewareItemConfig, app:BaseApplication) {
       }
       methods.forEach(method => {
         routes.forEach(route => {
-          AllRoute[method.toLocaleLowerCase()](route, async (ctx: Context, next:Next) => {
+          AllRoute[method.toLocaleLowerCase()](route, async(ctx: Context, next:Next) => {
             const { status } = ctx;
             // 证明已经被处理过或者重定向
             const successList = [200, 301, 302];

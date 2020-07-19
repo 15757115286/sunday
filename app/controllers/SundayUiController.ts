@@ -9,7 +9,7 @@ class SundayUiController {
 
     @Get
     @Route('/:component*')
-    async getComponent () {
+    async getComponent() {
       this.ctx.setGlobal('title', 'sunday-ui');
       await this.ctx.render('sunday-ui.html');
     }

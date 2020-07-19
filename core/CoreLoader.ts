@@ -10,13 +10,13 @@ class CoreLoader extends Loader {
     app!: BaseApplication;
     coreEntries!: CoreEntry[];
     sunday!: any;
-    constructor (params: CoreLoaderParameter) {
+    constructor(params: CoreLoaderParameter) {
       super(params);
       this.app = params.app;
       this.sunday = params.sunday || {};
     }
 
-    load () {
+    load() {
       this.getCoreEntry();
       this.getPluginConfig();
       this.mergePluginEntriesToCoreEntries();
@@ -25,7 +25,7 @@ class CoreLoader extends Loader {
       this.useMiddlewares();
     }
 
-    get pattern () {
+    get pattern() {
       const env = this.app.options.env;
       return {
         pluginConfig: `config/**/plugin?(.${env}).(js|ts)`,
@@ -37,7 +37,7 @@ class CoreLoader extends Loader {
     /**
      * 获取应用和继承应用的主入口
      */
-    getCoreEntry () {
+    getCoreEntry() {
       const root = this.app.options.root;
       const entries: CoreEntry[] = [
         {
@@ -65,7 +65,7 @@ class CoreLoader extends Loader {
      * 这边的entries是应用或者框架下config下目录下的所有插件配置
      * 它的合并顺序是无序的，依赖于系统返回文件的顺序
      */
-    getPluginConfig (): PureObject<PluginConfigItem> {
+    getPluginConfig(): PureObject<PluginConfigItem> {
       let mergedPluginConfig: PureObject<PluginConfigItem> = {};
       this.getGlobalEntry(this.pattern.pluginConfig, (entries, coreEntry) => {
         mergedPluginConfig = entries.reduce((mergedPluginConfig, entry) => {
@@ -88,7 +88,7 @@ class CoreLoader extends Loader {
     /**
      * 这边是把插件目录也当成核心的入口来对待，后期会从插件目录下加载controller或者其他配置
      */
-    mergePluginEntriesToCoreEntries () {
+    mergePluginEntriesToCoreEntries() {
       const pluginConfig = this.app.pluginConfig;
       const result: CoreEntry[] = [];
       this.coreEntries.forEach(entry => {
@@ -126,7 +126,7 @@ class CoreLoader extends Loader {
     }
 
     // 加载所有项目中的加载器的配置文件。
-    getLoaderConfig () {
+    getLoaderConfig() {
       // 同样执行插件中的loaders
       const entries = this.coreEntries;
       let mergedLoaderConfig: PureObject<LoaderConfigItem> = {};
@@ -161,7 +161,7 @@ class CoreLoader extends Loader {
     /**
      * 运行所有的加载器
      */
-    runLoaders () {
+    runLoaders() {
       const loadersQueue = this.app.loadersQueue;
       const canExecuteLoaders:PureObject<Loader> = {};
       this.getGlobalEntry(this.pattern.loaderPath, entries => {
@@ -193,14 +193,14 @@ class CoreLoader extends Loader {
     /**
      * 加载中间件
      */
-    useMiddlewares () {
+    useMiddlewares() {
       const middlewaresQueue = this.app.sundayMiddlewaresQueue;
       const middlewares = this.app.sundayMiddlewares;
       middlewaresQueue.forEach((config:MiddlewareConfig) => {
         const middlewareName = config.name;
         const wrappedMiddleware = middlewares[middlewareName as string];
         const _middleware = wrappedMiddleware(config.options as MiddlewareItemConfig, this.app);
-        const middleware = async function (ctx: Koa.BaseContext, next: Koa.Next) {
+        const middleware = async function(ctx: Koa.BaseContext, next: Koa.Next) {
           const { match, ignore } = config;
           if (match) {
             if (isMatch(ctx.path, match)) {

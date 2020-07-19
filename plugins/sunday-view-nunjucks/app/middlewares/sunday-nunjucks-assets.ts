@@ -10,9 +10,9 @@ const DEFAULT_FILENAME_REG = /nunjucks\/(.+)|(?:js|css)\/sunday-chunks/;
 
 const readFile = util.promisify(fs.readFile);
 
-const factory = function (config:MiddlewareItemConfig, app:BaseApplication) {
+const factory = function(config:MiddlewareItemConfig, app:BaseApplication) {
   const mode = app.config.mode || 'dev';
-  return async function (ctx: Context, next: Next) {
+  return async function(ctx: Context, next: Next) {
     const urlPath = ctx.path;
     const emptyReg = config.emptyReg;
     // 为了兼容异步组件提取的公共样式在加载时候会重复引入，导致程序crash的问题

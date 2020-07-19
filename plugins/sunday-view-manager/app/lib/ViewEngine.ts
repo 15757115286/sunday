@@ -7,7 +7,7 @@ export abstract class ViewEngine {
     ctx: Context;
     app: BaseApplication;
     root: string | string[];
-    constructor (ctx: Context, app: BaseApplication, root: string | string[]) {
+    constructor(ctx: Context, app: BaseApplication, root: string | string[]) {
       this.ctx = ctx;
       this.app = app;
       this.root = root;

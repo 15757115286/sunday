@@ -14,7 +14,7 @@ const DEFAULT_PATH = 'static';
 const DEFAULT_WATCH_PATH = 'static';
 const DEFAULT_MONITOR_PATH = 'monitor';
 
-function factory (config: MiddlewareItemConfig, app: BaseApplication) {
+function factory(config: MiddlewareItemConfig, app: BaseApplication) {
   const basePath = app.options.root;
   const port: number = config.port || 4000;
   let watchPaths: string | string[] = config.watch || DEFAULT_WATCH_PATH;
@@ -25,7 +25,7 @@ function factory (config: MiddlewareItemConfig, app: BaseApplication) {
   watch(watchPaths.map(p => path.join(basePath, p)));
   startWebSocket(port, app, socketPath);
   let relativePath: string | string[] = config.root || DEFAULT_PATH;
-  return async function (ctx: Context, next: Next) {
+  return async function(ctx: Context, next: Next) {
     const _path = ctx.path;
     if (/\.html$/.test(_path)) {
       let destination = '';
@@ -61,7 +61,7 @@ function factory (config: MiddlewareItemConfig, app: BaseApplication) {
  * @param port 服务端监听端口
  * @param path 服务端监听路径
  */
-function getDynamicScript (port:number, path: string): string {
+function getDynamicScript(port:number, path: string): string {
   const script = `
     <script>
         (function(){
@@ -88,7 +88,7 @@ function getDynamicScript (port:number, path: string): string {
 }
 
 // 监听文件变化
-function watch (paths: string[]) {
+function watch(paths: string[]) {
   const watcher = chokidar.watch(paths, {
     ignoreInitial: true
   });
@@ -105,7 +105,7 @@ function watch (paths: string[]) {
 }
 
 // 启动socket服务
-function startWebSocket (port: number, app: BaseApplication, socketPath: string): void {
+function startWebSocket(port: number, app: BaseApplication, socketPath: string): void {
   app.on('close', () => {
     chalk.blue('监听到http服务关闭，同时也将关闭socket服务');
     if (globalServer) globalServer.close();

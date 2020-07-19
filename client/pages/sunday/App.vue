@@ -11,13 +11,13 @@ add(1, 2);
 
 export default {
   name: 'sunday',
-  data () {
+  data() {
     return {
       name: 'xwt44sxw'
     };
   },
   methods: {
-    async beatCm () {
+    async beatCm() {
       const _now = Date.now();
       await new Promise(resolve => {
         setTimeout(resolve, 2000);

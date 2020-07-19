@@ -7,7 +7,7 @@ import { DEFAULT_ENGINE_NAME } from '../../config/config';
 import path = require('path');
 
 export default {
-  async render (this:Context, name: string, context?: PureObject, isAsync = true): Promise<string> {
+  async render(this:Context, name: string, context?: PureObject, isAsync = true): Promise<string> {
     const app = this.app as BaseApplication;
     const config: ViewManagerConfig = getConfig(app);
     const ext = path.extname(name);
@@ -19,7 +19,7 @@ export default {
     return result;
   },
 
-  async renderString (this:Context, str: string, context?: PureObject, isAsync = true, engineName = DEFAULT_ENGINE_NAME): Promise<string> {
+  async renderString(this:Context, str: string, context?: PureObject, isAsync = true, engineName = DEFAULT_ENGINE_NAME): Promise<string> {
     const app = this.app as BaseApplication;
     const config: ViewManagerConfig = getConfig(app);
     engineName = engineName || config.default!;
@@ -30,12 +30,12 @@ export default {
     return result;
   },
 
-  setGlobal (this: Context, name: string, value: any) {
+  setGlobal(this: Context, name: string, value: any) {
     const _global = this._global = this._global || {};
     _global[name] = value;
   },
 
-  getGlobal (this: Context, name?: string) {
+  getGlobal(this: Context, name?: string) {
     const _global = this._global || {};
     if (name) {
       return _global[name];

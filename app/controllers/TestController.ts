@@ -16,7 +16,7 @@ class TestController {
 
     @Get
     @Route('/getName')
-    async getName () {
+    async getName() {
       this.ctx.setGlobal('name', [1, 2, 3, 4]);
       this.ctx.setGlobal('title', '曹敏周日');
       await this.ctx.render('cm.html', {
@@ -26,7 +26,7 @@ class TestController {
 
     @Post
     @Route('/getAge')
-    async getAge () {
+    async getAge() {
       console.log(this.ctx.request.body);
       this.ctx.body = 'my age is 18ss';
     }

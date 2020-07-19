@@ -32,16 +32,16 @@ export default {
     [SunUpload.name]: SunUpload,
     [SunButton.name]: SunButton
   },
-  data () {
+  data() {
     return {
       filesList: [{ name: 'xwt.jpg' }, { name: 'cmcm.jpg' }]
     };
   },
   methods: {
-    handleExceed (e) {
+    handleExceed(e) {
       alert(e.length);
     },
-    handleView () {
+    handleView() {
       alert('必须是图片');
     }
   }

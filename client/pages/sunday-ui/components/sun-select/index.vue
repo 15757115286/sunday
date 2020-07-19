@@ -40,14 +40,14 @@ export default {
     [SunScrollbar.name]: SunScrollbar,
     [SunIcon.name]: SunIcon
   },
-  data () {
+  data() {
     return {
       suffixIcon: 'xiala',
       drop: false,
       handle: this.handleClick.bind(this)
     };
   },
-  provide () {
+  provide() {
     return {
       select: this
     };
@@ -66,7 +66,7 @@ export default {
     }
   },
   methods: {
-    toggle () {
+    toggle() {
       if (this.disabled) return;
       if (this.suffixIcon === 'xiala') {
         this.suffixIcon = 'shouqi';
@@ -76,7 +76,7 @@ export default {
         this.drop = false;
       }
     },
-    handleClick (e) {
+    handleClick(e) {
       if (e.target !== this.$refs.input) {
         this.drop = false;
         this.suffixIcon = 'xiala';

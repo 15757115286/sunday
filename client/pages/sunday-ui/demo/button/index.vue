@@ -57,13 +57,13 @@ export default {
     [SunButtonGroup.name]: SunButtonGroup,
     [SunIcon.name]: SunIcon
   },
-  data: function () {
+  data: function() {
     return {
       type: 'info'
     };
   },
   methods: {
-    switchType () {
+    switchType() {
       if (this.type === 'primary') {
         this.type = 'info';
       } else {

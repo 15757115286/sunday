@@ -4,7 +4,7 @@ import { printEnvBox, getDevServerContentConfig } from './helper';
 import webpack = require('webpack');
 import CopyPlugin = require('copy-webpack-plugin');
 
-async function start () {
+async function start() {
   printEnvBox(path.resolve(__dirname, '../package.json'));
   const callback = (err, stats) => { // Stats Object
     if (err || stats.hasErrors()) {

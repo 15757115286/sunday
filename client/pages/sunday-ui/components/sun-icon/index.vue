@@ -18,7 +18,7 @@ export default {
     }
   },
   computed: {
-    iconClass () {
+    iconClass() {
       return {
         iconfont: this.type,
         [PREFIX + 'icon-' + this.type]: this.type,

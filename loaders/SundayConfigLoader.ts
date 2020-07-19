@@ -9,7 +9,7 @@ declare module '../definitions/core' {
 }
 
 class SundayConfigLoader extends Loader {
-  load () {
+  load() {
     const config = this.config;
     let { pattern } = config;
     if (!pattern) {

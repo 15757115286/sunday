@@ -28,6 +28,6 @@ module.exports = {
     'no-prototype-builtins': 0,
     '@typescript-eslint/ban-types': 0,
     'import/no-named-default': 0,
-    'space-before-function-paren': 2
+    'space-before-function-paren': ['error', 'never']
   }
 };

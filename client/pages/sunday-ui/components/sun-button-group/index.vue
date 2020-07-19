@@ -9,7 +9,7 @@ import '../../assets/scss/style.vue.scss';
 import { PREFIX } from '../../prefix';
 export default {
   name: 'sun-button-group',
-  data () {
+  data() {
     return {
       btnGroupClasss: {
         [PREFIX + 'button-group']: true

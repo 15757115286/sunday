@@ -14,7 +14,7 @@
 import { links, nameMap } from '../router';
 export default {
   name: 'demo-home',
-  data () {
+  data() {
     return {
       links,
       nameMap

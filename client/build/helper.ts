@@ -8,7 +8,7 @@ import boxen = require('boxen');
 
 const ROOT_PATH = path.resolve(__dirname, '../../run');
 
-function outputJSON (fileName: string, obj: PureObject) {
+function outputJSON(fileName: string, obj: PureObject) {
   fs.outputJSON(path.join(ROOT_PATH, fileName), obj, {
     spaces: 4
   });
@@ -28,7 +28,7 @@ function printEnvBox(pkgPath) {
   }));
 }
 
-async function getDevServerContentConfig (entry: webpack.Configuration['entry'], root = 'assets') {
+async function getDevServerContentConfig(entry: webpack.Configuration['entry'], root = 'assets') {
   entry = await entry;
   let result: string[];
   if (Array.isArray(entry)) {

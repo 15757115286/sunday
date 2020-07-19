@@ -53,7 +53,7 @@ export default {
     }
   },
   methods: {
-    dropFile (e) {
+    dropFile(e) {
       const dt = e.dataTransfer;
       const files = dt.files;
       if (files.length > this.limit) {
@@ -62,7 +62,7 @@ export default {
       this.$emit('on-change', files);// 文件上传的钩子函数
       console.log(files);
     },
-    changeFile () {
+    changeFile() {
       const files = this.$refs.input.files;
       if (files.length > this.limit) {
         this.$emit('on-exceed', files); // 文件超过limit时会触发on-exceed事件

@@ -3,7 +3,7 @@ import * as path from 'path';
 import url = require('url');
 import http = require('http');
 
-function getConfig (app: BaseApplication) {
+function getConfig(app: BaseApplication) {
   const { nunjucks: config = {} } = app.config || {};
   const {
     reflectConfig: {
@@ -15,7 +15,7 @@ function getConfig (app: BaseApplication) {
   return [root, js, css];
 }
 
-function resolveUrl (realtive, config) {
+function resolveUrl(realtive, config) {
   const { hostname, port, protocol, publicPath } = config;
   // 兼容window路径
   const dest = url.format({
@@ -27,7 +27,7 @@ function resolveUrl (realtive, config) {
   return dest;
 }
 
-function easyGet (url):Promise<string|Buffer> {
+function easyGet(url):Promise<string|Buffer> {
   const promise = new Promise<string|Buffer>(resolve => {
     http.request(url, res => {
       let data = Buffer.alloc(0);
@@ -43,7 +43,7 @@ function easyGet (url):Promise<string|Buffer> {
   return promise;
 }
 
-function isMatch (url: string | undefined, patterns:(string | RegExp)[]): boolean {
+function isMatch(url: string | undefined, patterns:(string | RegExp)[]): boolean {
   if (url === undefined) {
     return false;
   }

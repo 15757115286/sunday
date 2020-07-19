@@ -5,16 +5,16 @@ import { ViewEngineConstructor } from './ViewEngine';
 
 class SundayViewManager extends Map {
     app: BaseApplication;
-    constructor (app: BaseApplication) {
+    constructor(app: BaseApplication) {
       super();
       this.app = app;
     }
 
-    use (name: string, viewEnginer: ViewEngineConstructor) {
+    use(name: string, viewEnginer: ViewEngineConstructor) {
       this.set(name, viewEnginer);
     }
 
-    getEngine (name: string): ViewEngineConstructor {
+    getEngine(name: string): ViewEngineConstructor {
       const config: ViewManagerConfig = getConfig(this.app);
       const defaultEnginerName = config.default!;
       const viewEnginer: ViewEngineConstructor = this.get(name) || this.get(defaultEnginerName);

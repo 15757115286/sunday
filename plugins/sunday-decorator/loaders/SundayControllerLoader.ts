@@ -12,7 +12,7 @@ declare module '../../../definitions/core' {
 }
 
 class SundayControllerLoader extends Loader {
-  load () {
+  load() {
     const controllerPattern = this.config.pattern;
     const controllers: IClass[] = [];
     const controllerRouterInfo: PureObject<ControllerRouterInfo> = {};

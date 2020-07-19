@@ -9,7 +9,7 @@ declare module '../../../definitions/core'{
     }
 }
 class SundayServiceLoader extends Loader {
-  load () {
+  load() {
     const servicePattern = this.config.pattern;
     const services: IService[] = [];
     const serviceInfo:PureObject = {};

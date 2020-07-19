@@ -45,7 +45,7 @@ export default {
     },
     size: {
       default: '',
-      validator: function (value) {
+      validator: function(value) {
         return INPUT_SIZE_GROUP.indexOf(value) !== -1;
       }
     },
@@ -63,18 +63,18 @@ export default {
     }
   },
   computed: {
-    inputListeners () {
+    inputListeners() {
       const vm = this;
       return Object.assign({}, this.$listeners, {
         // 配合v-model工作
-        input (event) {
+        input(event) {
           // 这个方法的this为window
           vm.$emit('input', event.target.value);
         }
       });
     },
     // 当左边slot是按钮时，去掉.sun-input-group-text
-    isButtonPrepend () {
+    isButtonPrepend() {
       const nodes = this.$slots.prepend;
       if (nodes !== undefined) {
         if (nodes[0].tag !== undefined) {
@@ -84,7 +84,7 @@ export default {
       return false;
     },
     // 当右边slot是按钮时，去掉.sun-input-group-text
-    isButtonAppend () {
+    isButtonAppend() {
       const nodes = this.$slots.append;
       if (nodes !== undefined) {
         if (nodes[0].tag !== undefined) {
@@ -94,12 +94,12 @@ export default {
       return false;
     },
     // 更改尺寸
-    inputGroupObject () {
+    inputGroupObject() {
       return {
         ['sun-input-group-' + this.size]: this.size
       };
     },
-    inputClass () {
+    inputClass() {
       const { suffixIcon, prefixIcon, clearable, value } = this;
       return {
         'sun-input-suffix': suffixIcon || clearable,
