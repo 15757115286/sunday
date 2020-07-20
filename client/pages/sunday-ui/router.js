@@ -3,10 +3,12 @@ const demoRoutes = [];
 const links = [];
 
 const config = {
-  button: '按钮组件',
-  input: '输入框组件',
-  icon: '图标组件',
-  upload: '上传组件（部分）'
+  tag: '标签',
+  button: '按钮',
+  input: '输入框',
+  icon: '图标',
+  upload: '上传（部分）',
+  select: '选择框（部分）'
 };
 
 // 第一层的index

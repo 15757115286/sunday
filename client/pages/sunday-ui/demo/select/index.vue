@@ -32,6 +32,16 @@
         </sun-select>
       </sun-col>
     </sun-row>
+     <p>自定义条目内容</p>
+    <sun-row style="margin-bottom:24px">
+      <sun-col :span="6">
+        <sun-select v-model="value4" clearable>
+          <sun-option v-for="list in lists2" :key="list.value" :lable="list.label" :value="list.value" :disabled="list.disabled">
+            <div style="display:flex;justify-content: space-between;">{{list.label}} <span style="font-size:12px;color:#999">{{list.value}}</span></div>
+          </sun-option>
+        </sun-select>
+      </sun-col>
+    </sun-row>
   </div>
 </template>
 <script>
@@ -60,9 +70,15 @@ export default {
         { value: '选项4', label: '炸鸡' },
         { value: '选项5', label: '汉堡' }
       ],
+      lists2: [
+        { value: 'teamilk', label: '奶茶' },
+        { value: 'coke', label: '可乐' },
+        { value: 'noun', label: '薯片' }
+      ],
       value: '奶茶',
       value1: '可乐',
-      value3: '奶茶'
+      value3: '奶茶',
+      value4: '奶茶'
     };
   }
 };

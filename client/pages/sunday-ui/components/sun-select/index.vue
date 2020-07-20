@@ -70,10 +70,14 @@ export default {
     toggle() {
       if (this.disabled) return;
       if (this.drop === false) {
-        this.suffixIcon = 'shouqi';
+        if (this.suffixIcon !== 'roundclosefill') {
+          this.suffixIcon = 'shouqi';
+        }
         this.drop = true;
       } else {
-        this.suffixIcon = 'xiala';
+        if (this.suffixIcon !== 'roundclosefill') {
+          this.suffixIcon = 'xiala';
+        }
         this.drop = false;
       }
     },
@@ -89,9 +93,12 @@ export default {
         this.suffixIcon = 'roundclosefill';
       }
     },
-    handleIconClick() {
+    handleIconClick(e) {
       if (this.suffixIcon === 'roundclosefill') {
+        e.stopPropagation();
         this.$emit('input', '');
+        this.drop = false;
+        this.suffixIcon = 'xiala';
       }
     },
     handleMouseleave() {

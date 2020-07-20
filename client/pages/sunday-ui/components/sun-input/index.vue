@@ -154,6 +154,9 @@ export default {
   mounted() {
     this.bindHandleOtherClick = this.handleOtherClick.bind(this);
     document.addEventListener('click', this.bindHandleOtherClick);
+    this.$once('hook:beforeDestroy', () => {
+      document.removeEventListener('click', this.bindHandleOtherClick);
+    });
   }
 };
 </script>

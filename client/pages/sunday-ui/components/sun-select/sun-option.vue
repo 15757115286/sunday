@@ -36,9 +36,9 @@ export default {
   },
   mounted() {
     document.addEventListener('click', this.select.handle);
-  },
-  destroyed() {
-    document.removeEventListener('click', this.select.handle);
+    this.$once('hook:beforeDestroy', () => {
+      document.removeEventListener('click', this.select.handle);
+    });
   }
 };
 </script>

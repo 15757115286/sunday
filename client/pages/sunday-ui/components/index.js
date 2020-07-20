@@ -7,6 +7,7 @@ import SunCol from './sun-row/sun-col';
 import SunUpload from './sun-upload';
 import SunOption from './sun-select';
 import SunSelect from './sun-select/sun-option';
+import SunTag from './sun-tag';
 
 export {
   SunButton,
@@ -17,5 +18,6 @@ export {
   SunCol,
   SunUpload,
   SunOption,
-  SunSelect
+  SunSelect,
+  SunTag
 };
