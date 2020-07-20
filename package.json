@@ -8,8 +8,7 @@
     "watch-server": "nodemon --inspect --watch 'index.ts' -e ts,tsx --exec 'node -r ts-node/register/files' index.ts",
     "dev": "nodemon --inspect index.ts",
     "build": "ts-node bin/build.ts",
-    "lint:server": "eslint ./ --ignore-pattern client --fix --ext .js,.ts",
-    "lint": "yarn lint:server && cd client && yarn lint"
+    "lint:server": "eslint ./ --ignore-pattern client --fix --ext .js,.ts"
   },
   "repository": {
     "url": "https://github.com/15757115286/sunday/tree/master"
