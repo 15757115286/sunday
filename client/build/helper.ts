@@ -10,7 +10,7 @@ const ROOT_PATH = path.resolve(__dirname, '../../run');
 
 function outputJSON(fileName: string, obj: PureObject) {
   fs.outputJSON(path.join(ROOT_PATH, fileName), obj, {
-    spaces: 4
+    spaces: 2
   });
 }
 

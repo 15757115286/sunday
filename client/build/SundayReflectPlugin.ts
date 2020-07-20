@@ -55,7 +55,7 @@ class SundayReflectPlugin {
         }
         for (const pre in result) {
           fs.outputJsonSync(path.join(this.output, `${pre}_version.json`), result[pre], {
-            spaces: 4
+            spaces: 2
           });
         }
       });

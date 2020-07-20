@@ -4,7 +4,7 @@ import { Context, Next } from 'koa';
 import { union } from '../lib/util';
 const compose = require('koa-compose');
 const Router = require('koa-router');
-console.log(1);
+
 // 把controller加载通过koa-router变成router信息
 function factory(config:MiddlewareItemConfig, app:BaseApplication) {
   const AllRoute = new Router();
