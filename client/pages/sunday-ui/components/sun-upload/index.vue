@@ -1,8 +1,13 @@
 <template>
   <div>
     <div @click="$refs.input.click()">
-      <input type="file" v-bind="$attrs" ref="input" @change="changeFile()" />
-      <slot v-if="!drag"></slot>
+      <input
+        ref="input"
+        type="file"
+        v-bind="$attrs"
+        @change="changeFile()"
+      >
+      <slot v-if="!drag" />
       <div
         v-if="drag"
         class="up-load-dragger"
@@ -10,22 +15,35 @@
         @dragover.prevent
         @drop.prevent.stop="dropFile($event)"
       >
-        <sun-icon class="up-load-icon" type="shangchuan"></sun-icon>
+        <sun-icon
+          class="up-load-icon"
+          type="shangchuan"
+        />
         <p class="up-load-text">
           将文件拖到此处，或
           <em class="up-load-em">点击上传</em>
         </p>
       </div>
     </div>
-    <slot name="tip"></slot>
-    <ul v-if="filesList" class="sun-up-list">
-        <li v-for="(file,index) in filesList" :key="index" class="sun-up-list_item">
-            <a class="sun-upload-list__item-name">
-                <sun-icon type="fuzhi"></sun-icon>
-                {{file.name}}
-            </a>
-            <sun-icon type="radiobutton" class="sun-upload-list__item-status"></sun-icon>
-        </li>
+    <slot name="tip" />
+    <ul
+      v-if="filesList"
+      class="sun-up-list"
+    >
+      <li
+        v-for="(file,index) in filesList"
+        :key="index"
+        class="sun-up-list_item"
+      >
+        <a class="sun-upload-list__item-name">
+          <sun-icon type="fuzhi" />
+          {{ file.name }}
+        </a>
+        <sun-icon
+          type="radiobutton"
+          class="sun-upload-list__item-status"
+        />
+      </li>
     </ul>
   </div>
 </template>
@@ -33,7 +51,7 @@
 import '../../assets/scss/style.vue.scss';
 import SunIcon from '../sun-icon';
 export default {
-  name: 'sun-upload',
+  name: 'SunUpload',
   components: {
     [SunIcon.name]: SunIcon
   },

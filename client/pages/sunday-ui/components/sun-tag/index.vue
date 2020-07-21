@@ -1,13 +1,20 @@
 <template>
-    <sun-transition leaveType="flipOutY" duration="500">
-        <span v-if="!close" :class="classObject">
-            <slot>{{label}}</slot>
-            <sun-icon
-            v-if="closable"
-            @click.native="handleClick"
-            type="roundclosefill"></sun-icon>
-        </span>
-    </sun-transition>
+  <sun-transition
+    leave-type="flipOutY"
+    duration="500"
+  >
+    <span
+      v-if="!close"
+      :class="classObject"
+    >
+      <slot>{{ label }}</slot>
+      <sun-icon
+        v-if="closable"
+        type="roundclosefill"
+        @click.native="handleClick"
+      />
+    </span>
+  </sun-transition>
 </template>
 <script>
 import '../../assets/scss/style.vue.scss';
@@ -16,15 +23,10 @@ import { PREFIX } from '../../prefix';
 import SunTransition from '../sun-transition';
 import SunIcon from '../sun-icon';
 export default {
-  name: 'sun-tag',
+  name: 'SunTag',
   components: {
     [SunIcon.name]: SunIcon,
     [SunTransition.name]: SunTransition
-  },
-  data() {
-    return {
-      close: false
-    };
   },
   props: {
     type: {
@@ -45,6 +47,11 @@ export default {
         return BUTTON_SIZE_LIST.includes(value);
       }
     }
+  },
+  data() {
+    return {
+      close: false
+    };
   },
   computed: {
     classObject() {

@@ -1,12 +1,16 @@
 <template>
-    <li class="sun-select-dorpdown_item" @click.stop="handle" :class="{'selected':$parent.value===lable}">
-        {{lable}}
-    </li>
+  <li
+    class="sun-select-dorpdown_item"
+    :class="{'selected':$parent.value===lable}"
+    @click.stop="handle"
+  >
+    {{ lable }}
+  </li>
 </template>
 <script>
 import '../../assets/scss/style.vue.scss';
 export default {
-  name: 'sun-option',
+  name: 'SunOption',
   props: {
     lable: {
       type: String,

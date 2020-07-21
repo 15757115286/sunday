@@ -3,44 +3,85 @@
     <div style="margin-bottom:32px">
       <p>标签</p>
       <sun-tag>标签一</sun-tag>
-      <sun-tag type="info">标签二</sun-tag>
-      <sun-tag type="success">标签三</sun-tag>
-      <sun-tag type="danger">标签四</sun-tag>
-      <sun-tag type="warning">标签五</sun-tag>
-      <sun-tag type="light">标签六</sun-tag>
-     <sun-tag type="dark">标签七</sun-tag>
-     <sun-tag type="secondary">标签八</sun-tag>
+      <sun-tag type="info">
+        标签二
+      </sun-tag>
+      <sun-tag type="success">
+        标签三
+      </sun-tag>
+      <sun-tag type="danger">
+        标签四
+      </sun-tag>
+      <sun-tag type="warning">
+        标签五
+      </sun-tag>
+      <sun-tag type="light">
+        标签六
+      </sun-tag>
+      <sun-tag type="dark">
+        标签七
+      </sun-tag>
+      <sun-tag type="secondary">
+        标签八
+      </sun-tag>
     </div>
-     <p>可移除标签</p>
+    <p>可移除标签</p>
     <div style="margin-bottom:32px">
-      <sun-tag closable>标签一</sun-tag>
-      <sun-tag type="info" closable>标签二</sun-tag>
-      <sun-tag type="success" closable>标签三</sun-tag>
-      <sun-tag type="danger" closable>标签四</sun-tag>
-      <sun-tag type="warning" closable>标签五</sun-tag>
-    </div>
-      <p>可编辑标签</p>
-     <div style="margin-bottom:32px">
+      <sun-tag closable>
+        标签一
+      </sun-tag>
       <sun-tag
-      v-for="tag in tags"
-      closable
-      @close="handleClose(tag)"
-      :key="tag">
-        {{tag}}
+        type="info"
+        closable
+      >
+        标签二
+      </sun-tag>
+      <sun-tag
+        type="success"
+        closable
+      >
+        标签三
+      </sun-tag>
+      <sun-tag
+        type="danger"
+        closable
+      >
+        标签四
+      </sun-tag>
+      <sun-tag
+        type="warning"
+        closable
+      >
+        标签五
+      </sun-tag>
+    </div>
+    <p>可编辑标签</p>
+    <div style="margin-bottom:32px">
+      <sun-tag
+        v-for="tag in tags"
+        :key="tag"
+        closable
+        @close="handleClose(tag)"
+      >
+        {{ tag }}
       </sun-tag>
       <sun-input
         v-model="text"
         class="tag-input"
         size="sm"
         @click="handleClick"
-        @blur="handleBlur">
-      </sun-input>
+        @blur="handleBlur"
+      />
     </div>
-     <p>不同尺寸</p>
+    <p>不同尺寸</p>
     <div style="margin-bottom:32px">
-     <sun-tag size="sm">sm标签</sun-tag>
+      <sun-tag size="sm">
+        sm标签
+      </sun-tag>
       <sun-tag>默认标签</sun-tag>
-      <sun-tag size="lg">lg标签</sun-tag>
+      <sun-tag size="lg">
+        lg标签
+      </sun-tag>
     </div>
   </div>
 </template>
@@ -50,7 +91,7 @@ import {
   SunInput
 } from '../../components';
 export default {
-  name: 'tag-demo',
+  name: 'TagDemo',
   components: {
     [SunTag.name]: SunTag,
     [SunInput.name]: SunInput

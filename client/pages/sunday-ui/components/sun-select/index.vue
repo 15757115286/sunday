@@ -1,29 +1,42 @@
 <template>
   <div>
-    <div class="sun-select" @click="toggle">
+    <div
+      class="sun-select"
+      @click="toggle"
+    >
       <input
-      type="text"
-      class="sun-form-control"
-      autocomplete="off"
-      readonly
-      ref="input"
-      :value="value"
-      :disabled="disabled"
-      @input="$emit('input',$event.target.value)"
-      @mouseenter="handleMouseenter"
-      @mouseleave="handleMouseleave"
-    />
-     <span  class="suffix-icon" @click="handleIconClick" @mouseenter="handleMouseenter">
-      <sun-icon :type="suffixIcon" ref="icon"></sun-icon>
-    </span>
+        ref="input"
+        type="text"
+        class="sun-form-control"
+        autocomplete="off"
+        readonly
+        :value="value"
+        :disabled="disabled"
+        @input="$emit('input',$event.target.value)"
+        @mouseenter="handleMouseenter"
+        @mouseleave="handleMouseleave"
+      >
+      <span
+        class="suffix-icon"
+        @click="handleIconClick"
+        @mouseenter="handleMouseenter"
+      >
+        <sun-icon
+          ref="icon"
+          :type="suffixIcon"
+        />
+      </span>
     </div>
-    <transition  name="sun-zoom-in-top">
-      <div v-if="drop" class="sun-select-dropdown">
-        <div class="poper_arrow"></div>
+    <transition name="sun-zoom-in-top">
+      <div
+        v-if="drop"
+        class="sun-select-dropdown"
+      >
+        <div class="poper_arrow" />
         <sun-scrollbar :max-height="270">
-            <ul class="sun-select-dropdown__list">
-              <slot></slot>
-            </ul>
+          <ul class="sun-select-dropdown__list">
+            <slot />
+          </ul>
         </sun-scrollbar>
       </div>
     </transition>
@@ -35,23 +48,11 @@ import SunInput from '../sun-input';
 import SunScrollbar from '../sun-scrollbar';
 import SunIcon from '../sun-icon';
 export default {
-  name: 'sun-select',
+  name: 'SunSelect',
   components: {
     [SunInput.name]: SunInput,
     [SunScrollbar.name]: SunScrollbar,
     [SunIcon.name]: SunIcon
-  },
-  data() {
-    return {
-      suffixIcon: 'xiala',
-      drop: false,
-      handle: this.handleClick.bind(this)
-    };
-  },
-  provide() {
-    return {
-      select: this
-    };
   },
   props: {
     value: {
@@ -65,6 +66,18 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  data() {
+    return {
+      suffixIcon: 'xiala',
+      drop: false,
+      handle: this.handleClick.bind(this)
+    };
+  },
+  provide() {
+    return {
+      select: this
+    };
   },
   methods: {
     toggle() {

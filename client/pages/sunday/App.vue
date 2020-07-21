@@ -1,8 +1,10 @@
 <template>
-    <div class="sunday">
-        this is sunday app {{ name }}
-        <button @click="beatCm">触发点击</button>
-    </div>
+  <div class="sunday">
+    this is sunday app {{ name }}
+    <button @click="beatCm">
+      触发点击
+    </button>
+  </div>
 </template>
 <script>
 import { add } from './utils';
@@ -10,7 +12,7 @@ import './asset/comm.scss';
 add(1, 2);
 
 export default {
-  name: 'sunday',
+  name: 'Sunday',
   data() {
     return {
       name: 'xwt44sxw'

@@ -2,42 +2,85 @@
   <div style="padding:32px; width:100%">
     <p>基本下拉框</p>
     <sun-row>
-      <sun-col :span="6" style="margin-bottom:24px">
-        <sun-select v-model="value" >
-          <sun-option v-for="list in lists" :key="list.value" :lable="list.label" :value="list.value"></sun-option>
+      <sun-col
+        :span="6"
+        style="margin-bottom:24px"
+      >
+        <sun-select v-model="value">
+          <sun-option
+            v-for="list in lists"
+            :key="list.value"
+            :lable="list.label"
+            :value="list.value"
+          />
         </sun-select>
       </sun-col>
     </sun-row>
-     <p>带不可选的下拉框</p>
+    <p>带不可选的下拉框</p>
     <sun-row style="margin-bottom:24px">
       <sun-col :span="6">
-        <sun-select v-model="value1" >
-          <sun-option v-for="list in lists1" :key="list.value" :lable="list.label" :value="list.value" :disabled="list.disabled"></sun-option>
+        <sun-select v-model="value1">
+          <sun-option
+            v-for="list in lists1"
+            :key="list.value"
+            :lable="list.label"
+            :value="list.value"
+            :disabled="list.disabled"
+          />
         </sun-select>
       </sun-col>
     </sun-row>
-     <p>禁用状态</p>
+    <p>禁用状态</p>
     <sun-row style="margin-bottom:24px">
       <sun-col :span="6">
-        <sun-select v-model="value1" disabled>
-          <sun-option v-for="list in lists1" :key="list.value" :lable="list.label" :value="list.value" :disabled="list.disabled"></sun-option>
+        <sun-select
+          v-model="value1"
+          disabled
+        >
+          <sun-option
+            v-for="list in lists1"
+            :key="list.value"
+            :lable="list.label"
+            :value="list.value"
+            :disabled="list.disabled"
+          />
         </sun-select>
       </sun-col>
     </sun-row>
-     <p>可清空单选</p>
+    <p>可清空单选</p>
     <sun-row style="margin-bottom:24px">
       <sun-col :span="6">
-        <sun-select v-model="value3" clearable>
-          <sun-option v-for="list in lists1" :key="list.value" :lable="list.label" :value="list.value" :disabled="list.disabled"></sun-option>
+        <sun-select
+          v-model="value3"
+          clearable
+        >
+          <sun-option
+            v-for="list in lists1"
+            :key="list.value"
+            :lable="list.label"
+            :value="list.value"
+            :disabled="list.disabled"
+          />
         </sun-select>
       </sun-col>
     </sun-row>
-     <p>自定义条目内容</p>
+    <p>自定义条目内容</p>
     <sun-row style="margin-bottom:24px">
       <sun-col :span="6">
-        <sun-select v-model="value4" clearable>
-          <sun-option v-for="list in lists2" :key="list.value" :lable="list.label" :value="list.value" :disabled="list.disabled">
-            <div style="display:flex;justify-content: space-between;">{{list.label}} <span style="font-size:12px;color:#999">{{list.value}}</span></div>
+        <sun-select
+          v-model="value4"
+          clearable
+        >
+          <sun-option
+            v-for="list in lists2"
+            :key="list.value"
+            :lable="list.label"
+            :value="list.value"
+            :disabled="list.disabled"
+          >
+            <div style="display:flex;justify-content: space-between;">
+              {{ list.label }} <span style="font-size:12px;color:#999">{{ list.value }}</span>
+            </div>
           </sun-option>
         </sun-select>
       </sun-col>
@@ -47,7 +90,7 @@
 <script>
 import { SunSelect, SunOption, SunRow, SunCol } from '../../components';
 export default {
-  name: 'select-demo',
+  name: 'SelectDemo',
   components: {
     [SunSelect.name]: SunSelect,
     [SunOption.name]: SunOption,

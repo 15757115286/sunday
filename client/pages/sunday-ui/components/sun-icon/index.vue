@@ -1,12 +1,12 @@
 <template>
-  <i :class="iconClass"></i>
+  <i :class="iconClass" />
 </template>
 
 <script>
 import '../../assets/scss/style.vue.scss';
 import { PREFIX } from '../../prefix';
 export default {
-  name: 'sun-icon',
+  name: 'SunIcon',
   props: {
     type: {
       type: String,

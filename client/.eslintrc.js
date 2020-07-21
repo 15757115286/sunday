@@ -5,7 +5,7 @@ module.exports = {
   },
   extends: [
     path.resolve(__dirname, '..', '.eslintrc.js'),
-    'plugin:vue/essential'
+    'plugin:vue/recommended'
   ],
   plugins: [
     'vue'

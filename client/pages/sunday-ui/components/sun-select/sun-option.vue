@@ -1,12 +1,17 @@
 <template>
-    <li class="sun-select-dorpdown__item" @click.stop="handle" :class="{'selected':select.value===lable,'is-disabled':disabled}" @mousemove.prevent>
-        <slot>{{lable}}</slot>
-    </li>
+  <li
+    class="sun-select-dorpdown__item"
+    :class="{'selected':select.value===lable,'is-disabled':disabled}"
+    @click.stop="handle"
+    @mousemove.prevent
+  >
+    <slot>{{ lable }}</slot>
+  </li>
 </template>
 <script>
 import '../../assets/scss/style.vue.scss';
 export default {
-  name: 'sun-option',
+  name: 'SunOption',
   props: {
     lable: {
       type: String,
@@ -21,6 +26,12 @@ export default {
     }
   },
   inject: ['select'],
+  mounted() {
+    document.addEventListener('click', this.select.handle);
+    this.$once('hook:beforeDestroy', () => {
+      document.removeEventListener('click', this.select.handle);
+    });
+  },
   methods: {
     handle() {
       if (this.disabled) return;
@@ -33,12 +44,6 @@ export default {
         this.select.drop = false;
       }
     }
-  },
-  mounted() {
-    document.addEventListener('click', this.select.handle);
-    this.$once('hook:beforeDestroy', () => {
-      document.removeEventListener('click', this.select.handle);
-    });
   }
 };
 </script>

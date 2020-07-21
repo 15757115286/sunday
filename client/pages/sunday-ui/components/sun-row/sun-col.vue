@@ -1,12 +1,15 @@
 <template>
-  <div :class="colObject" :style="styleObject">
-    <slot></slot>
+  <div
+    :class="colObject"
+    :style="styleObject"
+  >
+    <slot />
   </div>
 </template>
 <script>
 import '../../assets/scss/style.vue.scss';
 export default {
-  name: 'sun-col',
+  name: 'SunCol',
   props: {
     span: {
       type: Number,

@@ -1,8 +1,13 @@
 <template>
   <div class="sun-scrollbar">
-    <div class="sun-scrollbar__wrap" :style="styleObject" @scroll="handleScroll" ref="view">
+    <div
+      ref="view"
+      class="sun-scrollbar__wrap"
+      :style="styleObject"
+      @scroll="handleScroll"
+    >
       <div class="sun-scrollbar__view">
-        <slot></slot>
+        <slot />
       </div>
     </div>
     <div
@@ -12,12 +17,12 @@
       @mousedown="trackYHandle($event)"
     >
       <div
+        ref="barY"
         class="sun-scrollbar__thumb"
         :style="{'height':scrollbarHeight+'px','transform':'translateY('+moveY+'px)'}"
         @click.stop
         @mousedown="handleMousedownY"
-        ref="barY"
-      ></div>
+      />
     </div>
     <div
       v-if="viewWidth>maxWidth"
@@ -26,19 +31,27 @@
       @mousedown="trackXHandle($event)"
     >
       <div
+        ref="barX"
         class="sun-scrollbar__thumb"
         :style="{'width':scrollbarWidth+'px','transform':'translateX('+moveX+'px)'}"
         @click.stop
         @mousedown="handleMousedownX"
-        ref="barX"
-      ></div>
+      />
     </div>
   </div>
 </template>
 <script>
 import '../../assets/scss/style.vue.scss';
 export default {
-  name: 'sun-scrollbar',
+  name: 'SunScrollbar',
+  props: {
+    maxHeight: {
+      default: 'false'
+    },
+    maxWidth: {
+      default: 'false'
+    }
+  },
   data() {
     return {
       viewHeight: 0, // 滚动元素总高度
@@ -54,14 +67,6 @@ export default {
       bindMousemoveX: this.handleMoveX.bind(this),
       bindMouseupX: this.hanleMouseupX.bind(this)
     };
-  },
-  props: {
-    maxHeight: {
-      default: 'false'
-    },
-    maxWidth: {
-      default: 'false'
-    }
   },
   computed: {
     styleObject() {
@@ -87,6 +92,12 @@ export default {
       ((this.maxHeight - 17) / this.viewHeight) * (this.maxHeight - 21);
     this.scrollbarWidth =
       ((this.maxWidth - 17) / this.viewWidth) * (this.maxWidth - 21);
+  },
+  destroyed() {
+    document.removeEventListener('mousemove', this.bindMousemoveY);
+    document.removeEventListener('mouseup', this.bindMouseupY);
+    document.removeEventListener('mousemove', this.bindMousemoveX);
+    document.removeEventListener('mouseup', this.bindMouseupX);
   },
   methods: {
     handleScroll() {
@@ -173,12 +184,6 @@ export default {
     hanleMouseupX() {
       this.mousedownX = 0;
     }
-  },
-  destroyed() {
-    document.removeEventListener('mousemove', this.bindMousemoveY);
-    document.removeEventListener('mouseup', this.bindMouseupY);
-    document.removeEventListener('mousemove', this.bindMousemoveX);
-    document.removeEventListener('mouseup', this.bindMouseupX);
   }
 };
 </script>

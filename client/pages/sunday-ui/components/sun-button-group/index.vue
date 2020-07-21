@@ -1,6 +1,6 @@
 <template>
   <div :class="btnGroupClasss">
-    <slot></slot>
+    <slot />
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import '../../assets/scss/style.vue.scss';
 import { PREFIX } from '../../prefix';
 export default {
-  name: 'sun-button-group',
+  name: 'SunButtonGroup',
   data() {
     return {
       btnGroupClasss: {

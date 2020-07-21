@@ -1,17 +1,17 @@
 <template>
-    <transition
+  <transition
     :name="name"
     :leave-active-class="leaveClassObject"
     :enter-active-class="enterClassObject"
     :duration="duration"
-    >
-    <slot></slot>
-    </transition>
+  >
+    <slot />
+  </transition>
 </template>
 <script>
 import '../../assets/scss/style.vue.scss';
 export default {
-  name: 'sun-transition',
+  name: 'SunTransition',
   props: {
     enterType: String,
     leaveType: String,

@@ -1,9 +1,19 @@
 <template>
-  <button :class="btnClass" v-on="$listeners">
-    <sun-icon v-if="loading" type="loading" rotate></sun-icon>
-    <i v-if="icon" :class="iconClass"></i>
+  <button
+    :class="btnClass"
+    v-on="$listeners"
+  >
+    <sun-icon
+      v-if="loading"
+      type="loading"
+      rotate
+    />
+    <i
+      v-if="icon"
+      :class="iconClass"
+    />
     <span>
-      <slot></slot>
+      <slot />
     </span>
   </button>
 </template>
@@ -14,7 +24,7 @@ import { BUTTON_TYPE_LIST, BUTTON_SIZE_LIST } from './constant';
 import SunIcon from '../sun-icon';
 import { PREFIX } from '../../prefix';
 export default {
-  name: 'sun-button',
+  name: 'SunButton',
   components: {
     [SunIcon.name]: SunIcon
   },

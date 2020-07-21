@@ -1,12 +1,15 @@
 <template>
-  <div class="row" :style="styleObject">
-    <slot></slot>
+  <div
+    class="row"
+    :style="styleObject"
+  >
+    <slot />
   </div>
 </template>
 <script>
 import '../../assets/scss/style.vue.scss';
 export default {
-  name: 'sun-row',
+  name: 'SunRow',
   props: {
     gutter: {
       type: Number,

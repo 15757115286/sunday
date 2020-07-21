@@ -1,43 +1,58 @@
 <template>
-  <div class="sun-input-group" :class="inputGroupObject">
-    <div class="sun-input-group-prepend" v-if="$slots.prepend">
+  <div
+    class="sun-input-group"
+    :class="inputGroupObject"
+  >
+    <div
+      v-if="$slots.prepend"
+      class="sun-input-group-prepend"
+    >
       <span :class="{'sun-input-group-text': !isButtonPrepend}">
-        <slot name="prepend"></slot>
+        <slot name="prepend" />
       </span>
     </div>
     <input
+      ref="input"
       type="text"
       class="sun-form-control"
-      ref="input"
       :class="inputClass"
       :value="value"
-      v-on="inputListeners"
       v-bind="$attrs"
+      v-on="inputListeners"
       @mouseenter="handleIconMouseenter"
       @mouseleave="handleIconMouseleave"
-    />
+    >
     <span
-    v-if="suffixIcon && !clearable"
-    @click="$emit('icon-click',$event.target)"
-    class="suffix-icon">
-      <sun-icon :type="suffixIcon"></sun-icon>
+      v-if="suffixIcon && !clearable"
+      class="suffix-icon"
+      @click="$emit('icon-click',$event.target)"
+    >
+      <sun-icon :type="suffixIcon" />
     </span>
     <span
-     v-if="prefixIcon"
-     class="prefix-icon"
-     @click="$emit('icon-click',$event.target)">
-      <sun-icon :type="prefixIcon"></sun-icon>
+      v-if="prefixIcon"
+      class="prefix-icon"
+      @click="$emit('icon-click',$event.target)"
+    >
+      <sun-icon :type="prefixIcon" />
     </span>
     <span
-    v-if="clearIcon"
-    class="suffix-icon"
-    @mouseenter="handleIconMouseenter"
-    @click="handleIconClick">
-      <sun-icon ref="clear" type="roundclosefill"></sun-icon>
+      v-if="clearIcon"
+      class="suffix-icon"
+      @mouseenter="handleIconMouseenter"
+      @click="handleIconClick"
+    >
+      <sun-icon
+        ref="clear"
+        type="roundclosefill"
+      />
     </span>
-    <div class="sun-input-group-append" v-if="$slots.append">
+    <div
+      v-if="$slots.append"
+      class="sun-input-group-append"
+    >
       <span :class="{'sun-input-group-text': !isButtonAppend}">
-        <slot name="append"></slot>
+        <slot name="append" />
       </span>
     </div>
   </div>
@@ -47,16 +62,11 @@ import '../../assets/scss/style.vue.scss';
 import SunIcon from '../sun-icon';
 import { INPUT_SIZE_GROUP } from './constant';
 export default {
-  name: 'sun-input',
+  name: 'SunInput',
   components: {
     [SunIcon.name]: SunIcon
   },
   inheritAttrs: false,
-  data() {
-    return {
-      clearIcon: false
-    };
-  },
   props: {
     value: {
       default: ''
@@ -79,6 +89,11 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  data() {
+    return {
+      clearIcon: false
+    };
   },
   computed: {
     inputListeners() {
@@ -128,6 +143,13 @@ export default {
       };
     }
   },
+  mounted() {
+    this.bindHandleOtherClick = this.handleOtherClick.bind(this);
+    document.addEventListener('click', this.bindHandleOtherClick);
+    this.$once('hook:beforeDestroy', () => {
+      document.removeEventListener('click', this.bindHandleOtherClick);
+    });
+  },
   methods: {
     handleIconClick() {
       this.$emit('input', '');
@@ -150,13 +172,6 @@ export default {
         this.clearIcon = false;
       }
     }
-  },
-  mounted() {
-    this.bindHandleOtherClick = this.handleOtherClick.bind(this);
-    document.addEventListener('click', this.bindHandleOtherClick);
-    this.$once('hook:beforeDestroy', () => {
-      document.removeEventListener('click', this.bindHandleOtherClick);
-    });
   }
 };
 </script>

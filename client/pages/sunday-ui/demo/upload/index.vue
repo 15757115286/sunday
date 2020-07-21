@@ -2,7 +2,10 @@
   <div style="padding:32px">
     <p>按钮上传</p>
     <div style="margin-bottom:24px">
-      <sun-upload multiple :files-list="filesList">
+      <sun-upload
+        multiple
+        :files-list="filesList"
+      >
         <sun-button>点击上传</sun-button>
         <template #tip>
           <span class="sun-tip">文件只能上传jpg/png，且不超过500kb</span>
@@ -15,8 +18,9 @@
         multiple
         drag
         :limit="1"
-        @on-exceed="handleExceed($event)">
+        @on-exceed="handleExceed($event)"
       >
+        >
         <template #tip>
           <span class="sun-tip">文件只能上传jpg/png，且不超过500kb</span>
         </template>
@@ -27,7 +31,7 @@
 <script>
 import { SunUpload, SunButton } from '../../components';
 export default {
-  name: 'upload-demo',
+  name: 'UploadDemo',
   components: {
     [SunUpload.name]: SunUpload,
     [SunButton.name]: SunButton

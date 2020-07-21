@@ -1,19 +1,24 @@
 <template>
-    <div class="demo-container">
-        <div class="demo-menu">
-            <div v-for="link in links" :key="link">
-                <router-link :to="link" >{{ nameMap[link] || link }}</router-link>
-            </div>
-        </div>
-        <div class="demo-content" >
-            <router-view></router-view>
-        </div>
+  <div class="demo-container">
+    <div class="demo-menu">
+      <div
+        v-for="link in links"
+        :key="link"
+      >
+        <router-link :to="link">
+          {{ nameMap[link] || link }}
+        </router-link>
+      </div>
     </div>
+    <div class="demo-content">
+      <router-view />
+    </div>
+  </div>
 </template>
 <script>
 import { links, nameMap } from '../router';
 export default {
-  name: 'demo-home',
+  name: 'DemoHome',
   data() {
     return {
       links,
