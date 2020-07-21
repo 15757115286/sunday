@@ -40,7 +40,10 @@ export default {
       type: Boolean,
       default: false
     },
-    label: {},
+    label: {
+      type: String,
+      default: ''
+    },
     size: {
       default: '',
       validator: function(value) {

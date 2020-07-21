@@ -46,9 +46,11 @@ export default {
   name: 'SunScrollbar',
   props: {
     maxHeight: {
+      type: String,
       default: 'false'
     },
     maxWidth: {
+      type: String,
       default: 'false'
     }
   },

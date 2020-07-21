@@ -69,6 +69,7 @@ export default {
   inheritAttrs: false,
   props: {
     value: {
+      type: String,
       default: ''
     },
     size: {
@@ -112,7 +113,7 @@ export default {
       const nodes = this.$slots.prepend;
       if (nodes !== undefined) {
         if (nodes[0].tag !== undefined) {
-          return nodes[0].tag.includes('button');
+          return nodes[0].tag.includes('SunButton');
         }
       }
       return false;
@@ -122,7 +123,7 @@ export default {
       const nodes = this.$slots.append;
       if (nodes !== undefined) {
         if (nodes[0].tag !== undefined) {
-          return nodes[0].tag.includes('button');
+          return nodes[0].tag.includes('SunButton');
         }
       }
       return false;

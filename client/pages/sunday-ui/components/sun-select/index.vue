@@ -5,6 +5,7 @@
       @click="toggle"
     >
       <input
+        v-if="!multiple"
         ref="input"
         type="text"
         class="sun-form-control"
@@ -16,6 +17,31 @@
         @mouseenter="handleMouseenter"
         @mouseleave="handleMouseleave"
       >
+      <div v-if="multiple">
+        <input
+          ref="input"
+          type="text"
+          class="sun-form-control"
+          autocomplete="off"
+          readonly
+          :disabled="disabled"
+          @input="$emit('input',$event.target.value)"
+          @mouseenter="handleMouseenter"
+          @mouseleave="handleMouseleave"
+        >
+        <sun-scrollbar
+          :max-height="270"
+        >
+          <span>
+            <sun-tag
+              v-for="tag of tags"
+              :key="tag"
+              closable
+              type="secondary"
+              :label="tag"
+            /></span>
+        </sun-scrollbar>
+      </div>
       <span
         class="suffix-icon"
         @click="handleIconClick"
@@ -47,16 +73,19 @@ import '../../assets/scss/style.vue.scss';
 import SunInput from '../sun-input';
 import SunScrollbar from '../sun-scrollbar';
 import SunIcon from '../sun-icon';
+import SunTag from '../sun-tag';
 export default {
   name: 'SunSelect',
   components: {
     [SunInput.name]: SunInput,
     [SunScrollbar.name]: SunScrollbar,
-    [SunIcon.name]: SunIcon
+    [SunIcon.name]: SunIcon,
+    [SunTag.name]: SunTag
   },
   props: {
     value: {
-
+      default: '',
+      type: String
     },
     disabled: {
       type: Boolean,
@@ -65,13 +94,18 @@ export default {
     clearable: {
       type: Boolean,
       default: false
+    },
+    multiple: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
       suffixIcon: 'xiala',
       drop: false,
-      handle: this.handleClick.bind(this)
+      handle: this.handleClick.bind(this),
+      tags: []
     };
   },
   provide() {
@@ -122,3 +156,8 @@ export default {
   }
 };
 </script>
+<style scoped lang="scss">
+.sun-badge{
+  margin-left: 4px;
+}
+</style>
