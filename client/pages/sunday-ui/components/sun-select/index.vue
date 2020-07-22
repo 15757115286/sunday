@@ -13,7 +13,6 @@
         readonly
         :value="value"
         :disabled="disabled"
-        @input="$emit('input',$event.target.value)"
         @mouseenter="handleMouseenter"
         @mouseleave="handleMouseleave"
       >
@@ -25,22 +24,22 @@
           autocomplete="off"
           readonly
           :disabled="disabled"
-          @input="$emit('input',$event.target.value)"
           @mouseenter="handleMouseenter"
           @mouseleave="handleMouseleave"
         >
-        <sun-scrollbar
-          :max-height="270"
+        <span
+          ref="tagSpan"
+          class="tags-span"
+          :style="{'max-width':tagsWidth+'px'}"
         >
-          <span>
-            <sun-tag
-              v-for="tag of tags"
-              :key="tag"
-              closable
-              type="secondary"
-              :label="tag"
-            /></span>
-        </sun-scrollbar>
+          <sun-tag
+            v-for="tag of value"
+            :key="tag"
+            closable
+            type="secondary"
+            :label="tag"
+            @close="handleClose(tag)"
+          /></span>
       </div>
       <span
         class="suffix-icon"
@@ -83,10 +82,7 @@ export default {
     [SunTag.name]: SunTag
   },
   props: {
-    value: {
-      default: '',
-      type: String
-    },
+    value: {},
     disabled: {
       type: Boolean,
       default: false
@@ -105,13 +101,32 @@ export default {
       suffixIcon: 'xiala',
       drop: false,
       handle: this.handleClick.bind(this),
-      tags: []
+      tags: [], // mutiple时，value为一个数组，$emit()需要传递一个数组过去，tags为这个角色
+      tagsWidth: 0, // 最大宽度
+      tagsHeight: 0 // 变化的高度
     };
   },
   provide() {
     return {
       select: this
     };
+  },
+  watch: {
+    tags() {
+      this.$emit('input', this.tags);
+    },
+    value() {
+      if (this.multiple) {
+        this.handleInputHeight();
+      }
+    }
+  },
+  mounted() {
+    if (this.multiple) {
+      this.tagsWidth = this.$refs.input.clientWidth - 36;
+      this.tagsHeight = this.$refs.tagSpan.clientHeight;
+      this.tags = [...this.value];
+    }
   },
   methods: {
     toggle() {
@@ -152,6 +167,18 @@ export default {
       if (this.suffixIcon === 'roundclosefill') {
         this.suffixIcon = 'xiala';
       }
+    },
+    handleInputHeight() {
+      this.$nextTick(function() {
+        const span = this.$refs.tagSpan;
+        console.log(span.clientHeight);
+        if (span.clientHeight > 0) {
+          this.$refs.input.style.height = 38 + span.clientHeight - 24 + 'px';
+        }
+      });
+    },
+    handleClose(tag) {
+      this.tags.splice(this.tags.indexOf(tag), 1);
     }
   }
 };
@@ -159,5 +186,8 @@ export default {
 <style scoped lang="scss">
 .sun-badge{
   margin-left: 4px;
+}
+input{
+  padding-right: 36px;
 }
 </style>

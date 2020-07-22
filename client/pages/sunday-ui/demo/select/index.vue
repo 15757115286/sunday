@@ -141,7 +141,7 @@ export default {
       value1: '可乐',
       value3: '奶茶',
       value4: '奶茶',
-      value5: '奶茶'
+      value5: ['可乐']
     };
   }
 };

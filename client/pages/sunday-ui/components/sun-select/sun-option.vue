@@ -1,7 +1,7 @@
 <template>
   <li
     class="sun-select-dorpdown__item"
-    :class="{'selected':select.value===label,'is-disabled':disabled}"
+    :class="{'selected':select.value===label || select.tags.includes(label),'is-disabled':disabled}"
     @click.stop="handle"
     @mousemove.prevent
   >
@@ -40,8 +40,9 @@ export default {
         const index = this.select.tags.indexOf(this.label);
         if (index !== -1) {
           this.select.tags.splice(index, 1);
+        } else {
+          this.select.tags.push(this.label);
         }
-        this.select.tags.push(this.label);
         return;
       }
       this.select.$emit('input', this.label);
