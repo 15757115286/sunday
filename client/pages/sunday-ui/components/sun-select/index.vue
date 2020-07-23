@@ -28,18 +28,41 @@
           @mouseleave="handleMouseleave"
         >
         <span
+          v-if="!collapseTags"
           ref="tagSpan"
           class="tags-span"
-          :style="{'max-width':tagsWidth+'px'}"
         >
+          <!-- after-leave 对于事件传值的另一种思路 -->
           <sun-tag
             v-for="tag of value"
             :key="tag"
             closable
             type="secondary"
             :label="tag"
+            :after-leave="handleInputHeight.bind(this)"
             @close="handleClose(tag)"
           /></span>
+        <span
+          v-if="collapseTags && value"
+          class="tags-span"
+        >
+          <!-- 这里一定要加key，不然vue会偷懒不更新 -->
+          <sun-tag
+            v-if="value.length > 0"
+            :key="value[0]"
+            type="secondary"
+            :label="value[0]"
+            closable
+            unanimate
+            @close="handleClose(value[0])"
+          />
+          <sun-tag
+            v-if="value.length>1"
+            type="secondary"
+            unanimate
+          >+ {{ value.length-1 }}</sun-tag>
+          {{ value.length }}
+        </span>
       </div>
       <span
         class="suffix-icon"
@@ -82,7 +105,7 @@ export default {
     [SunTag.name]: SunTag
   },
   props: {
-    value: {},
+    value: {}, // value在multiple时为数组
     disabled: {
       type: Boolean,
       default: false
@@ -92,6 +115,10 @@ export default {
       default: false
     },
     multiple: {
+      type: Boolean,
+      default: false
+    },
+    collapseTags: {
       type: Boolean,
       default: false
     }
@@ -117,13 +144,15 @@ export default {
     },
     value() {
       if (this.multiple) {
+        if (this.value !== this.tags) {
+          this.tags = [...this.value];
+        }
         this.handleInputHeight();
       }
     }
   },
   mounted() {
-    if (this.multiple) {
-      this.tagsWidth = this.$refs.input.clientWidth - 36;
+    if (this.multiple && !this.collapseTags) {
       this.tagsHeight = this.$refs.tagSpan.clientHeight;
       this.tags = [...this.value];
     }
@@ -170,8 +199,8 @@ export default {
     },
     handleInputHeight() {
       this.$nextTick(function() {
+        if (this.collapseTags) return;
         const span = this.$refs.tagSpan;
-        console.log(span.clientHeight);
         if (span.clientHeight > 0) {
           this.$refs.input.style.height = 38 + span.clientHeight - 24 + 'px';
         }
@@ -179,6 +208,7 @@ export default {
     },
     handleClose(tag) {
       this.tags.splice(this.tags.indexOf(tag), 1);
+      console.log(this.value.length);
     }
   }
 };

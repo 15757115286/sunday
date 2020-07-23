@@ -86,7 +86,7 @@
       </sun-col>
     </sun-row>
     <p>多选</p>
-    <sun-row>
+    <sun-row :gutter="12">
       <sun-col
         :span="8"
         style="margin-bottom:24px"
@@ -94,6 +94,23 @@
         <sun-select
           v-model="value5"
           multiple
+        >
+          <sun-option
+            v-for="list in lists"
+            :key="list.value"
+            :label="list.label"
+            :value="list.value"
+          />
+        </sun-select>
+      </sun-col>
+      <sun-col
+        :span="8"
+        style="margin-bottom:24px"
+      >
+        <sun-select
+          v-model="value6"
+          multiple
+          collapse-tags
         >
           <sun-option
             v-for="list in lists"
@@ -141,7 +158,8 @@ export default {
       value1: '可乐',
       value3: '奶茶',
       value4: '奶茶',
-      value5: ['可乐']
+      value5: ['可乐', '奶茶', '薯片', '汉堡'],
+      value6: ['可乐', '奶茶', '薯片']
     };
   }
 };
