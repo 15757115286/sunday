@@ -1,8 +1,8 @@
 import { MiddlewareItemConfig, BaseApplication } from '../../../../definitions/core';
 import { Context, Next } from 'koa';
-import * as fs from 'fs-extra';
-import * as chalk from 'chalk';
-import * as WebSocket from 'ws';
+import fs from 'fs-extra';
+import chalk from 'chalk';
+import WebSocket from 'ws';
 import path = require('path');
 const chokidar = require('chokidar');
 const cheerio = require('cheerio');

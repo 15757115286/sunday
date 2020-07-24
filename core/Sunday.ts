@@ -1,6 +1,6 @@
-import * as Koa from 'koa';
+import Koa from 'koa';
 import path from 'path';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 import { SundayOptions, BaseApplication } from '../definitions/core';
 import { NumberLike } from '../definitions/common';
 import CoreLoader from './CoreLoader';

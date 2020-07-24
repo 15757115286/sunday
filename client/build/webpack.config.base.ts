@@ -1,6 +1,6 @@
-import * as path from 'path';
-import * as fs from 'fs-extra';
-import * as webpack from 'webpack';
+import path from 'path';
+import fs from 'fs-extra';
+import webpack from 'webpack';
 import { PureObject } from '../types/common';
 import SundayReflectPlugin from './SundayReflectPlugin';
 import chalk from 'chalk';

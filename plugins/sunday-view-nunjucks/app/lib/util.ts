@@ -1,5 +1,5 @@
 import { BaseApplication } from '../../../../definitions/core';
-import * as path from 'path';
+import path from 'path';
 import url = require('url');
 import http = require('http');
 

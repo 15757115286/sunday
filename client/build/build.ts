@@ -1,5 +1,5 @@
 import webpackProdConfig from './webpack.config.prod';
-import * as path from 'path';
+import path from 'path';
 import { printEnvBox, getDevServerContentConfig } from './helper';
 import webpack = require('webpack');
 import CopyPlugin = require('copy-webpack-plugin');

@@ -1,7 +1,7 @@
-import * as fs from 'fs-extra';
-import * as chalk from 'chalk';
-import * as path from 'path';
-import * as cp from 'child_process';
+import fs from 'fs-extra';
+import chalk from 'chalk';
+import path from 'path';
+import cp from 'child_process';
 import { BorderStyle } from 'boxen';
 const ora = require('ora');
 const boxen = require('boxen');

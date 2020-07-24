@@ -1,7 +1,7 @@
 import { CoreEntry, BaseApplication, LoaderConfig, LoaderParameter, EntryCallback, Pattern } from '../definitions/core';
 
-import * as path from 'path';
-import * as glob from 'fast-glob';
+import path from 'path';
+import glob from 'fast-glob';
 import { isCoreEntry } from './lib/util';
 
 const NOT_INCLUDE_SUFFIX = /\.d\.ts$/;
