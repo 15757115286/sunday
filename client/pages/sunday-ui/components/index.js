@@ -8,6 +8,7 @@ import SunUpload from './sun-upload';
 import SunOption from './sun-select';
 import SunSelect from './sun-select/sun-option';
 import SunTag from './sun-tag';
+import SunOptionGroup from './sun-select/sun-option-group';
 
 export {
   SunButton,
@@ -19,5 +20,6 @@ export {
   SunUpload,
   SunOption,
   SunSelect,
-  SunTag
+  SunTag,
+  SunOptionGroup
 };

@@ -86,7 +86,10 @@
       </sun-col>
     </sun-row>
     <p>多选</p>
-    <sun-row :gutter="12">
+    <sun-row
+      :gutter="12"
+      style="margin-bottom:24px"
+    >
       <sun-col
         :span="8"
         style="margin-bottom:24px"
@@ -121,17 +124,36 @@
         </sun-select>
       </sun-col>
     </sun-row>
+    <p>分组</p>
+    <sun-row>
+      <sun-col :span="8">
+        <sun-select v-model="value7">
+          <sun-option-group
+            v-for="option of options"
+            :key="option.label"
+            :label="option.label"
+          >
+            <sun-option
+              v-for="item of option.lists"
+              :key="item.label"
+              :label="item.label"
+            />
+          </sun-option-group>
+        </sun-select>
+      </sun-col>
+    </sun-row>
   </div>
 </template>
 <script>
-import { SunSelect, SunOption, SunRow, SunCol } from '../../components';
+import { SunSelect, SunOption, SunRow, SunCol, SunOptionGroup } from '../../components';
 export default {
   name: 'SelectDemo',
   components: {
     [SunSelect.name]: SunSelect,
     [SunOption.name]: SunOption,
     [SunCol.name]: SunCol,
-    [SunRow.name]: SunRow
+    [SunRow.name]: SunRow,
+    [SunOptionGroup.name]: SunOptionGroup
   },
   data() {
     return {
@@ -159,7 +181,26 @@ export default {
       value3: '奶茶',
       value4: '奶茶',
       value5: ['可乐', '奶茶', '薯片', '汉堡'],
-      value6: ['可乐', '奶茶', '薯片']
+      value6: ['可乐', '奶茶', '薯片'],
+      options: [{
+        label: '不能吃',
+        lists: [
+          { value: '选项1', label: '奶茶是不能吃的' },
+          { value: '选项2', label: '可乐是不能吃的' }
+        ]
+      },
+      {
+        label: '可以吃',
+        lists: [
+          { value: '选项1', label: '奶茶是可以吃的' },
+          { value: '选项2', label: '可乐是可以吃的' },
+          { value: '选项3', label: '薯片是可以吃的' },
+          { value: '选项4', label: '炸鸡是可以吃的' },
+          { value: '选项5', label: '汉堡是可以吃的' }
+        ]
+      }
+      ],
+      value7: ''
     };
   }
 };

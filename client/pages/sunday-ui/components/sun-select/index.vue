@@ -44,6 +44,7 @@
           /></span>
         <span
           v-if="collapseTags && value"
+          ref="tagSpan2"
           class="tags-span"
         >
           <!-- 这里一定要加key，不然vue会偷懒不更新 -->
@@ -61,7 +62,6 @@
             type="secondary"
             unanimate
           >+ {{ value.length-1 }}</sun-tag>
-          {{ value.length }}
         </span>
       </div>
       <span
@@ -152,8 +152,10 @@ export default {
     }
   },
   mounted() {
-    if (this.multiple && !this.collapseTags) {
-      this.tagsHeight = this.$refs.tagSpan.clientHeight;
+    if (this.multiple) {
+      if (!this.collapseTags) {
+        this.tagsHeight = this.$refs.tagSpan.clientHeight;
+      }
       this.tags = [...this.value];
     }
   },
@@ -173,7 +175,7 @@ export default {
       }
     },
     handleClick(e) {
-      if (e.target !== this.$refs.input && e.target !== this.$refs.icon.$vnode.elm) {
+      if (e.target !== this.$refs.input && e.target !== this.$refs.icon.$vnode.elm && e.target !== this.$refs.tagSpan && e.target !== this.$refs.tagSpan2) {
         this.drop = false;
         this.suffixIcon = 'xiala';
       }
@@ -208,7 +210,6 @@ export default {
     },
     handleClose(tag) {
       this.tags.splice(this.tags.indexOf(tag), 1);
-      console.log(this.value.length);
     }
   }
 };

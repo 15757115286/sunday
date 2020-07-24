@@ -1,7 +1,8 @@
 <template>
   <sun-transition
-    :leave-type="antype"
-    :duration="dur"
+    v-if="!unanimate"
+    leave-type="flipOutY"
+    duration="500"
     :after-leave="handleAfterLeave.bind(this)"
   >
     <span
@@ -16,6 +17,19 @@
       />
     </span>
   </sun-transition>
+  <span v-else>
+    <span
+      v-if="!close"
+      :class="classObject"
+    >
+      <slot>{{ label }}</slot>
+      <sun-icon
+        v-if="closable"
+        type="roundclosefill"
+        @click.native="handleClick"
+      />
+    </span>
+  </span>
 </template>
 <script>
 import '../../assets/scss/style.vue.scss';
@@ -59,9 +73,7 @@ export default {
   },
   data() {
     return {
-      close: false,
-      dur: this.unanimate ? '0' : '500',
-      antype: this.unanimate ? '' : 'flipOutY'
+      close: false
     };
   },
   computed: {
