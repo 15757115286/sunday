@@ -3,7 +3,7 @@
     <p>基本输入框</p>
     <sun-row style="margin-bottom:24px">
       <sun-col
-        :span="6"
+        :span="8"
         style="padding-left:0"
       >
         <sun-input
@@ -19,7 +19,7 @@
       :gutter="20"
       style="margin-bottom:24px"
     >
-      <sun-col :span="6">
+      <sun-col :span="8">
         <sun-input
           v-model="inputText"
           placeholder="请输入内容"
@@ -29,7 +29,7 @@
           </template>
         </sun-input>
       </sun-col>
-      <sun-col :span="6">
+      <sun-col :span="8">
         <sun-input
           v-model="inputText1"
           placeholder="请输入内容"
@@ -39,7 +39,7 @@
           </template>
         </sun-input>
       </sun-col>
-      <sun-col :span="6">
+      <sun-col :span="8">
         <sun-input
           v-model="inputText2"
           placeholder="请输入内容"
@@ -58,7 +58,7 @@
       :gutter="20"
       style="margin-bottom:24px"
     >
-      <sun-col :span="4">
+      <sun-col :span="8">
         <sun-input disabled />
       </sun-col>
     </sun-row>
@@ -69,7 +69,7 @@
       :gutter="20"
       style="margin-bottom:24px"
     >
-      <sun-col :span="6">
+      <sun-col :span="8">
         <sun-input
           v-model="inputText"
           placeholder="请输入内容"
@@ -84,7 +84,7 @@
           </template>
         </sun-input>
       </sun-col>
-      <sun-col :span="6">
+      <sun-col :span="8">
         <sun-input
           v-model="inputText1"
           placeholder="请输入内容"
@@ -94,7 +94,7 @@
           </template>
         </sun-input>
       </sun-col>
-      <sun-col :span="12">
+      <sun-col :span="8">
         <sun-input
           v-model="inputText1"
           placeholder="请输入内容"
@@ -121,20 +121,20 @@
       :gutter="20"
       style="margin-bottom:24px"
     >
-      <sun-col :span="6">
+      <sun-col :span="8">
         <sun-input
           v-model="inputText3"
           placeholder="请输入徐伟涛大大嘴"
           size="sm"
         />
       </sun-col>
-      <sun-col :span="6">
+      <sun-col :span="8">
         <sun-input
           v-model="inputText3"
           placeholder="请输入徐伟涛大大嘴"
         />
       </sun-col>
-      <sun-col :span="6">
+      <sun-col :span="8">
         <sun-input
           v-model="inputText3"
           placeholder="请输入徐伟涛大大嘴"
@@ -149,21 +149,21 @@
       :gutter="20"
       style="margin-bottom:24px"
     >
-      <sun-col :span="6">
+      <sun-col :span="8">
         <sun-input
           v-model="inputText3"
           placeholder="请输入徐伟涛大大嘴"
           prefix-icon="jiesuo"
         />
       </sun-col>
-      <sun-col :span="6">
+      <sun-col :span="8">
         <sun-input
           v-model="inputText3"
           placeholder="请输入徐伟涛大大嘴"
           suffix-icon="dianping"
         />
       </sun-col>
-      <sun-col :span="6">
+      <sun-col :span="8">
         <sun-input
           v-model="inputText3"
           placeholder="请输入徐伟涛大大嘴"
@@ -179,7 +179,7 @@
       :gutter="20"
       style="margin-bottom:24px"
     >
-      <sun-col :span="6">
+      <sun-col :span="8">
         <sun-input
           v-model="inputText5"
           placeholder="请输入徐伟涛大大嘴"

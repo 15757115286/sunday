@@ -5,6 +5,7 @@
       @click="toggle"
     >
       <input
+        v-if="!multiple"
         ref="input"
         type="text"
         class="sun-form-control"
@@ -12,10 +13,57 @@
         readonly
         :value="value"
         :disabled="disabled"
-        @input="$emit('input',$event.target.value)"
         @mouseenter="handleMouseenter"
         @mouseleave="handleMouseleave"
       >
+      <div v-if="multiple">
+        <input
+          ref="input"
+          type="text"
+          class="sun-form-control"
+          autocomplete="off"
+          readonly
+          :disabled="disabled"
+          @mouseenter="handleMouseenter"
+          @mouseleave="handleMouseleave"
+        >
+        <span
+          v-if="!collapseTags"
+          ref="tagSpan"
+          class="tags-span"
+        >
+          <!-- after-leave 对于事件传值的另一种思路 -->
+          <sun-tag
+            v-for="tag of value"
+            :key="tag"
+            closable
+            type="secondary"
+            :label="tag"
+            :after-leave="handleInputHeight.bind(this)"
+            @close="handleClose(tag)"
+          /></span>
+        <span
+          v-if="collapseTags && value"
+          class="tags-span"
+        >
+          <!-- 这里一定要加key，不然vue会偷懒不更新 -->
+          <sun-tag
+            v-if="value.length > 0"
+            :key="value[0]"
+            type="secondary"
+            :label="value[0]"
+            closable
+            unanimate
+            @close="handleClose(value[0])"
+          />
+          <sun-tag
+            v-if="value.length>1"
+            type="secondary"
+            unanimate
+          >+ {{ value.length-1 }}</sun-tag>
+          {{ value.length }}
+        </span>
+      </div>
       <span
         class="suffix-icon"
         @click="handleIconClick"
@@ -47,22 +95,30 @@ import '../../assets/scss/style.vue.scss';
 import SunInput from '../sun-input';
 import SunScrollbar from '../sun-scrollbar';
 import SunIcon from '../sun-icon';
+import SunTag from '../sun-tag';
 export default {
   name: 'SunSelect',
   components: {
     [SunInput.name]: SunInput,
     [SunScrollbar.name]: SunScrollbar,
-    [SunIcon.name]: SunIcon
+    [SunIcon.name]: SunIcon,
+    [SunTag.name]: SunTag
   },
   props: {
-    value: {
-
-    },
+    value: {}, // value在multiple时为数组
     disabled: {
       type: Boolean,
       default: false
     },
     clearable: {
+      type: Boolean,
+      default: false
+    },
+    multiple: {
+      type: Boolean,
+      default: false
+    },
+    collapseTags: {
       type: Boolean,
       default: false
     }
@@ -71,13 +127,35 @@ export default {
     return {
       suffixIcon: 'xiala',
       drop: false,
-      handle: this.handleClick.bind(this)
+      handle: this.handleClick.bind(this),
+      tags: [], // mutiple时，value为一个数组，$emit()需要传递一个数组过去，tags为这个角色
+      tagsWidth: 0, // 最大宽度
+      tagsHeight: 0 // 变化的高度
     };
   },
   provide() {
     return {
       select: this
     };
+  },
+  watch: {
+    tags() {
+      this.$emit('input', this.tags);
+    },
+    value() {
+      if (this.multiple) {
+        if (this.value !== this.tags) {
+          this.tags = [...this.value];
+        }
+        this.handleInputHeight();
+      }
+    }
+  },
+  mounted() {
+    if (this.multiple && !this.collapseTags) {
+      this.tagsHeight = this.$refs.tagSpan.clientHeight;
+      this.tags = [...this.value];
+    }
   },
   methods: {
     toggle() {
@@ -118,7 +196,28 @@ export default {
       if (this.suffixIcon === 'roundclosefill') {
         this.suffixIcon = 'xiala';
       }
+    },
+    handleInputHeight() {
+      this.$nextTick(function() {
+        if (this.collapseTags) return;
+        const span = this.$refs.tagSpan;
+        if (span.clientHeight > 0) {
+          this.$refs.input.style.height = 38 + span.clientHeight - 24 + 'px';
+        }
+      });
+    },
+    handleClose(tag) {
+      this.tags.splice(this.tags.indexOf(tag), 1);
+      console.log(this.value.length);
     }
   }
 };
 </script>
+<style scoped lang="scss">
+.sun-badge{
+  margin-left: 4px;
+}
+input{
+  padding-right: 36px;
+}
+</style>

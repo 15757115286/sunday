@@ -45,12 +45,8 @@ import '../../assets/scss/style.vue.scss';
 export default {
   name: 'SunScrollbar',
   props: {
-    maxHeight: {
-      default: 'false'
-    },
-    maxWidth: {
-      default: 'false'
-    }
+    maxHeight: Number,
+    maxWidth: Number
   },
   data() {
     return {

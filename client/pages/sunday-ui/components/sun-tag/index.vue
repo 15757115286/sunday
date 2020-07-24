@@ -1,7 +1,8 @@
 <template>
   <sun-transition
-    leave-type="flipOutY"
-    duration="500"
+    :leave-type="antype"
+    :duration="dur"
+    :after-leave="handleAfterLeave.bind(this)"
   >
     <span
       v-if="!close"
@@ -40,17 +41,27 @@ export default {
       type: Boolean,
       default: false
     },
-    label: {},
+    label: {
+      type: String,
+      default: ''
+    },
     size: {
       default: '',
       validator: function(value) {
         return BUTTON_SIZE_LIST.includes(value);
       }
-    }
+    },
+    unanimate: { // 关闭动画
+      type: Boolean,
+      default: false
+    },
+    afterLeave: Function // 因为在组建销毁后才完成这个，此时事件已经解绑了，不能用事件传递，故用此方法
   },
   data() {
     return {
-      close: false
+      close: false,
+      dur: this.unanimate ? '0' : '500',
+      antype: this.unanimate ? '' : 'flipOutY'
     };
   },
   computed: {
@@ -66,6 +77,9 @@ export default {
     handleClick() {
       this.close = true;
       this.$emit('close', this.label); // 预设关闭事件
+    },
+    handleAfterLeave() {
+      if (typeof this.afterLeave === 'function') { this.afterLeave(); }
     }
   }
 };

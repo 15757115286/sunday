@@ -4,6 +4,7 @@
     :leave-active-class="leaveClassObject"
     :enter-active-class="enterClassObject"
     :duration="duration"
+    @after-leave="handle"
   >
     <slot />
   </transition>
@@ -16,6 +17,7 @@ export default {
     enterType: String,
     leaveType: String,
     name: String,
+    afterLeave: Function,
     duration: {}
   },
   computed: {
@@ -24,6 +26,11 @@ export default {
     },
     leaveClassObject() {
       return 'animate__animated animate__' + this.leaveType;
+    }
+  },
+  methods: {
+    handle() {
+      if (typeof this.afterLeave === 'function') { this.afterLeave(); }
     }
   }
 };

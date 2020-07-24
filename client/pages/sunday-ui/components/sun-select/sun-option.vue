@@ -1,11 +1,11 @@
 <template>
   <li
     class="sun-select-dorpdown__item"
-    :class="{'selected':select.value===lable,'is-disabled':disabled}"
+    :class="{'selected':select.value===label || select.tags.includes(label),'is-disabled':disabled}"
     @click.stop="handle"
     @mousemove.prevent
   >
-    <slot>{{ lable }}</slot>
+    <slot>{{ label }}</slot>
   </li>
 </template>
 <script>
@@ -13,7 +13,7 @@ import '../../assets/scss/style.vue.scss';
 export default {
   name: 'SunOption',
   props: {
-    lable: {
+    label: {
       type: String,
       default: ''
     },
@@ -22,6 +22,7 @@ export default {
       required: true
     },
     disabled: {
+      type: Boolean,
       default: false
     }
   },
@@ -35,7 +36,16 @@ export default {
   methods: {
     handle() {
       if (this.disabled) return;
-      this.select.$emit('input', this.lable);
+      if (this.select.multiple) {
+        const index = this.select.tags.indexOf(this.label);
+        if (index !== -1) {
+          this.select.tags.splice(index, 1);
+        } else {
+          this.select.tags.push(this.label);
+        }
+        return;
+      }
+      this.select.$emit('input', this.label);
       if (this.select.drop === false) {
         this.select.suffixIcon = 'shouqi';
         this.select.drop = true;
