@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import { PureObject, StringLike } from '../../definitions/common';
 import { CoreEntry, MergeFunction } from '../../definitions/core';
 const fs = require('fs-extra');

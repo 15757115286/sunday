@@ -1,5 +1,5 @@
 import webpackDevConfig from './webpack.config.dev';
-import * as path from 'path';
+import path from 'path';
 import { printEnvBox, getDevServerContentConfig } from './helper';
 import webpack = require('webpack');
 import WebpackDevServer = require('webpack-dev-server');

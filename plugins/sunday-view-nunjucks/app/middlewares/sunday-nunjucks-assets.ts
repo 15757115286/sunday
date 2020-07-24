@@ -1,9 +1,9 @@
 import { MiddlewareItemConfig, BaseApplication } from '../../../../definitions/core';
 import { Context, Next } from 'koa';
-import * as fs from 'fs-extra';
-import * as path from 'path';
+import fs from 'fs-extra';
+import path from 'path';
 import { getConfig, resolveUrl, easyGet } from '../lib/util';
-import * as util from 'util';
+import util from 'util';
 import { isMatch } from '../../../../core/lib/util';
 const mime = require('mime');
 const DEFAULT_FILENAME_REG = /nunjucks\/(.+)|(?:js|css)\/sunday-chunks/;
