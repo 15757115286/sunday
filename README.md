@@ -53,6 +53,9 @@ export default SundayUiController;
 ### 静态资源
 静态资源统一在`client/pages/xxxx/assets`下，引用的时候通过`/xxxx/assets/xxx.png`来引用。
 
+### vue中使用注解开发
+[注解文档](https://github.com/kaorun343/vue-property-decorator)
+
 ### TODO
 
 - 优化代码和声明文件。
