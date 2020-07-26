@@ -32,7 +32,6 @@
   </span>
 </template>
 <script>
-import '../../assets/scss/style.vue.scss';
 import { BUTTON_TYPE_LIST, BUTTON_SIZE_LIST } from '../sun-button/constant';
 import { PREFIX } from '../../prefix';
 import SunTransition from '../sun-transition';

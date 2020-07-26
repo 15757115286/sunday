@@ -7,7 +7,6 @@
   </div>
 </template>
 <script>
-import '../../assets/scss/style.vue.scss';
 export default {
   name: 'SunRow',
   props: {

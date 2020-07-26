@@ -15,17 +15,21 @@
     </div>
   </div>
 </template>
-<script>
+<script lang="ts">
+import Vue from 'vue';
+import Component from 'vue-class-component';
 import { links, nameMap } from '../router';
-export default {
-  name: 'DemoHome',
+
+@Component
+export default class DemoHome extends Vue {
+  name = 'DemoHome';
   data() {
     return {
       links,
       nameMap
     };
   }
-};
+}
 </script>
 <style lang="scss">
 .demo-container {

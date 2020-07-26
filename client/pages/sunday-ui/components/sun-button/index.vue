@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import '../../assets/scss/style.vue.scss';
 import { BUTTON_TYPE_LIST, BUTTON_SIZE_LIST } from './constant';
 import SunIcon from '../sun-icon';
 import { PREFIX } from '../../prefix';

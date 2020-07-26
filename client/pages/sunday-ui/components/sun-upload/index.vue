@@ -48,7 +48,6 @@
   </div>
 </template>
 <script>
-import '../../assets/scss/style.vue.scss';
 import SunIcon from '../sun-icon';
 export default {
   name: 'SunUpload',

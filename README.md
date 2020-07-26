@@ -50,6 +50,9 @@ export default SundayUiController;
 
 ```
 
+### 静态资源
+静态资源统一在`client/pages/xxxx/assets`下，引用的时候通过`/xxxx/assets/xxx.png`来引用。
+
 ### TODO
 
 - 优化代码和声明文件。

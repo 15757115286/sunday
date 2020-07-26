@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import '../../assets/scss/style.vue.scss';
 import { PREFIX } from '../../prefix';
 export default {
   name: 'SunButtonGroup',

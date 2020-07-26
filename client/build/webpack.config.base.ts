@@ -14,7 +14,7 @@ const isDev = !args.prod;
 // 获取pages下面所有的文件夹，默认是一个独立的入口
 const ENTRY_SPOT = path.resolve(__dirname, '../pages');
 const CACHE_DIR = path.resolve(__dirname, '../../run/cache');
-const MAIN_FILE = 'main.js';
+const MAIN_FILE = 'main';
 const entry: PureObject<string> = {};
 let pathes: string[] = [];
 if (args.entry) {
@@ -33,7 +33,7 @@ pathes.forEach(dirname => {
 const webpackConfig: webpack.Configuration = {
   entry,
   resolve: {
-    extensions: ['.vue', '.js', '.ts']
+    extensions: ['.vue', '.js', '.ts', '.jsx', '.tsx']
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -58,7 +58,7 @@ const webpackConfig: webpack.Configuration = {
         }
       },
       {
-        test: /js$/,
+        test: /(js|ts)x?$/,
         exclude: /node_modules/,
         use: [
           {

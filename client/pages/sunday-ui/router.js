@@ -12,7 +12,7 @@ const config = {
 };
 
 // 第一层的index
-const context = require.context('./demo', true, /\.\/[^/]+\/index.vue$/, 'lazy');
+const context = require.context('./demo', true, /\.\/[^/]+\/index.(vue|tsx)$/, 'lazy');
 const rootPath = '/ui';
 context.keys().forEach(dir => {
   const paths = dir.split('/');

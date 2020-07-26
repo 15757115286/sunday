@@ -91,7 +91,6 @@
   </div>
 </template>
 <script>
-import '../../assets/scss/style.vue.scss';
 import SunInput from '../sun-input';
 import SunScrollbar from '../sun-scrollbar';
 import SunIcon from '../sun-icon';

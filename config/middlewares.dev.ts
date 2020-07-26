@@ -9,7 +9,7 @@ const middlewaresConfig:PureObject<MiddlewareConfig> = {
       redirectMatch: [
         /hot-update/,
         /js\/(?:vendors~)?saturday\//,
-        /iconfont\.(?:svg|woff|eot|ttf)/,
+        /\/sunday-ui\/assets\//,
         /js\/sunday-chunks\//
       ]
     }

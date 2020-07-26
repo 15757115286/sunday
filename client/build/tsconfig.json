@@ -1,0 +1,17 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "declaration": true,
+    "declarationMap": false,
+    "strict": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": false
+  },
+  "include": [
+    "**/*.ts"
+  ]
+}
