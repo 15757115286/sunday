@@ -26,9 +26,12 @@ export default class DemoHome extends Vue {
     return (
       <div ref="div1">
         hello,cm {this.name1}
-        <img src="/sunday-ui/assets/test.jpg" style={{ width: '200px' }}></img>
+        <img
+          src="/sunday-ui/assets/test.jpg"
+          style={{ width: '200px' }}
+        />
         <div value={this.name}>
-          <demo judgement="xwtcc" onCountChange={this.show}></demo>
+          <demo judgement="xwtcc" onCountChange={this.show} />
         </div>
       </div>
     );

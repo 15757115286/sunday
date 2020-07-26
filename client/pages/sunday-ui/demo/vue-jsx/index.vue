@@ -21,7 +21,10 @@ export default {
   render() {
     return (
       <div class="bg" onClick={this.add}>
-        <demo judgement="test" onCountChange={this.countChange}></demo>
+        <demo
+          judgement="test"
+          onCountChange={this.countChange}
+        />
       </div>
     );
   }
@@ -29,6 +32,6 @@ export default {
 </script>
 <style lang="scss">
 .bg {
-  color:red;
+  color: red;
 }
 </style>

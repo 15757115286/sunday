@@ -8,7 +8,9 @@ const config = {
   input: '输入框',
   icon: '图标',
   upload: '上传（部分）',
-  select: '选择框（部分）'
+  select: '选择框（部分）',
+  'vue-jsx': 'jsx示例',
+  'vue-tsx': 'tsx示例'
 };
 
 // 第一层的index

@@ -2,11 +2,12 @@ import { Vue, Component, Emit, Prop } from 'vue-property-decorator';
 
 @Component
 export default class Demo extends Vue {
-  name = 'Demo'
+  name = 'Demo';
   count = 0;
 
   @Prop({ default: 'judgement', type: String }) judgement: string;
 
+  // @Emit中countChange必须填写。该名字对应父组件中onCountChange
   @Emit('countChange')
   onCountChange(count: number) {
     return count;
