@@ -1,36 +1,3 @@
-<template>
-  <sun-transition
-    v-if="!unanimate"
-    leave-type="flipOutY"
-    duration="500"
-    :after-leave="handleAfterLeave.bind(this)"
-  >
-    <span
-      v-if="!close"
-      :class="classObject"
-    >
-      <slot>{{ label }}</slot>
-      <sun-icon
-        v-if="closable"
-        type="roundclosefill"
-        @click.native="handleClick"
-      />
-    </span>
-  </sun-transition>
-  <span v-else>
-    <span
-      v-if="!close"
-      :class="classObject"
-    >
-      <slot>{{ label }}</slot>
-      <sun-icon
-        v-if="closable"
-        type="roundclosefill"
-        @click.native="handleClick"
-      />
-    </span>
-  </span>
-</template>
 <script>
 import { BUTTON_TYPE_LIST, BUTTON_SIZE_LIST } from '../sun-button/constant';
 import { PREFIX } from '../../prefix';
@@ -64,7 +31,8 @@ export default {
         return BUTTON_SIZE_LIST.includes(value);
       }
     },
-    unanimate: { // 关闭动画
+    unanimate: {
+      // 关闭动画
       type: Boolean,
       default: false
     },
@@ -88,9 +56,36 @@ export default {
     handleClick() {
       this.close = true;
       this.$emit('close', this.label); // 预设关闭事件
+      console.log(1);
     },
     handleAfterLeave() {
-      if (typeof this.afterLeave === 'function') { this.afterLeave(); }
+      if (typeof this.afterLeave === 'function') {
+        this.afterLeave();
+      }
+    }
+  },
+  render() {
+    const icon = (
+      <sun-icon type="roundclosefill" nativeOnClick={this.handleClick} />
+    );
+    const element = (
+      <span class={this.classObject}>
+        {this.$slots.default || this.label}
+        {this.closable ? icon : null}
+      </span>
+    );
+    if (!this.unanimate) {
+      return (
+        <sun-transition
+          leave-type="flipOutY"
+          duration="500"
+          afterLeave={this.handleAfterLeave.bind(this)}
+        >
+          {this.close ? null : element}
+        </sun-transition>
+      );
+    } else {
+      return this.close ? null : element;
     }
   }
 };
