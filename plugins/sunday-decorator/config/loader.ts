@@ -1,5 +1,5 @@
-import { PureObject } from '@/def/common';
-import { LoaderConfigItem } from '@/def/core';
+import { PureObject } from '@def/common';
+import { LoaderConfigItem } from '@def/core';
 
 const EXTENDSION = 'ts|js';
 

@@ -1,5 +1,5 @@
-import { PureObject } from '@/def/common';
-import { MiddlewareConfig } from '@/def/core';
+import { PureObject } from '@def/common';
+import { MiddlewareConfig } from '@def/core';
 
 const middlewaresConfig:PureObject<MiddlewareConfig> = {
   'sunday-decorator-router': {

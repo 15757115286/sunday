@@ -1,4 +1,4 @@
-import { MiddlewareItemConfig, BaseApplication } from '@/def/core';
+import { MiddlewareItemConfig, BaseApplication } from '@def/core';
 import { Context, Next } from 'koa';
 import fs from 'fs-extra';
 import chalk from 'chalk';

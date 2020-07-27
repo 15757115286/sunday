@@ -1,7 +1,7 @@
 import { IClass, ControllerOptions, ControllerRouterInfo, BaseController } from '../../definitions';
 import { isString, getControllStore } from './util';
 import { controllerRouterInfo } from './store';
-import { BaseApplication } from '@/def/core';
+import { BaseApplication } from '@def/core';
 import { BaseContext } from 'koa';
 import { initService } from './inject';
 function Controller(options: ControllerOptions = { route: '/' }) {

@@ -1,5 +1,5 @@
-import Service from '../../plugins/sunday-decorator/app/lib/service';
-import { ServiceOptions } from '../../plugins/sunday-decorator/definitions';
+import Service from '@plugins/sunday-decorator/app/lib/service';
+import { ServiceOptions } from '@plugins/sunday-decorator/definitions';
 import { BaseContext } from 'koa';
 
 @Service('TestService')

@@ -17,7 +17,9 @@
     "noImplicitAny": false,
     "baseUrl": "./",
     "paths": {
-      "@/def/*": ["definitions/*"]
+      "@def/*": ["definitions/*"],
+      "@plugins/*": ["plugins/*"],
+      "@core/*": ["core/*"]
     }
   },
   "include": [

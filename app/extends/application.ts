@@ -1,4 +1,4 @@
-declare module '@/def/core' {
+declare module '@def/core' {
     interface BaseApplication {
         appName: string;
     }

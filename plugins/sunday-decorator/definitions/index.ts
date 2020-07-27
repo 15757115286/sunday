@@ -1,6 +1,6 @@
-import { PureObject } from '@/def/common';
+import { PureObject } from '@def/common';
 import { BaseContext, Next } from 'koa';
-import { BaseApplication } from '@/def/core';
+import { BaseApplication } from '@def/core';
 import { STORE_KEY, PROVIDE_KEY } from '../app/lib/store';
 
 interface BaseOptions {
