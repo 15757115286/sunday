@@ -15,6 +15,7 @@
         :disabled="disabled"
         @mouseenter="handleMouseenter"
         @mouseleave="handleMouseleave"
+        @focus="handleFocus"
       >
       <div v-if="multiple">
         <input
@@ -76,32 +77,24 @@
       </span>
     </div>
     <transition name="sun-zoom-in-top">
-      <div
-        v-if="drop"
-        class="sun-select-dropdown"
-      >
-        <div class="poper_arrow" />
-        <sun-scrollbar :max-height="270">
-          <ul class="sun-select-dropdown__list">
-            <slot />
-          </ul>
-        </sun-scrollbar>
-      </div>
+      <sun-dropdown v-if="drop">
+        <slot />
+      </sun-dropdown>
     </transition>
   </div>
 </template>
 <script>
 import SunInput from '../sun-input';
-import SunScrollbar from '../sun-scrollbar';
 import SunIcon from '../sun-icon';
 import SunTag from '../sun-tag';
+import SunDropdown from '../sun-select/dropdown';
 export default {
   name: 'SunSelect',
   components: {
     [SunInput.name]: SunInput,
-    [SunScrollbar.name]: SunScrollbar,
     [SunIcon.name]: SunIcon,
-    [SunTag.name]: SunTag
+    [SunTag.name]: SunTag,
+    [SunDropdown.name]: SunDropdown
   },
   props: {
     value: {}, // value在multiple时为数组
@@ -213,13 +206,18 @@ export default {
     },
     handleClose(tag) {
       this.tags.splice(this.tags.indexOf(tag), 1);
+    },
+    handleFocus(e) {
+      if (this.filterable) {
+        e.target.select();
+      }
     }
   }
 };
 </script>
 <style scoped lang="scss">
 .sun-badge{
-  margin-left: 4px;
+  margin-left: 4px !important;
 }
 input{
   padding-right: 36px;

@@ -159,6 +159,13 @@ ul.sun-up-list{
 .sun-select-group__wrap:not(:last-of-type) {
     padding-bottom: 24px;
 }
+.sun-select-dropdown__empty {
+    padding: 10px 0;
+    margin: 0;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+}
 .poper_arrow{
     position: absolute;
     display: block;

@@ -56,7 +56,6 @@ export default {
     handleClick() {
       this.close = true;
       this.$emit('close', this.label); // 预设关闭事件
-      console.log(1);
     },
     handleAfterLeave() {
       if (typeof this.afterLeave === 'function') {
