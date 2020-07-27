@@ -65,4 +65,4 @@ export default SundayUiController;
 - 框架整体异常捕获和处理
 - nunjucks一些同步api需要改写成为异步
 - 处理dev-server静态资源服务和打包时候静态资源处理
-- 接入husky在git push前验证代码
+- 生产环境在打包时候webpack资源没有打进app/dist目录，需要加此功能
