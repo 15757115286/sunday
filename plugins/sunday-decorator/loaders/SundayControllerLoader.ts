@@ -1,5 +1,5 @@
 import Loader from '../../../core/Loader';
-import { PureObject } from '../../../definitions/common';
+import { PureObject } from '@/def/common';
 import { ControllerRouterInfo, IClass } from '../definitions';
 import { controllerRouterInfo as _controllerRouterInfo } from '../app/lib/store';
 import { outputJSON } from '../../../core/lib/util';

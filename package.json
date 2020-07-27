@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "ts-node --files index.ts",
     "watch-server": "nodemon --inspect --watch 'index.ts' -e ts,tsx --exec 'node -r ts-node/register/files' index.ts",
     "dev": "nodemon --inspect index.ts",
     "build": "ts-node bin/build.ts",
@@ -60,6 +60,7 @@
     "ora": "^4.0.4",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^8.10.1",
+    "tsconfig-paths": "^3.9.0",
     "tslib": "^2.0.0",
     "typescript": "^3.9.3"
   }

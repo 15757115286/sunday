@@ -1,6 +1,6 @@
 import { Context } from 'koa';
 import { Controller, Route, Get, Post, Inject } from '../../plugins/sunday-decorator/app/lib';
-import { BaseApplication } from '../../definitions/core';
+import { BaseApplication } from '@/def/core';
 import TestService from '../services/TestService';
 import 'reflect-metadata';
 

@@ -1,6 +1,6 @@
 import { IClass, RouterItem } from '../../definitions';
 import { getControllStore, get } from './util';
-import { PureObject } from '../../../../definitions/common';
+import { PureObject } from '@/def/common';
 
 type Item = Partial<RouterItem>;
 export default function Route(route:string|string[] = '/') {

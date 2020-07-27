@@ -9,12 +9,16 @@
     "strict": true,
     "esModuleInterop": true,
     "importHelpers": true,
-    "declarationDir":"./dist/@types/sunday",
+    "declarationDir": "./dist/@types/sunday",
     "outDir": "./dist",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strictPropertyInitialization": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "baseUrl": "./",
+    "paths": {
+      "@/def/*": ["definitions/*"]
+    }
   },
   "include": [
     "app",

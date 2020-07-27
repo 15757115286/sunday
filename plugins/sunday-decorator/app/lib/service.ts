@@ -1,6 +1,6 @@
 import { IService, ServiceOptions, BaseService } from '../../definitions';
 import { isString } from './util';
-import { BaseApplication } from '../../../../definitions/core';
+import { BaseApplication } from '@/def/core';
 import { BaseContext } from 'koa';
 
 export default function Service(options: ServiceOptions) {
