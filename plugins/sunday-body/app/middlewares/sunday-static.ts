@@ -1,4 +1,4 @@
-import { MiddlewareItemConfig, BaseApplication } from '../../../../definitions/core';
+import { MiddlewareItemConfig, BaseApplication } from '@def/core';
 import compose = require('koa-compose');
 import path = require('path');
 const serve = require('koa-static');

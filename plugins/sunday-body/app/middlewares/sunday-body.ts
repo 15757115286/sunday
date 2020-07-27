@@ -1,4 +1,4 @@
-import { MiddlewareItemConfig } from '../../../../definitions/core';
+import { MiddlewareItemConfig } from '@def/core';
 const bodyParser = require('koa-bodyparser');
 declare module 'koa' {
     interface Request {

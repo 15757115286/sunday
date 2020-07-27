@@ -1,5 +1,5 @@
-import { PureObject } from '../../../definitions/common';
-import { MiddlewareConfig } from '../../../definitions/core';
+import { PureObject } from '@def/common';
+import { MiddlewareConfig } from '@def/core';
 import { ServerResponse } from 'http';
 
 const middlewaresConfig:PureObject<MiddlewareConfig> = {

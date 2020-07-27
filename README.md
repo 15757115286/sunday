@@ -56,10 +56,13 @@ export default SundayUiController;
 ### vue中使用注解开发
 [注解文档](https://github.com/kaorun343/vue-property-decorator)
 
+### 生产环境
+由于这边使用了tsconfig.json中的paths映射，所以同步使用`tsconfig-paths`包来使用，具体可以参考[tsconfig-paths](https://www.npmjs.com/package/tsconfig-paths)。但是编译过后的文件也不会进行路径的转化。所以这里使用的是自动探测`tsconfig.json`下的paths，使用`module-alias`进行模块注册。
+
 ### TODO
 
 - 优化代码和声明文件。
 - 框架整体异常捕获和处理
 - nunjucks一些同步api需要改写成为异步
 - 处理dev-server静态资源服务和打包时候静态资源处理
-- 接入husky在git push前验证代码
+- 生产环境在打包时候webpack资源没有打进app/dist目录，需要加此功能

@@ -1,6 +1,6 @@
 import { IClass, IServiceInstance } from '../../definitions';
 import { getProvides } from './util';
-import { PureObject } from '../../../../definitions/common';
+import { PureObject } from '@def/common';
 import 'reflect-metadata';
 
 // 如果使用reflect-metadata来后去元数据类型，必须在tsconfig中配置如下属性：

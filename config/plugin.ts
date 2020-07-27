@@ -1,5 +1,5 @@
-import { PluginConfigItem } from '../definitions/core';
-import { PureObject } from '../definitions/common';
+import { PluginConfigItem } from '@def/core';
+import { PureObject } from '@def/common';
 import { getPluginPath } from '../core/lib/util';
 
 const pluginConfig: PureObject<Partial<PluginConfigItem>> = {

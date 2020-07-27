@@ -1,4 +1,4 @@
-import { MiddlewareItemConfig, BaseApplication } from '../../../../definitions/core';
+import { MiddlewareItemConfig, BaseApplication } from '@def/core';
 import { RouterItem } from '../../definitions';
 import { Context, Next } from 'koa';
 import { union } from '../lib/util';
