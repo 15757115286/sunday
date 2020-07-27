@@ -126,7 +126,10 @@
     </sun-row>
     <p>分组</p>
     <sun-row>
-      <sun-col :span="8">
+      <sun-col
+        :span="8"
+        style="margin-bottom:24px"
+      >
         <sun-select v-model="value7">
           <sun-option-group
             v-for="option of options"
@@ -139,6 +142,25 @@
               :label="item.label"
             />
           </sun-option-group>
+        </sun-select>
+      </sun-col>
+    </sun-row>
+    <p>搜索</p>
+    <sun-row>
+      <sun-col
+        :span="8"
+        style="margin-bottom:24px"
+      >
+        <sun-select
+          v-model="value"
+          filterable
+        >
+          <sun-option
+            v-for="list in lists"
+            :key="list.value"
+            :label="list.label"
+            :value="list.value"
+          />
         </sun-select>
       </sun-col>
     </sun-row>

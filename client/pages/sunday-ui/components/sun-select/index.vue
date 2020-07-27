@@ -10,7 +10,7 @@
         type="text"
         class="sun-form-control"
         autocomplete="off"
-        readonly
+        :readonly="!filterable"
         :value="value"
         :disabled="disabled"
         @mouseenter="handleMouseenter"
@@ -118,6 +118,10 @@ export default {
       default: false
     },
     collapseTags: {
+      type: Boolean,
+      default: false
+    },
+    filterable: {
       type: Boolean,
       default: false
     }

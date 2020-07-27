@@ -10,28 +10,34 @@ export default {
       age: 18
     };
   },
-  methods: {
-    add() {
-      this.age++;
-    },
-    countChange(number) {
-      console.log(number);
-    }
-  },
+  // 这是一个render()模板
+  // render(h) {
+  //   return h('div', {
+  //     class: 'hhh'
+  //   }, [
+  //     h('demo',
+  //       {
+  //         props: {
+  //           level: 2
+  //         },
+  //         scopedSlots: {
+  //           default({ text }) {
+  //             return h('span', text);
+  //           }
+  //         }
+  //       })]);
+  // }
+
+  // jsx
   render() {
-    return (
-      <div class="bg" onClick={this.add}>
-        <demo
-          judgement="test"
-          onCountChange={this.countChange}
-        />
-      </div>
-    );
+    return (<div>
+      <demo level={2} scopedSlots={{
+        default({ text }) {
+          return <span>{text}</span>;
+        }
+      }}>
+      </demo>
+    </div>);
   }
 };
 </script>
-<style lang="scss">
-.bg {
-  color: red;
-}
-</style>
