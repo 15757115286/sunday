@@ -10,7 +10,7 @@
         type="text"
         class="sun-form-control"
         autocomplete="off"
-        :readonly="!filterable"
+        :readonly="!filterable && !drop"
         :value="value"
         :disabled="disabled"
         @mouseenter="handleMouseenter"

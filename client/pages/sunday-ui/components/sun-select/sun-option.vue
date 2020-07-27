@@ -65,7 +65,7 @@ export default {
           this.show = true;
         }
         this.$nextTick(() => {
-          if (typeof this.dropdown.$refs.ul.clientHeight !== 'undefined') {
+          if (typeof this.dropdown.$refs.ul !== 'undefined') {
             if (this.dropdown.$refs.ul.clientHeight === 12) {
               this.dropdown.empty = true;
             } else {
