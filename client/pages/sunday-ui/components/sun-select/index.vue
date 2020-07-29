@@ -10,12 +10,13 @@
         type="text"
         class="sun-form-control"
         autocomplete="off"
-        :readonly="!filterable && !drop"
+        :readonly="!filterable || !drop && !remote"
         :value="value"
         :disabled="disabled"
         @mouseenter="handleMouseenter"
         @mouseleave="handleMouseleave"
         @focus="handleFocus"
+        @input="handleInput"
       >
       <div v-if="multiple">
         <input
@@ -117,7 +118,12 @@ export default {
     filterable: {
       type: Boolean,
       default: false
-    }
+    },
+    remote: {
+      type: Boolean,
+      default: false
+    },
+    remoteMethods: Function
   },
   data() {
     return {
@@ -157,7 +163,8 @@ export default {
   },
   methods: {
     toggle() {
-      if (this.disabled) return;
+      if (this.disabled) return; // 不可点击item
+      if (this.remote) return; // 远程搜索
       if (this.drop === false) {
         if (this.suffixIcon !== 'roundclosefill') {
           this.suffixIcon = 'shouqi';
@@ -197,9 +204,9 @@ export default {
     },
     handleInputHeight() {
       this.$nextTick(function() {
-        if (this.collapseTags) return;
+        if (this.collapseTags) return; // 如果是折叠搜索，则返回
         const span = this.$refs.tagSpan;
-        if (span.clientHeight > 0) {
+        if (span.clientHeight > 0) { // 如果存在标签
           this.$refs.input.style.height = 38 + span.clientHeight - 24 + 'px';
         }
       });
@@ -211,6 +218,10 @@ export default {
       if (this.filterable) {
         e.target.select();
       }
+    },
+    handleInput() {
+      if (!this.remote) return; // 如果不是远程搜索
+      this.drop = true;
     }
   }
 };

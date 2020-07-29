@@ -60,7 +60,9 @@ export default {
       bindMousemoveY: this.handleMoveY.bind(this),
       bindMouseupY: this.hanleMouseupY.bind(this),
       bindMousemoveX: this.handleMoveX.bind(this),
-      bindMouseupX: this.hanleMouseupX.bind(this)
+      bindMouseupX: this.hanleMouseupX.bind(this),
+      mb: this.maxWidth < this.viewWidth ? 17 : 0,
+      mr: this.maxHeight < this.viewHeight ? -17 : 0
     };
   },
   computed: {
@@ -68,8 +70,8 @@ export default {
       return {
         'max-height': this.maxHeight + 'px',
         'max-width': this.maxWidth + 'px',
-        'margin-right': this.maxWidth < this.viewWidth ? '-17px' : 0,
-        'margin-bottom': this.maxHeight < this.viewHeight ? '-17px' : 0
+        'margin-right': this.mr + 'px',
+        'margin-bottom': this.mb + 'px '
       };
     }
   },
@@ -84,9 +86,9 @@ export default {
       scrollElement.scrollWidth
     );
     this.scrollbarHeight =
-      ((this.maxHeight - 17) / this.viewHeight) * (this.maxHeight - 21);
+      ((this.maxHeight - this.mb) / this.viewHeight) * (this.maxHeight - this.mb - 4);
     this.scrollbarWidth =
-      ((this.maxWidth - 17) / this.viewWidth) * (this.maxWidth - 21);
+      ((this.maxWidth - this.mr) / this.viewWidth) * (this.maxWidth - this.mr - 4);
   },
   destroyed() {
     document.removeEventListener('mousemove', this.bindMousemoveY);
@@ -97,9 +99,9 @@ export default {
   methods: {
     handleScroll() {
       this.moveY =
-        (this.$refs.view.scrollTop / this.viewHeight) * (this.maxHeight - 21);
+        (this.$refs.view.scrollTop / this.viewHeight) * (this.maxHeight - this.mb - 4);
       this.moveX =
-        (this.$refs.view.scrollLeft / this.viewWidth) * (this.maxWidth - 21);
+        (this.$refs.view.scrollLeft / this.viewWidth) * (this.maxWidth - this.mr - 4);
     },
     trackYHandle(e) {
       const barPointY = this.$refs.barY.getBoundingClientRect().y;
@@ -112,7 +114,7 @@ export default {
       }
       this.moveY = this.moveY + range;
       view.scrollTop =
-        view.scrollTop + (range / (this.maxHeight - 17)) * this.viewHeight;
+        view.scrollTop + (range / (this.maxHeight - this.mb)) * this.viewHeight;
     },
     trackXHandle(e) {
       const barPointX = this.$refs.barX.getBoundingClientRect().x;
@@ -125,7 +127,7 @@ export default {
       }
       this.moveX = this.moveX + range;
       view.scrollLeft =
-        view.scrollLeft + (range / (this.maxWidth - 17)) * this.viewWidth;
+        view.scrollLeft + (range / (this.maxWidth - this.mr)) * this.viewWidth;
     },
     handleMousedownY(e) {
       e.stopImmediatePropagation();
@@ -138,7 +140,7 @@ export default {
       e.preventDefault();
       if (!this.mousedownY) return;
       const currentPos = e.clientY - this.mousedownY + this.y;
-      const maxMoveY = this.maxHeight - 21 - this.scrollbarHeight;
+      const maxMoveY = this.maxHeight - this.mb - 4 - this.scrollbarHeight;
       if (currentPos <= 0) {
         this.moveY = 0;
       } else if (currentPos >= maxMoveY) {
@@ -148,7 +150,7 @@ export default {
       }
 
       this.$refs.view.scrollTop =
-        (this.moveY / (this.maxHeight - 21)) * this.viewHeight;
+        (this.moveY / (this.maxHeight - this.mb - 4)) * this.viewHeight;
     },
     hanleMouseupY() {
       this.mousedownY = 0;
@@ -164,7 +166,7 @@ export default {
       e.preventDefault();
       if (!this.mousedownX) return;
       const currentPos = e.clientX - this.mousedownX + this.x;
-      const maxMoveX = this.maxWidth - 21 - this.scrollbarWidth;
+      const maxMoveX = this.maxWidth - this.mr - 4 - this.scrollbarWidth;
       if (currentPos <= 0) {
         this.moveX = 0;
       } else if (currentPos >= maxMoveX) {
@@ -174,7 +176,7 @@ export default {
       }
 
       this.$refs.view.scrollLeft =
-        (this.moveX / (this.maxWidth - 21)) * this.viewWidth;
+        (this.moveX / (this.maxWidth - this.mr - 4)) * this.viewWidth;
     },
     hanleMouseupX() {
       this.mousedownX = 0;

@@ -164,6 +164,26 @@
         </sun-select>
       </sun-col>
     </sun-row>
+    <p>远程搜索</p>
+    <sun-row>
+      <sun-col
+        :span="8"
+        style="margin-bottom:24px"
+      >
+        <sun-select
+          v-model="value8"
+          filterable
+          remote
+        >
+          <sun-option
+            v-for="list in lists"
+            :key="list.value"
+            :label="list.label"
+            :value="list.value"
+          />
+        </sun-select>
+      </sun-col>
+    </sun-row>
   </div>
 </template>
 <script>
@@ -222,7 +242,8 @@ export default {
         ]
       }
       ],
-      value7: ''
+      value7: '',
+      value8: ''
     };
   }
 };
