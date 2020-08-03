@@ -200,7 +200,7 @@ class CoreLoader extends Loader {
         const middlewareName = config.name;
         const wrappedMiddleware = middlewares[middlewareName as string];
         const _middleware = wrappedMiddleware(config.options as MiddlewareItemConfig, this.app);
-        const middleware = async function(ctx: Koa.BaseContext, next: Koa.Next) {
+        const middleware = async function(ctx: Koa.Context, next: Koa.Next) {
           const { match, ignore } = config;
           if (match) {
             if (isMatch(ctx.path, match)) {

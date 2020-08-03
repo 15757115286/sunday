@@ -2,7 +2,7 @@ import { IClass, ControllerOptions, ControllerRouterInfo, BaseController } from 
 import { isString, getControllStore } from './util';
 import { controllerRouterInfo } from './store';
 import { BaseApplication } from '@def/core';
-import { BaseContext } from 'koa';
+import { Context } from 'koa';
 import { initService } from './inject';
 function Controller(options: ControllerOptions = { route: '/' }) {
   return function <T extends IClass, K extends T>(constructor: T): K {
@@ -16,12 +16,12 @@ function Controller(options: ControllerOptions = { route: '/' }) {
     }
     constructor = class extends constructor implements BaseController {
             app!: BaseApplication;
-            ctx!: BaseContext;
+            ctx!: Context;
             constructor(...args:any[]) {
               super(args);
               const config = args[0] || {};
               const app:BaseApplication = config.app;
-              const ctx:BaseContext = config.ctx;
+              const ctx:Context = config.ctx;
               this.app = app;
               this.ctx = ctx;
               // 自动注入service实例
