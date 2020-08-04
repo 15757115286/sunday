@@ -119,17 +119,21 @@ export default {
       type: Boolean,
       default: false
     },
-    remote: {
+    remote: { // 远程搜索
       type: Boolean,
       default: false
     },
-    remoteMethods: Function
+    remoteMethod: Function,
+    loading: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
       suffixIcon: 'xiala',
       drop: false,
-      handle: this.handleClick.bind(this),
+      handle: this.handleClick.bind(this), // 点击document下拉菜单消失。inject到dropdown中使用
       tags: [], // mutiple时，value为一个数组，$emit()需要传递一个数组过去，tags为这个角色
       tagsWidth: 0, // 最大宽度
       tagsHeight: 0 // 变化的高度
@@ -219,9 +223,12 @@ export default {
         e.target.select();
       }
     },
-    handleInput() {
+    handleInput(e) {
       if (!this.remote) return; // 如果不是远程搜索
       this.drop = true;
+      if (typeof this.remoteMethod === 'function') {
+        this.remoteMethod(e.target.value);
+      }
     }
   }
 };

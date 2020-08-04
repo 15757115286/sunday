@@ -24,17 +24,15 @@ export default {
   },
   data() {
     return {
-      bindHandleInput: this.handleInput.bind(this),
       show: true
     };
   },
   inject: ['select', 'dropdown'],
   mounted() {
-    document.addEventListener('click', this.select.handle);
-    this.select.$refs.input.addEventListener('input', this.bindHandleInput);
-    this.$once('hook:beforeDestroy', () => {
-      document.removeEventListener('click', this.select.handle);
-    });
+    const searchMethod = (e) => {
+      this.handleInput(e);
+    };
+    this.select.$refs.input.addEventListener('input', searchMethod);
   },
   methods: {
     handle() {

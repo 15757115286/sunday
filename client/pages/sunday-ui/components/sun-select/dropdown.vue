@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       empty: false,
-      top: 'default',
+      top: 'inherit',
       isBottom: false
     };
   },
@@ -47,25 +47,49 @@ export default {
       dropdown: this
     };
   },
+  inject: ['select'],
   computed: {
     styleObject() {
       return {
-        top: this.top + 'px',
-        'transform-origin': this.top === 'default' ? 'center top !important' : 'center bottom !important'
+        top: this.top,
+        'transform-origin': this.top === 'inherit' ? 'center top !important' : 'center bottom !important'
       };
     }
   },
   mounted() {
-    const dropdown = this.$refs.dropdown;
-    const bodyRect = document.body.getBoundingClientRect();
-    console.log(dropdown.getBoundingClientRect());
-    console.log(dropdown.clientHeight);
-    if ((dropdown.getBoundingClientRect().bottom + dropdown.clientHeight) > bodyRect.bottom) {
-      this.isBottom = true;
-      this.top = -dropdown.clientHeight - 26;
-    }
+    this.isInViewport();
+    const scrollMethod = () => {
+      if ((Date.now() - scrollMethod.now) > 50) {
+        this.isInViewport();
+        scrollMethod.now = Date.now();
+      }
+    };
+    scrollMethod.now = 0;
+    window.addEventListener('scroll', scrollMethod); // 监听滚动菜单位置变化
+    document.addEventListener('click', this.select.handle); // 监听点击document下拉框消失
+    this.$once('beforeDestroy:hook', () => {
+      window.removeEventListener('scroll', scrollMethod);
+      document.removeEventListener('click', this.select.handle);
+    });
+  },
+  updated() {
+    this.isInViewport();
   },
   methods: {
+    isInViewport() {
+      this.$nextTick(() => {
+        const dropdown = this.$refs.dropdown;
+        const viewHeight = document.documentElement.clientHeight;
+        if (!dropdown) return;
+        if ((dropdown.getBoundingClientRect().top + dropdown.clientHeight) > viewHeight) {
+          this.isBottom = true;
+          this.top = -dropdown.clientHeight - 26 + 'px';
+        } else {
+          this.isBottom = false;
+          this.top = 'inherit';
+        }
+      });
+    }
   }
 };
 </script>
