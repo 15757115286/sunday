@@ -20,7 +20,6 @@ export interface SundayOptions<T = any> extends PureObject<T | NumberLike> {
     port: NumberLike;
     env: string;
 }
-export type BaseContext = Koa.BaseContext
 
 export interface LoaderConfigItem {
     name: string;
@@ -71,7 +70,7 @@ export interface MiddlewareConfig {
 export type MiddlewareItemConfig = PureObject
 
 export interface Middleware<T = any> {
-    (ctx:Koa.BaseContext, next:Koa.Next): Promise<T>;
+    (ctx:Koa.Context, next:Koa.Next): Promise<T>;
 }
 export interface WrappedMiddleware {
     (config:MiddlewareItemConfig, app:BaseApplication): Middleware;

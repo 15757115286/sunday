@@ -1,7 +1,7 @@
 import { IService, ServiceOptions, BaseService } from '../../definitions';
 import { isString } from './util';
 import { BaseApplication } from '@def/core';
-import { BaseContext } from 'koa';
+import { Context } from 'koa';
 
 export default function Service(options: ServiceOptions) {
   return function<T extends IService, K extends T>(constructor:T): K {
@@ -15,7 +15,7 @@ export default function Service(options: ServiceOptions) {
     }
     constructor = class extends constructor implements BaseService {
             app!: BaseApplication;
-            ctx!: BaseContext;
+            ctx!: Context;
             options: ServiceOptions;
             constructor(...args:any[]) {
               super(args);

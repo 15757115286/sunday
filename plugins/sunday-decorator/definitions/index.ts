@@ -1,11 +1,11 @@
 import { PureObject } from '@def/common';
-import { BaseContext, Next } from 'koa';
+import { Context, Next } from 'koa';
 import { BaseApplication } from '@def/core';
 import { STORE_KEY, PROVIDE_KEY } from '../app/lib/store';
 
 interface BaseOptions {
     app: BaseApplication;
-    ctx: BaseContext;
+    ctx: Context;
 }
 export type BaseController = BaseOptions
 export interface BaseService extends BaseOptions{
@@ -50,7 +50,7 @@ export interface ControllerRouterInfo {
 
 export interface RouterItem {
     methods: Method[];
-    action: (ctx: BaseContext, next:Next) => void;
+    action: (ctx: Context, next:Next) => void;
     route: string[];
 }
 
@@ -62,4 +62,4 @@ export type ControllerOptions = Partial<_ControllerOptions> | string;
 
 export type ServiceOptions = _ServiceOptions | string;
 
-export type ReturnFunction = (ctx:BaseContext, next:Next) => any;
+export type ReturnFunction = (ctx:Context, next:Next) => any;

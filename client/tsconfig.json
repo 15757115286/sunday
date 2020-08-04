@@ -10,12 +10,13 @@
     "experimentalDecorators": true,
     "jsx": "preserve",
     "noImplicitAny": false,
+    "noEmit": true,
     "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
     "allowJs": true
   },
   "exclude": [
     "node_modules",
-    "dist",
-    "**/*.d.ts"
+    "dist"
   ]
 }
