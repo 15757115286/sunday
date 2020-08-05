@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <div class="select-range">
     <div
       class="sun-select"
       @click="toggle"
     >
+      <!-- 由于input事件通常影响的是option和dropdown，故在dropdown和option组件中处理-->
       <input
         v-if="!multiple"
         ref="input"
@@ -18,7 +19,7 @@
         @focus="handleFocus"
         @input="handleInput"
       >
-      <div v-if="multiple">
+      <div v-else>
         <input
           ref="input"
           type="text"
@@ -28,6 +29,7 @@
           :disabled="disabled"
           @mouseenter="handleMouseenter"
           @mouseleave="handleMouseleave"
+          @input="handleInput"
         >
         <span
           v-if="!collapseTags"
@@ -78,7 +80,10 @@
       </span>
     </div>
     <transition name="sun-zoom-in-top">
-      <sun-dropdown v-if="drop">
+      <sun-dropdown
+        v-if="drop"
+        ref="dropdown"
+      >
         <slot />
       </sun-dropdown>
     </transition>
@@ -168,7 +173,6 @@ export default {
   methods: {
     toggle() {
       if (this.disabled) return; // 不可点击item
-      if (this.remote) return; // 远程搜索
       if (this.drop === false) {
         if (this.suffixIcon !== 'roundclosefill') {
           this.suffixIcon = 'shouqi';
@@ -224,11 +228,7 @@ export default {
       }
     },
     handleInput(e) {
-      if (!this.remote) return; // 如果不是远程搜索
-      this.drop = true;
-      if (typeof this.remoteMethod === 'function') {
-        this.remoteMethod(e.target.value);
-      }
+
     }
   }
 };

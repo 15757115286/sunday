@@ -56,21 +56,13 @@ export default {
       }
     },
     handleInput(e) {
-      if (this.select.filterable) {
+      const select = this.select;
+      if (select.filterable) {
         if (!this.label.includes(e.target.value) && e.target.value !== '') {
           this.show = false;
         } else {
           this.show = true;
         }
-        this.$nextTick(() => {
-          if (typeof this.dropdown.$refs.ul !== 'undefined') {
-            if (this.dropdown.$refs.ul.clientHeight === 12) {
-              this.dropdown.empty = true;
-            } else {
-              this.dropdown.empty = false;
-            }
-          }
-        });
       }
     }
   }

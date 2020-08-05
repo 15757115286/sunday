@@ -1,5 +1,6 @@
 <template>
   <div
+    v-show="!remoteEmpty"
     ref="dropdown"
     class="sun-select-dropdown"
     :style="styleObject"
@@ -8,7 +9,10 @@
       v-if="!isBottom"
       class="poper_arrow__top"
     />
-    <sun-scrollbar :max-height="270">
+    <sun-scrollbar
+      :max-height="270"
+      :class="{'is-empty':empty}"
+    >
       <p
         v-if="empty"
         class="sun-select-dropdown__empty"
@@ -38,7 +42,8 @@ export default {
   data() {
     return {
       empty: false,
-      top: 'inherit',
+      remoteEmpty: this.select.remote,
+      top: 0,
       isBottom: false
     };
   },
@@ -51,12 +56,17 @@ export default {
   computed: {
     styleObject() {
       return {
-        top: this.top,
-        'transform-origin': this.top === 'inherit' ? 'center top !important' : 'center bottom !important'
+        top: this.top + 'px',
+        'transform-origin': !this.isBottom ? 'center top !important' : 'center bottom !important'
       };
     }
   },
   mounted() {
+    const inputMethod = (e) => {
+      this.handleInput(e);
+    };
+    this.select.$refs.input.addEventListener('input', inputMethod);
+    this.top = this.select.$refs.input.clientHeight + 2;
     this.isInViewport();
     const scrollMethod = () => {
       if ((Date.now() - scrollMethod.now) > 50) {
@@ -72,21 +82,47 @@ export default {
       document.removeEventListener('click', this.select.handle);
     });
   },
-  updated() {
-    this.isInViewport();
-  },
   methods: {
     isInViewport() {
       this.$nextTick(() => {
         const dropdown = this.$refs.dropdown;
         const viewHeight = document.documentElement.clientHeight;
+        const input = this.select.$refs.input;
         if (!dropdown) return;
-        if ((dropdown.getBoundingClientRect().top + dropdown.clientHeight) > viewHeight) {
-          this.isBottom = true;
-          this.top = -dropdown.clientHeight - 26 + 'px';
+        if (!this.isBottom) {
+          if ((dropdown.getBoundingClientRect().top + dropdown.clientHeight) > viewHeight) {
+            this.isBottom = true;
+            this.top = -dropdown.clientHeight - 26;
+          }
         } else {
-          this.isBottom = false;
-          this.top = 'inherit';
+          if ((dropdown.getBoundingClientRect().bottom + input.clientHeight + dropdown.clientHeight + 26 + 2) <= viewHeight) {
+            this.isBottom = false;
+            this.top = this.select.$refs.input.clientHeight + 2;
+          }
+        }
+      });
+    },
+    handleInput(e) {
+      const select = this.select;
+      const ul = this.$refs.ul;
+      if (select.remote) {
+        if (typeof select.remoteMethod === 'function') {
+          select.remoteMethod(e.target.value);
+          this.remoteEmpty = false;
+        }
+      }
+      this.$nextTick(() => {
+        if (select.filterable) {
+          if (typeof ul !== 'undefined') {
+            if (ul.clientHeight === 12 || ul.clientHeight === 0) {
+              this.empty = true;
+            } else {
+              this.empty = false;
+            }
+          }
+        }
+        if (select.filterable || select.remote) {
+          this.isInViewport(); // 搜索后调整搜索框高度
         }
       });
     }
