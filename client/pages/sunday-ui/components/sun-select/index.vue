@@ -17,7 +17,6 @@
         @mouseenter="handleMouseenter"
         @mouseleave="handleMouseleave"
         @focus="handleFocus"
-        @input="handleInput"
       >
       <div v-else>
         <input
@@ -29,7 +28,6 @@
           :disabled="disabled"
           @mouseenter="handleMouseenter"
           @mouseleave="handleMouseleave"
-          @input="handleInput"
         >
         <span
           v-if="!collapseTags"
@@ -226,9 +224,6 @@ export default {
       if (this.filterable) {
         e.target.select();
       }
-    },
-    handleInput(e) {
-
     }
   }
 };
