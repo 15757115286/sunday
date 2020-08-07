@@ -177,7 +177,7 @@
           :remote-method="remoteMethod.bind(this)"
         >
           <sun-option
-            v-for="list in option1"
+            v-for="list in options1"
             :key="list.value"
             :label="list.label"
             :value="list.value"
@@ -245,10 +245,11 @@ export default {
       ],
       value7: '',
       value8: '',
-      option1: [], // 远程获取后的列表
+      loading: false,
+      options1: [], // 远程获取后的列表
       lists11: [ // 模拟远程上的所有内容
-        { value: '选项1', label: '奶茶是可以吃的' },
-        { value: '选项2', label: '可乐是可以吃的' },
+        { value: '选项1', label: 'a' },
+        { value: '选项2', label: 'v' },
         { value: '选项3', label: '薯片是可以吃的' },
         { value: '选项4', label: '炸鸡是可以吃的' },
         { value: '选项5', label: '汉堡是可以吃的' }
@@ -257,12 +258,14 @@ export default {
   },
   methods: {
     remoteMethod(query) { // 模拟远程获取数据
+      console.log(query);
       if (query !== '') {
         this.loading = true;
         setTimeout(() => {
-          this.options1 = this.lists11.filter((item) => item.label.includes(query));// 设置筛选条件，只返回符合搜索条件的
+          this.loading = false;
+          this.options1 = this.lists11.filter(item => item.label.includes(query));// 设置筛选条件，只返回符合搜索条件的
         }, 500);
-      } else { this.options = []; }
+      } else { this.options1 = []; }
     }
   }
 };

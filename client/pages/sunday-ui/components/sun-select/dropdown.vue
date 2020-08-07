@@ -1,6 +1,5 @@
 <template>
   <div
-    v-show="!remoteEmpty"
     ref="dropdown"
     class="sun-select-dropdown"
     :style="styleObject"
@@ -11,13 +10,19 @@
     />
     <sun-scrollbar
       :max-height="270"
-      :class="{'is-empty':empty}"
+      :class="{'is-empty':empty || loading}"
     >
       <p
-        v-if="empty"
+        v-if="empty && !loading"
         class="sun-select-dropdown__empty"
       >
         无匹配数据
+      </p>
+      <p
+        v-if="loading"
+        class="sun-select-dropdown__empty"
+      >
+        正在搜索中...
       </p>
       <ul
         ref="ul"
@@ -39,10 +44,15 @@ export default {
   components: {
     [SunScrollbar.name]: SunScrollbar
   },
+  props: {
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       empty: false,
-      remoteEmpty: this.select.remote,
       top: 0,
       isBottom: false
     };
@@ -62,10 +72,6 @@ export default {
     }
   },
   mounted() {
-    const inputMethod = (e) => {
-      this.handleInput(e);
-    };
-    this.select.$refs.input.addEventListener('input', inputMethod);
     this.top = this.select.$refs.input.clientHeight + 2;
     this.isInViewport();
     const scrollMethod = () => {
@@ -99,30 +105,6 @@ export default {
             this.isBottom = false;
             this.top = this.select.$refs.input.clientHeight + 2;
           }
-        }
-      });
-    },
-    handleInput(e) {
-      const select = this.select;
-      const ul = this.$refs.ul;
-      if (select.remote) {
-        if (typeof select.remoteMethod === 'function') {
-          select.remoteMethod(e.target.value);
-          this.remoteEmpty = false;
-        }
-      }
-      this.$nextTick(() => {
-        if (select.filterable) {
-          if (typeof ul !== 'undefined') {
-            if (ul.clientHeight === 12 || ul.clientHeight === 0) {
-              this.empty = true;
-            } else {
-              this.empty = false;
-            }
-          }
-        }
-        if (select.filterable || select.remote) {
-          this.isInViewport(); // 搜索后调整搜索框高度
         }
       });
     }

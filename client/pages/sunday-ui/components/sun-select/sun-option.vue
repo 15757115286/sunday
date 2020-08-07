@@ -3,7 +3,7 @@
     v-show="show"
     class="sun-select-dorpdown__item"
     :class="{'selected':select.value===label || select.tags.includes(label),'is-disabled':disabled}"
-    @click.stop="handle"
+    @click.stop="handleClick"
     @mousemove.prevent
   >
     <slot>{{ label }}</slot>
@@ -28,14 +28,8 @@ export default {
     };
   },
   inject: ['select', 'dropdown'],
-  mounted() {
-    const searchMethod = (e) => {
-      this.handleInput(e);
-    };
-    this.select.$refs.input.addEventListener('input', searchMethod);
-  },
   methods: {
-    handle() {
+    handleClick() {
       if (this.disabled) return;
       if (this.select.multiple) {
         const index = this.select.tags.indexOf(this.label);
@@ -56,7 +50,7 @@ export default {
       }
     },
     handleInput(e) {
-      const select = this.select;
+      const select = this.select; // 搜索功能
       if (select.filterable) {
         if (!this.label.includes(e.target.value) && e.target.value !== '') {
           this.show = false;

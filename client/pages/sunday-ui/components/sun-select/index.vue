@@ -17,6 +17,9 @@
         @mouseenter="handleMouseenter"
         @mouseleave="handleMouseleave"
         @focus="handleFocus"
+        @compositionstart="search=false"
+        @compositionend="handleComposition"
+        @input="handleInput"
       >
       <div v-else>
         <input
@@ -81,6 +84,7 @@
       <sun-dropdown
         v-if="drop"
         ref="dropdown"
+        :loading="loading"
       >
         <slot />
       </sun-dropdown>
@@ -92,6 +96,7 @@ import SunInput from '../sun-input';
 import SunIcon from '../sun-icon';
 import SunTag from '../sun-tag';
 import SunDropdown from '../sun-select/dropdown';
+import mixins from '../mixins/mixins.ts';
 export default {
   name: 'SunSelect',
   components: {
@@ -100,6 +105,7 @@ export default {
     [SunTag.name]: SunTag,
     [SunDropdown.name]: SunDropdown
   },
+  mixins: [mixins],
   props: {
     value: {}, // value在multiple时为数组
     disabled: {
@@ -139,7 +145,8 @@ export default {
       handle: this.handleClick.bind(this), // 点击document下拉菜单消失。inject到dropdown中使用
       tags: [], // mutiple时，value为一个数组，$emit()需要传递一个数组过去，tags为这个角色
       tagsWidth: 0, // 最大宽度
-      tagsHeight: 0 // 变化的高度
+      tagsHeight: 0, // 变化的高度
+      search: true // 拼音搜索标记
     };
   },
   provide() {
@@ -224,7 +231,50 @@ export default {
       if (this.filterable) {
         e.target.select();
       }
+    },
+    handleComposition(e) {
+      this.search = true;
+      this.handleInput(e);
+    },
+    handleInput(e) {
+      if (this.search) {
+        if (!e.target.readonly) {
+          this.$emit('input', e.target.value);
+        }
+        this.traverse(this, { SunOption: this.handleSearch.bind(this, e) });
+        if (this.remote) {
+          this.drop = true;
+          if (typeof this.remoteMethod === 'function') {
+            this.remoteMethod(e.target.value);
+          }
+          this.$nextTick(() => {
+            this.$refs.dropdown.isInViewport();
+          });
+        }
+      }
+    },
+    handleSearch(e, vm) {
+      if (this.filterable) {
+        const dropdown = this.$refs.dropdown;
+        const ul = dropdown.$refs.ul;
+        if (!vm.label.includes(e.target.value) && e.target.value !== '') {
+          vm.show = false;
+        } else {
+          vm.show = true;
+        }
+        this.$nextTick(() => {
+          this.$refs.dropdown.isInViewport();
+          if (ul !== undefined) {
+            if (ul.clientHeight === 12 || ul.clientHeight === 0) {
+              dropdown.empty = true;
+            } else {
+              dropdown.empty = false;
+            }
+          }
+        });
+      }
     }
+
   }
 };
 </script>
