@@ -172,9 +172,9 @@
       >
         <sun-select
           v-model="value8"
-          filterable
           remote
           :remote-method="remoteMethod.bind(this)"
+          :loading="loading"
         >
           <sun-option
             v-for="list in options1"
@@ -245,7 +245,7 @@ export default {
       ],
       value7: '',
       value8: '',
-      loading: false,
+      loading: true,
       options1: [], // 远程获取后的列表
       lists11: [ // 模拟远程上的所有内容
         { value: '选项1', label: 'a' },

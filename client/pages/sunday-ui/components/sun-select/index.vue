@@ -11,7 +11,7 @@
         type="text"
         class="sun-form-control"
         autocomplete="off"
-        :readonly="!filterable || !drop && !remote"
+        :readonly="(!filterable || !drop) && (!remote)"
         :value="value"
         :disabled="disabled"
         @mouseenter="handleMouseenter"
@@ -165,6 +165,13 @@ export default {
         }
         this.handleInputHeight();
       }
+    },
+    loading() {
+      const dropdown = this.$refs.dropdown;
+      if (dropdown) {
+        dropdown.isEmpty();
+        dropdown.isInViewport();
+      }
     }
   },
   mounted() {
@@ -178,6 +185,7 @@ export default {
   methods: {
     toggle() {
       if (this.disabled) return; // 不可点击item
+      if (this.remote) return;
       if (this.drop === false) {
         if (this.suffixIcon !== 'roundclosefill') {
           this.suffixIcon = 'shouqi';
@@ -241,37 +249,40 @@ export default {
         if (!e.target.readonly) {
           this.$emit('input', e.target.value);
         }
-        this.traverse(this, { SunOption: this.handleSearch.bind(this, e) });
+        this.traverse(this, { SunOption: this.handleSearch.bind(this, e) }); // 找到option组件并进行同步搜索
         if (this.remote) {
-          this.drop = true;
+          if (e.target.value !== '') {
+            this.drop = true;
+          } else {
+            this.drop = false;
+          }
           if (typeof this.remoteMethod === 'function') {
             this.remoteMethod(e.target.value);
           }
-          this.$nextTick(() => {
-            this.$refs.dropdown.isInViewport();
-          });
+          // this.$nextTick(() => {
+          //   if (this.$refs.dropdown) {
+          //     this.$refs.dropdown.isInViewport();
+          //   }
+          // });
         }
+        this.$nextTick(() => {
+          if (this.filterable || this.remote) {
+            const dropdown = this.$refs.dropdown;
+            if (dropdown) {
+              dropdown.isEmpty();
+              dropdown.isInViewport();
+            }
+          }
+        });
       }
     },
-    handleSearch(e, vm) {
+    handleSearch(e, vm) { // 同步搜索
       if (this.filterable) {
-        const dropdown = this.$refs.dropdown;
-        const ul = dropdown.$refs.ul;
         if (!vm.label.includes(e.target.value) && e.target.value !== '') {
           vm.show = false;
         } else {
           vm.show = true;
         }
-        this.$nextTick(() => {
-          this.$refs.dropdown.isInViewport();
-          if (ul !== undefined) {
-            if (ul.clientHeight === 12 || ul.clientHeight === 0) {
-              dropdown.empty = true;
-            } else {
-              dropdown.empty = false;
-            }
-          }
-        });
       }
     }
 

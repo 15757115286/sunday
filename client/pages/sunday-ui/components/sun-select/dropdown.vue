@@ -54,7 +54,7 @@ export default {
     return {
       empty: false,
       top: 0,
-      isBottom: false
+      isBottom: false // 判断poper在上还是在下
     };
   },
   provide() {
@@ -89,24 +89,33 @@ export default {
     });
   },
   methods: {
-    isInViewport() {
+    isInViewport() { // 判断下拉框是位置在上还是在下
       this.$nextTick(() => {
         const dropdown = this.$refs.dropdown;
         const viewHeight = document.documentElement.clientHeight;
         const input = this.select.$refs.input;
-        if (!dropdown) return;
-        if (!this.isBottom) {
-          if ((dropdown.getBoundingClientRect().top + dropdown.clientHeight) > viewHeight) {
-            this.isBottom = true;
-            this.top = -dropdown.clientHeight - 26;
-          }
+        if (!dropdown) {
+          return;
+        }
+        const { bottom } = input.getBoundingClientRect();
+        if ((bottom + dropdown.clientHeight + 2) >= viewHeight) {
+          this.isBottom = true;
+          this.top = -dropdown.clientHeight - 26;
         } else {
-          if ((dropdown.getBoundingClientRect().bottom + input.clientHeight + dropdown.clientHeight + 26 + 2) <= viewHeight) {
-            this.isBottom = false;
-            this.top = this.select.$refs.input.clientHeight + 2;
-          }
+          this.isBottom = false;
+          this.top = input.clientHeight + 2;
         }
       });
+    },
+    isEmpty() {
+      const ul = this.$refs.ul;
+      if (ul !== undefined) {
+        if (ul.clientHeight === 12 || ul.clientHeight === 0) {
+          this.empty = true;
+        } else {
+          this.empty = false;
+        }
+      }
     }
   }
 };
