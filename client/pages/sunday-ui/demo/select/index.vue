@@ -259,8 +259,8 @@ export default {
   },
   mounted() {
     traverseVNode(this.$vnode, {
-      span: console.log
-    });
+      SunSelect: console.log
+    }, true);
   },
   methods: {
     remoteMethod(query) { // 模拟远程获取数据
