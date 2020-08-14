@@ -12,7 +12,7 @@
         class="sun-form-control"
         autocomplete="off"
         :readonly="(!filterable || !drop) && (!remote)"
-        :value="value"
+        :value="inputValue"
         :disabled="disabled"
         @mouseenter="handleMouseenter"
         @mouseleave="handleMouseleave"
@@ -146,7 +146,8 @@ export default {
       tags: [], // mutiple时，value为一个数组，$emit()需要传递一个数组过去，tags为这个角色
       tagsWidth: 0, // 最大宽度
       tagsHeight: 0, // 变化的高度
-      search: true // 拼音搜索标记
+      search: true, // 拼音搜索标记
+      inputValue: this.value
     };
   },
   provide() {
@@ -165,12 +166,15 @@ export default {
         }
         this.handleInputHeight();
       }
+      this.inputValue = this.value;
     },
     loading() {
       const dropdown = this.$refs.dropdown;
       if (dropdown) {
-        dropdown.isEmpty();
-        dropdown.isInViewport();
+        this.$nextTick(() => { // watch更新是异步，此时组件未更新，需要$nextTick()
+          dropdown.isEmpty();
+          dropdown.isInViewport();
+        });
       }
     }
   },
@@ -247,10 +251,10 @@ export default {
     handleInput(e) {
       if (this.search) {
         if (!e.target.readonly) {
-          this.$emit('input', e.target.value);
+          this.inputValue = e.target.value; // 搜索框在刷新的时候输入数据不被刷新掉
         }
         this.traverse(this, { SunOption: this.handleSearch.bind(this, e) }); // 找到option组件并进行同步搜索
-        if (this.remote) {
+        if (this.remote) { // 远程搜索
           if (e.target.value !== '') {
             this.drop = true;
           } else {
@@ -259,11 +263,6 @@ export default {
           if (typeof this.remoteMethod === 'function') {
             this.remoteMethod(e.target.value);
           }
-          // this.$nextTick(() => {
-          //   if (this.$refs.dropdown) {
-          //     this.$refs.dropdown.isInViewport();
-          //   }
-          // });
         }
         this.$nextTick(() => {
           if (this.filterable || this.remote) {
@@ -278,7 +277,7 @@ export default {
     },
     handleSearch(e, vm) { // 同步搜索
       if (this.filterable) {
-        if (!vm.label.includes(e.target.value) && e.target.value !== '') {
+        if (!vm.label.includes(e.target.value) && e.target.value !== '') { // 输入框不为空时，才判断下拉框内容
           vm.show = false;
         } else {
           vm.show = true;

@@ -39,11 +39,13 @@
 </template>
 <script>
 import SunScrollbar from '../sun-scrollbar';
+import mixins from '../mixins/mixins.ts';
 export default {
   name: 'SunDropdown',
   components: {
     [SunScrollbar.name]: SunScrollbar
   },
+  mixins: [mixins],
   props: {
     loading: {
       type: Boolean,
@@ -54,7 +56,8 @@ export default {
     return {
       empty: false,
       top: 0,
-      isBottom: false // 判断poper在上还是在下
+      isBottom: false, // 判断poper在上还是在下
+      options: [] // option组建
     };
   },
   provide() {
@@ -108,14 +111,19 @@ export default {
       });
     },
     isEmpty() {
-      const ul = this.$refs.ul;
-      if (ul !== undefined) {
-        if (ul.clientHeight === 12 || ul.clientHeight === 0) {
-          this.empty = true;
-        } else {
-          this.empty = false;
+      this.traverse(this, {
+        SunOption: (child) => {
+          if (child.show === true) {
+            this.options.push(child);
+          }
         }
+      });
+      if (this.options.length === 0) {
+        this.empty = true;
+      } else {
+        this.empty = false;
       }
+      this.options = [];
     }
   }
 };
