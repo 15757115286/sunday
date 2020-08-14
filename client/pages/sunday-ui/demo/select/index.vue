@@ -189,6 +189,7 @@
 </template>
 <script>
 import { SunSelect, SunOption, SunRow, SunCol, SunOptionGroup } from '../../components';
+import { traverseVNode } from '../../components/mixins/vnode';
 export default {
   name: 'SelectDemo',
   components: {
@@ -255,6 +256,11 @@ export default {
         { value: '选项5', label: '汉堡是可以吃的' }
       ]
     };
+  },
+  mounted() {
+    traverseVNode(this.$vnode, {
+      SunSelect: console.log
+    }, true);
   },
   methods: {
     remoteMethod(query) { // 模拟远程获取数据
