@@ -10,7 +10,8 @@ const config = {
   upload: '上传（部分）',
   select: '选择框',
   'vue-jsx': 'jsx示例',
-  'vue-tsx': 'tsx示例'
+  'vue-tsx': 'tsx示例',
+  notify: '提示框'
 };
 
 // 第一层的index
