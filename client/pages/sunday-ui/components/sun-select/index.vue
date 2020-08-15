@@ -20,6 +20,7 @@
         @compositionstart="search=false"
         @compositionend="handleComposition"
         @input="handleInput"
+        @blur="handleBlur"
       >
       <div v-else>
         <input
@@ -283,6 +284,9 @@ export default {
           vm.show = true;
         }
       }
+    },
+    handleBlur() {
+      this.inputValue = this.value;
     }
 
   }

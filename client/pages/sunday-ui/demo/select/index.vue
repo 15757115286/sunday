@@ -264,7 +264,6 @@ export default {
   },
   methods: {
     remoteMethod(query) { // 模拟远程获取数据
-      console.log(query);
       if (query !== '') {
         this.loading = true;
         setTimeout(() => {
