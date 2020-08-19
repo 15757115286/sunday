@@ -1,6 +1,5 @@
-import Koa from 'koa';
+import Application, { Context, Next } from 'koa';
 import { PureObject, NumberLike, StringLike } from '../definitions/common';
-import type Application from 'koa';
 
 type EntryType = 'framework' | 'plugin' | 'app';
 export interface CoreEntry {
@@ -70,7 +69,7 @@ export interface MiddlewareConfig {
 export type MiddlewareItemConfig = PureObject
 
 export interface Middleware<T = any> {
-    (ctx:Koa.Context, next:Koa.Next): Promise<T>;
+    (ctx:Context, next:Next): Promise<T>;
 }
 export interface WrappedMiddleware {
     (config:MiddlewareItemConfig, app:BaseApplication): Middleware;
