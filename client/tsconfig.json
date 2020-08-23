@@ -13,6 +13,7 @@
     "noEmit": true,
     "strictPropertyInitialization": false,
     "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
     "allowJs": true
   },
   "exclude": [
