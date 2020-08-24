@@ -6,7 +6,6 @@ class Observer {
   private proxy?: ProxyOriginal;
   private repo: ReactiveItemRepo;
   private keys: string[]; // 响应项
-  // 这个值在vue中有用，在本次小demo中其实没用。
   // 这个值的主要作用是用在Vue.set中和数组的变更中（常用）。
   // 因为set了一个新的属性，必须要告诉targe的partent重新取target的值。
   // 如果数组中也被push或者pop了一个值，数组的引用是没有变的。需要告诉持有数组
@@ -29,7 +28,7 @@ class Observer {
 
   traverse(obj: ProxyOriginal) {
     if (isArray(obj)) {
-      obj.forEach((val, index) => {
+      obj.forEach(val => {
         observe(val);
       });
     } else {
