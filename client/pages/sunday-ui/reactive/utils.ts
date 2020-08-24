@@ -4,6 +4,7 @@ import Dep from './dep';
 let currentDepId = 0;
 let currentWatcherId = 0;
 const targetStacks: Watcher[] = [];
+const hasOwner = Object.prototype.hasOwnProperty;
 
 export function genDepId() {
   return currentDepId++;
@@ -47,6 +48,12 @@ export function def(obj, key, value) {
     enumerable: false,
     configurable: true
   });
+}
+
+// 这样做的原因是如果使用Object.create(null)的对象没有该方法。
+// 并且这个方法是不受保护的，可以被覆盖。
+export function hasOwnerProperty(obj:any, key: string) {
+  return hasOwner.call(obj, key);
 }
 
 const set = new Set<any>();
