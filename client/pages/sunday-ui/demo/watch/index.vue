@@ -8,6 +8,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import Reactive from '../../reactive';
+import open from '../../components/quick-open';
+import Button from '../../components/sun-button/index.vue';
 export default Vue.extend({
   name: 'Watch',
 
@@ -32,6 +34,19 @@ export default Vue.extend({
     }
   },
   mounted() {
+    open({
+      component: Button,
+      options: {
+        on: {
+          click() {
+            console.log(this, 'click');
+          }
+        },
+        scopedSlots: {
+          default: props => '11'
+        }
+      }
+    });
     const state = {
       name: 'xwt',
       age: 18,
