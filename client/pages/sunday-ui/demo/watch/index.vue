@@ -10,6 +10,7 @@ import Vue from 'vue';
 import Reactive from '../../reactive';
 import open from '../../components/quick-open';
 import Button from '../../components/sun-button/index.vue';
+import { watch } from '../../reactive/watcher';
 export default Vue.extend({
   name: 'Watch',
 
@@ -49,10 +50,14 @@ export default Vue.extend({
     });
     const state = {
       name: 'xwt',
+      can: {
+        name: '1',
+        age: 2
+      },
       age: 18,
       job: [1, 2, 3]
     };
-    (window as any)._px = Reactive<typeof state>({
+    const px = (window as any)._px = Reactive<typeof state>({
       state,
       computed: {
         myName() {
@@ -68,6 +73,12 @@ export default Vue.extend({
           console.log(val, oldVal);
         }
       }
+    });
+    const un = watch(px as any, () => {
+      return (px as typeof state).can.name;
+    }, () => {
+      console.log('change');
+      un();
     });
   },
 

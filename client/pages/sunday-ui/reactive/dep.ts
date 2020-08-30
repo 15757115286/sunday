@@ -24,6 +24,13 @@ class Dep {
     }
   }
 
+  // 当依赖被删除时候
+  destroy() {
+    this.subs.forEach(watcher => {
+      watcher.deleteDep(this);
+    });
+  }
+
   notify() {
     // 这里需要一个副本，防止后续更新过程中新增的依赖马上进行修改
     const subs = [...this.subs];

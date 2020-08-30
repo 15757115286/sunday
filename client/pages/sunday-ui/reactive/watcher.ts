@@ -79,9 +79,11 @@ class Watcher<T = any> {
 
   // 监听器更新
   update() {
-    const { lazy } = this.options;
+    const { lazy, sync } = this.options;
     if (lazy === true) {
       this.dirty = true;
+    } else if (sync) {
+      this.run();
     } else {
       // 在下个时刻进行更新，这里使用proxy进行依赖收集。如使用splice，数组会触发多次set
       queueWatcher(this);
@@ -112,11 +114,40 @@ class Watcher<T = any> {
     dep.addSub(this);
   }
 
+  // 删除对应依赖
+  deleteDep(dep: Dep) {
+    this.deps.delete(dep);
+  }
+
+  // 销毁所有依赖
+  destroy() {
+    this.deps.forEach(dep => {
+      dep.removeSub(this);
+    });
+  }
+
   // 如果某个该watcher是一个计算属性的watcher，那么可以把计算属性
   // 对应的依赖值全部复制到依赖于该属性的watcher。
   depend() {
     this.deps.forEach(dep => dep.depend());
   }
 }
+
+function watch<T = any>(ro: ReactiveObject, getter: () => T, cb: (value: T, oldValue?: T) => void, options: WatcherOptions = {}) {
+  const settledOptions = {
+    lazy: false,
+    user: true,
+    isComputed: false,
+    sync: true
+  };
+  const watcher = new Watcher(ro, getter, cb, Object.assign(options, settledOptions));
+  return function unwatch() {
+    watcher.destroy();
+  };
+}
+
+export {
+  watch
+};
 
 export default Watcher;

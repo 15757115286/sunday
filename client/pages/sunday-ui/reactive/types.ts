@@ -16,6 +16,7 @@ export type WatcherCallback<T> = (value: T, oldValue?: T) => void;
 export interface WatcherOptions {
   lazy?: boolean;
   user?: boolean;
+  sync?: boolean;
   isComputed?: boolean;
   deep?: boolean;
 }

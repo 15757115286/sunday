@@ -12,7 +12,14 @@ class Observer {
   // 的对象或者数组从新获取该值来达到对应的刷新效果
   // 因为此时target并没有新属性的依赖。所以这里对应这defineReactive中的childOb.depend
   dep: Dep;
-  constructor(obj: ProxyOriginal, shallow = false) {
+  canDirectChange: boolean;
+  /**
+   *
+   * @param obj 响应式原对象
+   * @param shallow 是否浅响应式（不涉及递归响应）
+   * @param canDirectChange 是否可以直接添加响应式属性（原来Vue的响应项都需要提前列出）
+   */
+  constructor(obj: ProxyOriginal, shallow = false, canDirectChange = true) {
     const { __ob__ } = obj as any;
     // 如果有对应__ob__，证明对象已经是响应式属性
     if (__ob__) {
@@ -21,6 +28,7 @@ class Observer {
     this.repo = Object.create(null);
     this.dep = new Dep();
     this.keys = Object.keys(obj);
+    this.canDirectChange = canDirectChange;
     this.defineReactive(obj);
     // 遍历迭代
     !shallow && this.traverse(obj);
@@ -45,7 +53,9 @@ class Observer {
     }
     const repo = this.repo;
     const keys = this.keys;
+    const canDirectChange = this.canDirectChange;
     const parentDep = this.dep;
+    const isArr = isArray(obj); // 响应式的对象是否为数组
     const proxy = new Proxy<ProxyOriginal>(obj, {
       get(obj, prop: string) {
         // 不是响应项
@@ -58,7 +68,7 @@ class Observer {
         }
         let value;
         let { getter, dep } = item;
-        if (!isArray(obj) && dep === undefined) {
+        if (!isArr && dep === undefined) {
           dep = item.dep = new Dep();
         }
         // 如果是getter，必须重新估值
@@ -70,30 +80,35 @@ class Observer {
         // 这里如果已经是响应式的值，不会再次进行对象响应式
         const childOb = observe(value); // 给子属性建立响应式。
         if (Dep.target) {
-          dep && dep.depend();
+          dep?.depend(); // eslint-disable-line
           if (childOb) {
-            // 用在数组和Vue.set中使用
+            // 用在数组和Vue.set中使用。如果child添加新的属性，就触发依赖于该child的所有watcher
             childOb.dep.depend();
             if (isArray(value)) {
               dependArray(value);
             }
           }
         }
-        return value.__ob__
-          ? value.__ob__.get()
-          : value;
+        return value.__ob__?.get() || value;
       },
 
       set(obj, prop: string, value: any) {
         // 如果是数组，长度的变化不影响变更
-        if (isArray(obj) && prop === 'length') {
+        if (isArr && prop === 'length') {
           const oldLength = obj.length;
           obj[prop] = value;
           // 数组长度发生变化，需要触发依赖
-          if (length !== oldLength) {
+          if (value !== oldLength) {
             parentDep.notify();
           }
           return true;
+        }
+        const isNewProperty = !isArr && !keys.includes(prop);
+        if (isNewProperty && !canDirectChange) {
+          obj[prop] = obj;
+          return true;
+        } else {
+          keys.push(prop);
         }
         let item = repo[prop];
         if (item === undefined) {
@@ -102,17 +117,17 @@ class Observer {
         const { dep, setter } = item;
         const oldValue = obj[prop];
         // 值相同不做依赖触发，不考虑NaN
-        if (oldValue === value) {
+        if (oldValue === value && !isNewProperty) {
           return true;
         }
         obj[prop] = setter
           ? setter(value)
           : value;
 
-        if (isArray(obj)) {
+        if (isArr || isNewProperty) {
           parentDep.notify();
         } else {
-          dep && dep.notify();
+          dep?.notify(); // eslint-disable-line
         }
         // 让值进行响应式
         observe(value);
@@ -121,9 +136,14 @@ class Observer {
 
       deleteProperty(obj, prop: string) {
         const result = delete obj[prop];
-        if (result) {
-          parentDep.notify();
+        const needNotify = result && (canDirectChange || isArr || keys.includes(prop));
+        const dep = repo[prop]?.dep;
+        if (!isArr && dep) {
+          dep.destroy();
+          keys.splice(keys.indexOf(prop), 1);
+          delete repo[prop];
         }
+        needNotify && parentDep.notify();
         return result;
       }
     });
@@ -137,7 +157,7 @@ class Observer {
 }
 
 function observe(val: any) {
-  if (val && val.__ob__) {
+  if (val?.__ob__) {
     return val.__ob__;
   }
   if (isObject(val) || isArray(val)) {
@@ -148,7 +168,7 @@ function observe(val: any) {
 
 function dependArray(array: any[]) {
   array.forEach(val => {
-    val && val.__ob__ && val.__ob__.dep.depend();
+    val?.__ob__?.dep.depend(); // eslint-disable-line
     if (isArray(val)) {
       dependArray(val);
     }
